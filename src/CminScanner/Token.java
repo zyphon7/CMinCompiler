@@ -22,7 +22,8 @@ public class Token {
         ID_TOKEN,
         NUM_TOKEN,
         LETTER_TOKEN,
-        DIGIT_TOKEN
+        DIGIT_TOKEN,
+        EOF_TOKEN
     }
 
     
