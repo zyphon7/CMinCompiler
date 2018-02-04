@@ -12,46 +12,47 @@ package CminScanner;
 public class Token {
  
     public enum TokenType {
-        INT_TOKEN,
-        IF_TOKEN,
-        ELSE_TOKEN,
-        RETURN_TOKEN,
-        VOID_TOKEN,
-        WHILE_TOKEN,
+        INT,
+        IF,
+        ELSE,
+        RETURN,
+        VOID,
+        WHILE,
         //Maybe?
-        ID_TOKEN,
-        NUM_TOKEN,
-        LETTER_TOKEN,
-        DIGIT_TOKEN,
-        PLUS_TOKEN,
-        MINUS_TOKEN,
-        MULTI_TOKEN,
-        DIVIDE_TOKEN,
-        LESS_TOKEN,
-        LESSEQ_TOKEN,
-        GREATER_TOKEN,
-        GREATEREQ_TOKEN,
-        DOUBLEEQUAL_TOKEN,
-        NOTEQUAL_TOKEN,
-        EQUAL_TOKEN,
-        SEMICOLIN_TOKEN,
-        COMMA_TOKEN,
-        LP_TOKEN, //(
-        RP_TOKEN,
-        LBRACKET_TOKEN, //[
-        RBRACKET_TOKEN,
-        LCURLY_TOKEN, //{
-        RCURLY_TOKEN,
-        BEGINCOMMENT_TOKEN,
-        ENDCOMMENT_TOKEN,
-        ERROR_TOKEN,
-        EOF_TOKEN
+        ID,
+        NUM,
+        LETTER,
+        DIGIT,
+        PLUS,
+        MINUS,
+        MULTI,
+        DIVIDE,
+        LESS,
+        LESSEQ,
+        GREATER,
+        GREATEREQ,
+        DOUBLEEQUAL,
+        NOTEQUAL,
+        EQUAL,
+        SEMICOLIN,
+        COMMA,
+        LP, //(
+        RP,
+        LBRACKET, //[
+        RBRACKET,
+        LCURLY, //{
+        RCURLY,
+        BEGINCOMMENT,
+        ENDCOMMENT,
+        ERROR,
+        EOF
     }
 
     
     private TokenType tokenType;
     private Object tokenData;
 
+    //e.g only need type if its a ;
     public Token (TokenType type) {
         this (type, null);
     }
