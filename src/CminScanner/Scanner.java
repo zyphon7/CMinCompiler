@@ -9,6 +9,7 @@ package CminScanner;
  *
  * @author Spencer
  */
-public class Scanner {
-    
+public interface Scanner {
+    public Token getNextToken();
+    public Token viewNextToken();
 }
