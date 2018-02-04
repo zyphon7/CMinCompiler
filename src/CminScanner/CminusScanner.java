@@ -24,6 +24,9 @@ public class CminusScanner implements Scanner{
     
     private BufferedReader inFile;
     private Token nextToken;
+    private String line;
+    private int linepos;
+
     private Map<String, Token.TokenType> reservedKeywords = new HashMap<String, Token.TokenType>()
 {{
      put("else", Token.TokenType.ELSE);
@@ -52,6 +55,43 @@ public class CminusScanner implements Scanner{
         return nextToken;
     }
 
+    private String getNextChar(){
+        //What I want to do
+        /*if the line still has characters get the next one
+        if it doesn't get a new line
+        if there are no new lines return EOF wait wah?
+        */
+        String nextChar = "";
+        
+        try{
+            //if the position is greater than the length
+            if(linepos > line.length()-1){
+                //get new line
+                if((line = inFile.readLine()) != null){
+                    linepos = 0;
+                    nextChar = String.valueOf(line.charAt(linepos++));
+                }
+                else{
+                    //EOF!
+                    nextChar = null;
+                }
+            }
+            //Get new line
+            else{
+                nextChar = String.valueOf(line.charAt(linepos++));
+            }
+        }
+        //Do specific exceptions later
+        catch(Exception e){
+            
+        }
+        return nextChar;  
+    }
+    
+    private void ungetNextChar(){
+        linepos--;
+    }
+    
     private Token scanToken() {
         String tokenString = "";
         State currState = State.START;
@@ -187,8 +227,5 @@ public class CminusScanner implements Scanner{
             /*}*/
         }
         return currToken;
-    }
-    char getNextChar(){
-        return null;
     }
 }
