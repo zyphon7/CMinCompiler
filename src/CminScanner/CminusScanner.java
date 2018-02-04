@@ -99,119 +99,122 @@ public class CminusScanner implements Scanner{
         boolean save;
         
         while(currState != State.DONE){
-            char c = getNextChar();
-            save = true;
-            switch(currState){
-                case START:
-                    if(isDigit(c)){
-                        currState = State.INNUM;
-                    }
-                    else if(isLetter(c)){
-                        currState = State.INID;
-                    }
-                    else if(c == '/'){
-                        currState = State.MAYBECOMMENT;
-                    }
-                    else if(c == ' ' || c == '\t' || c == '\n'){
-                        save = false;
-                    }
-                    else{
-                        currState = State.DONE;
-                        switch(c){
-                            case EOF:
-                                save = false;
-                                currToken.setTokenType(TokenType.EOF);
-                                break;
-                            case '=':
-                                currToken.setTokenType(TokenType.EQUAL);
-                                break;
-                            case '<':
-                                currToken.setTokenType(TokenType.LESS);
-                                break;
-                            case '+':
-                                currToken.setTokenType(TokenType.PLUS);
-                                break;
-                            case '-':
-                                currToken.setTokenType(TokenType.MINUS);
-                                break;
-                            case '*':
-                                currToken.setTokenType(TokenType.MULTI);
-                                break;
-                            case '(':
-                                currToken.setTokenType(TokenType.LP);
-                                break;
-                            case ')':
-                                currToken.setTokenType(TokenType.RP);
-                                break;
-                            case ',':
-                                currToken.setTokenType(TokenType.COMMA);
-                                break;
-                            case ';':
-                                currToken.setTokenType(TokenType.SEMICOLON);
-                                break;
-                            case '[':
-                                currToken.setTokenType(TokenType.LBRACKET);
-                                break;
-                            case ']':
-                                currToken.setTokenType(TokenType.RBRACKET);
-                                break;
-                            case '{':
-                                currToken.setTokenType(TokenType.LCURLY);
-                                break;
-                            case '}':
-                                currToken.setTokenType(TokenType.RCURLY);
-                                break;  
+            String s = getNextChar();
+            if(s != null){
+                char c = s.charAt(0);
+                save = true;
+                switch(currState){
+                    case START:
+                        if(isDigit(c)){
+                            currState = State.INNUM;
                         }
-                    }
-                    break;
-                case INNUM:
-                    if(!isDigit(c)){
-                        //TODO:unget
+                        else if(isLetter(c)){
+                            currState = State.INID;
+                        }
+                        else if(c == '/'){
+                            currState = State.MAYBECOMMENT;
+                        }
+                        else if(c == ' ' || c == '\t' || c == '\n'){
+                            save = false;
+                        }
+                        else{
+                            currState = State.DONE;
+                            switch(c){
+                                case '=':
+                                    currToken.setTokenType(TokenType.EQUAL);
+                                    break;
+                                case '<':
+                                    currToken.setTokenType(TokenType.LESS);
+                                    break;
+                                case '+':
+                                    currToken.setTokenType(TokenType.PLUS);
+                                    break;
+                                case '-':
+                                    currToken.setTokenType(TokenType.MINUS);
+                                    break;
+                                case '*':
+                                    currToken.setTokenType(TokenType.MULTI);
+                                    break;
+                                case '(':
+                                    currToken.setTokenType(TokenType.LP);
+                                    break;
+                                case ')':
+                                    currToken.setTokenType(TokenType.RP);
+                                    break;
+                                case ',':
+                                    currToken.setTokenType(TokenType.COMMA);
+                                    break;
+                                case ';':
+                                    currToken.setTokenType(TokenType.SEMICOLON);
+                                    break;
+                                case '[':
+                                    currToken.setTokenType(TokenType.LBRACKET);
+                                    break;
+                                case ']':
+                                    currToken.setTokenType(TokenType.RBRACKET);
+                                    break;
+                                case '{':
+                                    currToken.setTokenType(TokenType.LCURLY);
+                                    break;
+                                case '}':
+                                    currToken.setTokenType(TokenType.RCURLY);
+                                    break;  
+                            }
+                        }
+                        break;
+                    case INNUM:
+                        if(!isDigit(c)){
+                            //TODO:unget
+                            save = false;
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.NUM);
+                        }
+                        break;
+                    case INID:
+                        if(!isLetter(c)){
+                            //TODO:unget
+                            save = false;
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.ID);
+                        }
+                        break;
+                    case MAYBECOMMENT:
+                        if(c == '*'){
+                            save = false;
+                            currState = State.INCOMMENT;
+                        }
+                        else{
+                            save = true;
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.DIVIDE);
+                        }
+                        break;
+                    case INCOMMENT:
                         save = false;
-                        currState = State.DONE;
-                        currToken.setTokenType(TokenType.NUM);
-                    }
-                    break;
-                case INID:
-                    if(!isLetter(c)){
-                        //TODO:unget
+                        if(c == '*'){
+                            currState = State.LEAVECOMMENT;
+                        }
+                        break;
+                    case LEAVECOMMENT:
                         save = false;
+                        if(c == '/'){
+                            currState = State.START;
+                        }
+                        break;
+                    case DONE:
+                    default: // SHOULD NOT HAPPEN
+                        System.out.println("SCANNER BUG!");
                         currState = State.DONE;
-                        currToken.setTokenType(TokenType.ID);
-                    }
-                    break;
-                case MAYBECOMMENT:
-                    if(c == '*'){
-                        save = false;
-                        currState = State.INCOMMENT;
-                    }
-                    else{
-                        save = true;
-                        currState = State.DONE;
-                        currToken.setTokenType(TokenType.DIVIDE);
-                    }
-                    break;
-                case INCOMMENT:
-                    save = false;
-                    if(c == '*'){
-                        currState = State.LEAVECOMMENT;
-                    }
-                    break;
-                case LEAVECOMMENT:
-                    save = false;
-                    if(c == '/'){
-                        currState = State.START;
-                    }
-                    break;
-                case DONE:
-                default: // SHOULD NOT HAPPEN
-                    System.out.println("SCANNER BUG!");
-                    currState = State.DONE;
-                    currToken.setTokenType(TokenType.ERROR);
-                    break;
+                        currToken.setTokenType(TokenType.ERROR);
+                        break;
+                }
+            }
+            else{
+                save = false;
+                currToken.setTokenType(TokenType.EOF);
             }
             if(save){
-                tokenString.concat(String.valueOf(c));
+                tokenString.concat(s);
             }
             if(currState == State.DONE){
                 if(currToken.getTokenType() == Token.TokenType.ID){
