@@ -23,6 +23,28 @@ public class Token {
         NUM_TOKEN,
         LETTER_TOKEN,
         DIGIT_TOKEN,
+        PLUS_TOKEN,
+        MINUS_TOKEN,
+        MULTI_TOKEN,
+        DIVIDE_TOKEN,
+        LESS_TOKEN,
+        LESSEQ_TOKEN,
+        GREATER_TOKEN,
+        GREATEREQ_TOKEN,
+        DOUBLEEQUAL_TOKEN,
+        NOTEQUAL_TOKEN,
+        EQUAL_TOKEN,
+        SEMICOLIN_TOKEN,
+        COMMA_TOKEN,
+        LP_TOKEN, //(
+        RP_TOKEN,
+        LBRACKET_TOKEN, //[
+        RBRACKET_TOKEN,
+        LCURLY_TOKEN, //{
+        RCURLY_TOKEN,
+        BEGINCOMMENT_TOKEN,
+        ENDCOMMENT_TOKEN,
+        ERROR_TOKEN,
         EOF_TOKEN
     }
 
