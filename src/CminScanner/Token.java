@@ -10,14 +10,19 @@ package CminScanner;
  * @author Spencer
  */
 public class Token {
-
  
-    
     public enum TokenType {
         INT_TOKEN,
-        DOUBLE_TOKEN,
         IF_TOKEN,
-        // rest of tokens ....
+        ELSE_TOKEN,
+        RETURN_TOKEN,
+        VOID_TOKEN,
+        WHILE_TOKEN,
+        //Maybe?
+        ID_TOKEN,
+        NUM_TOKEN,
+        LETTER_TOKEN,
+        DIGIT_TOKEN
     }
 
     
