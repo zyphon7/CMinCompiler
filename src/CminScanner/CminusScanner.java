@@ -12,6 +12,11 @@ import java.io.BufferedReader;
  * @author Annie
  */
 public class CminusScanner implements Scanner{
+    
+    public enum State{
+        START,INNUM, INID, MAYBECOMMENT, INCOMMENT, LEAVECOMMENT, DONE
+    }
+    
     private BufferedReader inFile;
     private Token nextToken;
     
@@ -33,7 +38,35 @@ public class CminusScanner implements Scanner{
     }
 
     private Token scanToken() {
-        //TODO!
+        State currState = State.START;
+        Token.TokenType currentToken;
+        boolean save;
+        
+        while(currState != State.DONE){
+            save = true;
+            switch(currState){
+                case START:
+                    break;
+                case INNUM:
+                    break;
+                case INID:
+                    break;
+                case MAYBECOMMENT:
+                    break;
+                case INCOMMENT:
+                    break;
+                case LEAVECOMMENT:
+                    break;
+            }
+        }
+        if(currState == State.DONE){
+            //Check for special token
+            Token next = viewNextToken();
+            //Create token
+           
+            //Return token
+            //return token;
+        }
         return null;
     }
 }
