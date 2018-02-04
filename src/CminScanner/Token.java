@@ -17,6 +17,7 @@ public class Token {
         INT_TOKEN,
         DOUBLE_TOKEN,
         IF_TOKEN,
+        EOF_TOKEN
         // rest of tokens ....
     }
 
