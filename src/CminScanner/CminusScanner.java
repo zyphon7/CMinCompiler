@@ -27,7 +27,7 @@ public class CminusScanner implements Scanner{
     
     public Token getNextToken(){
         Token returnToken = nextToken;
-        if(nextToken.getTokenType()!= Token.TokenType.EOF_TOKEN){
+        if(nextToken.getTokenType()!= Token.TokenType.EOF){
             nextToken = scanToken();
         }
         return returnToken;
