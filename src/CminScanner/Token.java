@@ -34,7 +34,7 @@ public class Token {
         DOUBLEEQUAL,
         NOTEQUAL,
         EQUAL,
-        SEMICOLIN,
+        SEMICOLON,
         COMMA,
         LP, //(
         RP,
@@ -52,6 +52,9 @@ public class Token {
     private TokenType tokenType;
     private Object tokenData;
 
+    public Token(){
+        this (null, null);
+    }
     //e.g only need type if its a ;
     public Token (TokenType type) {
         this (type, null);
