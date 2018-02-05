@@ -27,7 +27,7 @@ public class CminusScanner implements Scanner{
     private String line;
     private int linepos;
 
-    private Map<String, Token.TokenType> reservedKeywords = new HashMap<String, Token.TokenType>()
+    private final Map<String, Token.TokenType> reservedKeywords = new HashMap<String, Token.TokenType>()
 {{
      put("else", Token.TokenType.ELSE);
      put("if", Token.TokenType.IF);
@@ -164,7 +164,7 @@ public class CminusScanner implements Scanner{
                         break;
                     case INNUM:
                         if(!isDigit(c)){
-                            //TODO:unget
+                            ungetNextChar();
                             save = false;
                             currState = State.DONE;
                             currToken.setTokenType(TokenType.NUM);
@@ -172,7 +172,7 @@ public class CminusScanner implements Scanner{
                         break;
                     case INID:
                         if(!isLetter(c)){
-                            //TODO:unget
+                            ungetNextChar();
                             save = false;
                             currState = State.DONE;
                             currToken.setTokenType(TokenType.ID);
@@ -222,11 +222,12 @@ public class CminusScanner implements Scanner{
                    if(t != null){
                        currToken.setTokenType(t);
                    }
+                   currToken.setTokenData(tokenString);
                 }
             }
             /*if(TraceParse){*/
                 System.out.println("LISTING:");
-                //TODO:printToken(currToken,tokenString);
+                //TODO:printToken(currToken);
             /*}*/
         }
         return currToken;
