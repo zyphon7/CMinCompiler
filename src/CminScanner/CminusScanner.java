@@ -115,18 +115,24 @@ public class CminusScanner implements Scanner{
                         else if(c == '/'){
                             currState = State.MAYBECOMMENT;
                         }
+                        else if(c == '<'){
+                            currState = State.LESSTHAN;
+                        }
+                        else if(c == '>'){
+                            currState = State.GREATERTHAN;
+                        }
+                        else if(c == '='){
+                            currState = State.ASSIGN;
+                        }
+                        else if(c == '!'){
+                            currState = State.NOTEQ;
+                        }
                         else if(c == ' ' || c == '\t' || c == '\n'){
                             save = false;
                         }
                         else{
                             currState = State.DONE;
                             switch(c){
-                                case '=':
-                                    currToken.setTokenType(TokenType.EQUAL);
-                                    break;
-                                case '<':
-                                    currToken.setTokenType(TokenType.LESS);
-                                    break;
                                 case '+':
                                     currToken.setTokenType(TokenType.PLUS);
                                     break;
@@ -203,22 +209,62 @@ public class CminusScanner implements Scanner{
                         }
                         break;
                     case LESSTHAN:
+                        save = false;
                         if(c == '='){
-                            currState = State.LESSTHANEQ;
-                            
+                            currState = State.LESSTHANEQ;   
+                        }
+                        else{
+                            ungetNextChar();
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.LESS);
                         }
                         break;
                     case LESSTHANEQ:
+                        save = false;
+                        currState = State.DONE;
+                        currToken.setTokenType(TokenType.LESSEQ);
                         break;
                     case GREATERTHAN:
+                        save = false;
+                        if(c == '='){
+                            currState = State.GREATERTHANEQ;
+                        }
+                        else{
+                            ungetNextChar();
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.GREATER);
+                        }
                         break;
                     case GREATERTHANEQ:
+                        save = false;
+                        currState = State.DONE;
+                        currToken.setTokenType(TokenType.GREATEREQ);
                         break;
                     case ASSIGN:
+                        save = false;
+                        if(c == '='){
+                            currState = State.EQ;
+                        }
+                        else{
+                            ungetNextChar();
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.EQUAL);
+                        }
                         break;
                     case EQ:
+                        save = false;
+                        currState = State.DONE;
+                        currToken.setTokenType(TokenType.DOUBLEEQUAL);
                         break;
                     case NOTEQ:
+                        save = false;
+                        currState = State.DONE;
+                        if(c == '='){
+                            currToken.setTokenType(TokenType.NOTEQUAL);
+                        }
+                        else{
+                            currToken.setTokenType(TokenType.ERROR);
+                        }
                         break;
                     case DONE:
                     default: // SHOULD NOT HAPPEN
