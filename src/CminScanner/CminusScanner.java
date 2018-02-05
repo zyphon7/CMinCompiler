@@ -19,7 +19,8 @@ import java.util.Map;
 public class CminusScanner implements Scanner{
     
     public enum State{
-        START,INNUM, INID, MAYBECOMMENT, INCOMMENT, LEAVECOMMENT, DONE
+        START,INNUM, INID, MAYBECOMMENT, INCOMMENT, LEAVECOMMENT, LESSTHAN,
+        LESSTHANEQ, GREATERTHAN, GREATERTHANEQ, ASSIGN, EQ, NOTEQ, DONE
     }
     
     private BufferedReader inFile;
@@ -201,6 +202,24 @@ public class CminusScanner implements Scanner{
                             currState = State.START;
                         }
                         break;
+                    case LESSTHAN:
+                        if(c == '='){
+                            currState = State.LESSTHANEQ;
+                            
+                        }
+                        break;
+                    case LESSTHANEQ:
+                        break;
+                    case GREATERTHAN:
+                        break;
+                    case GREATERTHANEQ:
+                        break;
+                    case ASSIGN:
+                        break;
+                    case EQ:
+                        break;
+                    case NOTEQ:
+                        break;
                     case DONE:
                     default: // SHOULD NOT HAPPEN
                         System.out.println("SCANNER BUG!");
@@ -222,8 +241,8 @@ public class CminusScanner implements Scanner{
                    if(t != null){
                        currToken.setTokenType(t);
                    }
-                   currToken.setTokenData(tokenString);
                 }
+                currToken.setTokenData(tokenString);
             }
             /*if(TraceParse){*/
                 System.out.println("LISTING:");
