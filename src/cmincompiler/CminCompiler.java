@@ -7,6 +7,7 @@ package cmincompiler;
 
 import CminScanner.CminusScanner;
 import CminScanner.Token.TokenType;
+import CminScanner.lexicalErrorException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -25,14 +26,6 @@ public class CminCompiler {
     public static void main(String[] args) {
         try{
             File cminFile = new File("CminPrograms/program1.txt");
-            if(!cminFile.exists()){
-                System.out.println("I dont exists!");
-            }
-try {
-    System.out.println(cminFile.getCanonicalPath());
-} catch (IOException e) {
-    e.printStackTrace();
-}
             CminusScanner cminscanner = new CminusScanner(new BufferedReader(new FileReader(cminFile)));
             
             while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
@@ -41,9 +34,10 @@ try {
         }
         catch(IOException e){
             e.printStackTrace();
-        }
-        
-        
+        } catch (lexicalErrorException ex) {
+            System.out.println(ex.toString());
+            System.exit(1);
+        }    
         
     }
     
