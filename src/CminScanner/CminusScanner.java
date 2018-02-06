@@ -14,6 +14,8 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.isLetter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,7 +45,7 @@ public class CminusScanner implements Scanner{
 }};
 
     
-    public CminusScanner(BufferedReader file){
+    public CminusScanner(BufferedReader file) throws lexicalErrorException{
         inFile = file;
         lineLength = -1;
         nextToken = scanToken();  
@@ -52,7 +54,12 @@ public class CminusScanner implements Scanner{
     public Token getNextToken(){
         Token returnToken = nextToken;
         if(nextToken.getTokenType()!= TokenType.EOF){
-            nextToken = scanToken();
+            try {
+                nextToken = scanToken();
+            } catch (lexicalErrorException ex) {
+                System.out.println(ex.toString());
+                System.exit(1);
+            }
         }
         return returnToken;
     }
@@ -115,7 +122,7 @@ public class CminusScanner implements Scanner{
         //linepos--;
     }
     
-    private Token scanToken() {
+    private Token scanToken() throws lexicalErrorException {
         String tokenString = "";
         State currState = State.START;
         Token currToken = new Token();
@@ -198,15 +205,34 @@ public class CminusScanner implements Scanner{
                         }
                         break;
                     case INNUM:
-                        if(!isDigit(c)){
+                        //LEX ERROR i.e. 99i throw exception
+                        if(isLetter(c)){
+                            /*ungetNextChar();
+                            save = false;
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.ERROR);
+                            currToken.setTokenData("Letters cannot occur inside a number.");*/
+                            throw new lexicalErrorException("Letters cannot occur inside a number. ");
+                        }
+                        else if(!isDigit(c)){
                             ungetNextChar();
                             save = false;
                             currState = State.DONE;
                             currToken.setTokenType(TokenType.NUM);
                         }
+                        
                         break;
                     case INID:
-                        if(!isLetter(c)){
+                        //LEX ERROR i.e. hi3
+                        if(isDigit(c)){
+                            /*ungetNextChar();
+                            save = false;
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.ERROR);
+                            currToken.setTokenData("Numbers cannot occur inside an identifier.");*/
+                            throw new lexicalErrorException("Numbers cannot occur inside an identifier.");
+                        }
+                        else if(!isLetter(c)){
                             ungetNextChar();
                             save = false;
                             currState = State.DONE;
@@ -293,7 +319,11 @@ public class CminusScanner implements Scanner{
                             currToken.setTokenType(TokenType.NOTEQUAL);
                         }
                         else{
+                            ungetNextChar();
+                            save = false;
+                            currState = State.DONE;
                             currToken.setTokenType(TokenType.ERROR);
+                            currToken.setTokenData("Letters cannot be mixed in with numbers.");
                         }
                         break;
                     case DONE:
@@ -321,7 +351,12 @@ public class CminusScanner implements Scanner{
                        tokenString = "";
                    }
                 }
-                currToken.setTokenData(tokenString);
+                if(currToken.getTokenType() == Token.TokenType.ERROR){
+                    System.out.println(currToken.getTokenData());
+                    System.exit(1);
+                }
+                    currToken.setTokenData(tokenString);
+               
                 printToken(currToken);
             }
             /*if(TraceParse){*/
