@@ -309,6 +309,7 @@ public class CminusScanner implements Scanner{
             }
             else{
                 save = false;
+                currState = State.DONE;
                 currToken.setTokenType(TokenType.EOF);
             }
             if(save){
