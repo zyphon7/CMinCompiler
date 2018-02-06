@@ -24,7 +24,15 @@ public class CminCompiler {
     //Just for testing scanner
     public static void main(String[] args) {
         try{
-            File cminFile = new File(args[0]);
+            File cminFile = new File("CminPrograms/program1.txt");
+            if(!cminFile.exists()){
+                System.out.println("I dont exists!");
+            }
+try {
+    System.out.println(cminFile.getCanonicalPath());
+} catch (IOException e) {
+    e.printStackTrace();
+}
             CminusScanner cminscanner = new CminusScanner(new BufferedReader(new FileReader(cminFile)));
             
             while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){

@@ -32,6 +32,7 @@ public class CminusScanner implements Scanner{
     private String line;
     private int linepos;
     private boolean newFile;
+    private int lineLength;
 
     private final Map<String, Token.TokenType> reservedKeywords = new HashMap<String, Token.TokenType>()
 {{
@@ -47,7 +48,8 @@ public class CminusScanner implements Scanner{
     public CminusScanner(BufferedReader file){
         inFile = file;
         newFile = true;
-        nextToken = scanToken();   
+        lineLength = -1;
+        nextToken = scanToken();  
     }
     
     public Token getNextToken(){
@@ -66,10 +68,11 @@ public class CminusScanner implements Scanner{
         String nextChar = "";
         try{
             //if the position is greater than the length
-            if(linepos > line.length()-1){
+            if(linepos > lineLength){
                 //get new line
                 if((line = inFile.readLine()) != null){
                     linepos = 0;
+                    lineLength = line.length()-1;
                     nextChar = String.valueOf(line.charAt(linepos++));
                 }
                 else{
