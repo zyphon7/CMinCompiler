@@ -8,6 +8,7 @@ package CminScanner;
 import CminScanner.Token.TokenType;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import static java.lang.Character.isDigit;
@@ -42,6 +43,27 @@ public class CminusScanner implements Scanner{
      put("void", Token.TokenType.VOID);
      put("while", Token.TokenType.WHILE);
 }};
+    
+    /**
+     * @param args the command line arguments
+     */
+    //Just for testing scanner
+    public static void main(String[] args) {
+        try{
+            File cminFile = new File("CminPrograms/program1.txt");
+            CminusScanner cminscanner = new CminusScanner(new BufferedReader(new FileReader(cminFile)));
+            
+            while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
+                cminscanner.getNextToken();
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        } catch (lexicalErrorException ex) {
+            System.out.println(ex.toString());
+            System.exit(1);
+        }       
+    }
 
     
     public CminusScanner(BufferedReader file) throws lexicalErrorException{
