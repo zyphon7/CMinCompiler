@@ -331,5 +331,5 @@ public class CminusScanner implements Scanner{
        catch(IOException e){
            e.printStackTrace();
        }
-    }
+    }    
 }

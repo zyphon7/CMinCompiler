@@ -5,6 +5,13 @@
  */
 package cmincompiler;
 
+import CminScanner.CminusScanner;
+import CminScanner.Token.TokenType;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author Spencer
@@ -14,8 +21,22 @@ public class CminCompiler {
     /**
      * @param args the command line arguments
      */
+    //Just for testing scanner
     public static void main(String[] args) {
-        // TODO code application logic here
+        try{
+            File cminFile = new File(args[0]);
+            CminusScanner cminscanner = new CminusScanner(new BufferedReader(new FileReader(cminFile)));
+            
+            while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
+                cminscanner.getNextToken();
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
+        
+        
     }
     
 }
