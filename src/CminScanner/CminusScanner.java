@@ -7,6 +7,10 @@ package CminScanner;
 
 import CminScanner.Token.TokenType;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import static java.lang.Character.isDigit;
 import static java.lang.Character.isLetter;
 import java.util.HashMap;
@@ -27,6 +31,7 @@ public class CminusScanner implements Scanner{
     private Token nextToken;
     private String line;
     private int linepos;
+    private boolean newFile;
 
     private final Map<String, Token.TokenType> reservedKeywords = new HashMap<String, Token.TokenType>()
 {{
@@ -41,6 +46,7 @@ public class CminusScanner implements Scanner{
     
     public CminusScanner(BufferedReader file){
         inFile = file;
+        newFile = true;
         nextToken = scanToken();   
     }
     
@@ -57,13 +63,7 @@ public class CminusScanner implements Scanner{
     }
 
     private String getNextChar(){
-        //What I want to do
-        /*if the line still has characters get the next one
-        if it doesn't get a new line
-        if there are no new lines return EOF wait wah?
-        */
         String nextChar = "";
-        
         try{
             //if the position is greater than the length
             if(linepos > line.length()-1){
@@ -83,8 +83,8 @@ public class CminusScanner implements Scanner{
             }
         }
         //Do specific exceptions later
-        catch(Exception e){
-            
+        catch(IOException e){
+            e.printStackTrace();
         }
         return nextChar;  
     }
@@ -250,5 +250,32 @@ public class CminusScanner implements Scanner{
             /*}*/
         }
         return currToken;
+    }
+    
+    private void printToken(Token current){
+        try{
+            String name = "tokens.csv";
+            File output = new File(name);
+            
+            //if newFile = true create new file otherwise append to the file
+            PrintWriter writer = new PrintWriter(new FileOutputStream(output), 
+                    !newFile /*append=true/false*/);
+                        
+            if(newFile == true){
+                //print header columns first time
+                writer.println("Token Type|Token Data|");
+            }
+            writer.println(current.getTokenType()+"|");
+            //Could do very long if statement testing to see if we have correct 
+            //types but if our scanner is working properly this will be fine
+            if(current.getTokenData() != null){
+                writer.println(current.getTokenData()+"|");
+            }
+            newFile = false;
+            writer.close();
+        }
+       catch(IOException e){
+           e.printStackTrace();
+       }
     }
 }
