@@ -31,6 +31,7 @@ public class CminusScanner implements Scanner{
     private String line;
     private int linepos;
     private int lineLength;
+    private boolean newFile;
 
     private final Map<String, Token.TokenType> reservedKeywords = new HashMap<String, Token.TokenType>()
 {{
@@ -46,7 +47,8 @@ public class CminusScanner implements Scanner{
     public CminusScanner(BufferedReader file) throws lexicalErrorException{
         inFile = file;
         lineLength = -1;
-        nextToken = scanToken();  
+        nextToken = scanToken();
+        newFile = true;
     }
     
     public Token getNextToken(){
@@ -71,6 +73,10 @@ public class CminusScanner implements Scanner{
         int temp;
         try{
             temp = inFile.read();
+            //13 is a null character
+            while(temp == 13){
+                temp = inFile.read();
+            }
             if(temp != -1){
                 nextChar = String.valueOf((char)temp);
                 //Mark our spot to return too
@@ -357,8 +363,9 @@ public class CminusScanner implements Scanner{
             File output = new File(name);
             FileWriter fw;
                        
-            if(!output.exists()){
+            if(!output.exists() || newFile){
                 //print header columns first time
+                //output.createNewFile();
                 fw = new FileWriter(output);
                 fw.write("Token Type|Token Data|\n");
             }
@@ -377,7 +384,7 @@ public class CminusScanner implements Scanner{
             else{
                 fw.write("\n");
             }
-            
+            newFile = false;
             fw.flush();
             fw.close();
         }
