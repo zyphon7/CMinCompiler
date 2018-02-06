@@ -14,8 +14,6 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.isLetter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -207,11 +205,6 @@ public class CminusScanner implements Scanner{
                     case INNUM:
                         //LEX ERROR i.e. 99i throw exception
                         if(isLetter(c)){
-                            /*ungetNextChar();
-                            save = false;
-                            currState = State.DONE;
-                            currToken.setTokenType(TokenType.ERROR);
-                            currToken.setTokenData("Letters cannot occur inside a number.");*/
                             throw new lexicalErrorException("Letters cannot occur inside a number. ");
                         }
                         else if(!isDigit(c)){
@@ -225,11 +218,6 @@ public class CminusScanner implements Scanner{
                     case INID:
                         //LEX ERROR i.e. hi3
                         if(isDigit(c)){
-                            /*ungetNextChar();
-                            save = false;
-                            currState = State.DONE;
-                            currToken.setTokenType(TokenType.ERROR);
-                            currToken.setTokenData("Numbers cannot occur inside an identifier.");*/
                             throw new lexicalErrorException("Numbers cannot occur inside an identifier.");
                         }
                         else if(!isLetter(c)){
@@ -359,10 +347,6 @@ public class CminusScanner implements Scanner{
                
                 printToken(currToken);
             }
-            /*if(TraceParse){*/
-                //System.out.println("LISTING:");
-                
-            /*}*/
         }
         return currToken;
     }
