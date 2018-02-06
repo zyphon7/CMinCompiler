@@ -300,7 +300,7 @@ public class CminusScanner implements Scanner{
             }
             /*if(TraceParse){*/
                 System.out.println("LISTING:");
-                //TODO:printToken(currToken);
+                printToken(currToken);
             /*}*/
         }
         return currToken;
