@@ -114,19 +114,31 @@ public class CminusScanner implements Scanner{
                         }
                         else if(c == '/'){
                             currState = State.MAYBECOMMENT;
+                            save = false;
+                        }
+                        else if(c == '<'){
+                            currState = State.LESSTHAN;
+                            save = false;
+                        }
+                        else if(c == '>'){
+                            currState = State.GREATERTHAN;
+                            save = false;
+                        }
+                        else if(c == '='){
+                            currState = State.ASSIGN;
+                            save = false;
+                        }
+                        else if(c == '!'){
+                            currState = State.NOTEQ;
+                            save = false;
                         }
                         else if(c == ' ' || c == '\t' || c == '\n'){
                             save = false;
                         }
                         else{
+                            save = false;
                             currState = State.DONE;
                             switch(c){
-                                case '=':
-                                    currToken.setTokenType(TokenType.EQUAL);
-                                    break;
-                                case '<':
-                                    currToken.setTokenType(TokenType.LESS);
-                                    break;
                                 case '+':
                                     currToken.setTokenType(TokenType.PLUS);
                                     break;
@@ -180,12 +192,11 @@ public class CminusScanner implements Scanner{
                         }
                         break;
                     case MAYBECOMMENT:
+                        save = false;
                         if(c == '*'){
-                            save = false;
                             currState = State.INCOMMENT;
                         }
                         else{
-                            save = true;
                             currState = State.DONE;
                             currToken.setTokenType(TokenType.DIVIDE);
                         }
@@ -201,24 +212,67 @@ public class CminusScanner implements Scanner{
                         if(c == '/'){
                             currState = State.START;
                         }
+                        else if(c != '*'){
+                            currState = State.INCOMMENT;
+                        }
                         break;
                     case LESSTHAN:
+                        save = false;
                         if(c == '='){
-                            currState = State.LESSTHANEQ;
-                            
+                            currState = State.LESSTHANEQ;   
+                        }
+                        else{
+                            ungetNextChar();
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.LESS);
                         }
                         break;
                     case LESSTHANEQ:
+                        save = false;
+                        currState = State.DONE;
+                        currToken.setTokenType(TokenType.LESSEQ);
                         break;
                     case GREATERTHAN:
+                        save = false;
+                        if(c == '='){
+                            currState = State.GREATERTHANEQ;
+                        }
+                        else{
+                            ungetNextChar();
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.GREATER);
+                        }
                         break;
                     case GREATERTHANEQ:
+                        save = false;
+                        currState = State.DONE;
+                        currToken.setTokenType(TokenType.GREATEREQ);
                         break;
                     case ASSIGN:
+                        save = false;
+                        if(c == '='){
+                            currState = State.EQ;
+                        }
+                        else{
+                            ungetNextChar();
+                            currState = State.DONE;
+                            currToken.setTokenType(TokenType.EQUAL);
+                        }
                         break;
                     case EQ:
+                        save = false;
+                        currState = State.DONE;
+                        currToken.setTokenType(TokenType.DOUBLEEQUAL);
                         break;
                     case NOTEQ:
+                        save = false;
+                        currState = State.DONE;
+                        if(c == '='){
+                            currToken.setTokenType(TokenType.NOTEQUAL);
+                        }
+                        else{
+                            currToken.setTokenType(TokenType.ERROR);
+                        }
                         break;
                     case DONE:
                     default: // SHOULD NOT HAPPEN
