@@ -114,23 +114,29 @@ public class CminusScanner implements Scanner{
                         }
                         else if(c == '/'){
                             currState = State.MAYBECOMMENT;
+                            save = false;
                         }
                         else if(c == '<'){
                             currState = State.LESSTHAN;
+                            save = false;
                         }
                         else if(c == '>'){
                             currState = State.GREATERTHAN;
+                            save = false;
                         }
                         else if(c == '='){
                             currState = State.ASSIGN;
+                            save = false;
                         }
                         else if(c == '!'){
                             currState = State.NOTEQ;
+                            save = false;
                         }
                         else if(c == ' ' || c == '\t' || c == '\n'){
                             save = false;
                         }
                         else{
+                            save = false;
                             currState = State.DONE;
                             switch(c){
                                 case '+':
@@ -186,12 +192,11 @@ public class CminusScanner implements Scanner{
                         }
                         break;
                     case MAYBECOMMENT:
+                        save = false;
                         if(c == '*'){
-                            save = false;
                             currState = State.INCOMMENT;
                         }
                         else{
-                            save = true;
                             currState = State.DONE;
                             currToken.setTokenType(TokenType.DIVIDE);
                         }
@@ -206,6 +211,9 @@ public class CminusScanner implements Scanner{
                         save = false;
                         if(c == '/'){
                             currState = State.START;
+                        }
+                        else if(c != '*'){
+                            currState = State.INCOMMENT;
                         }
                         break;
                     case LESSTHAN:
