@@ -66,14 +66,27 @@ public class CminusScanner implements Scanner{
 
     private String getNextChar(){
         String nextChar = "";
+        int temp;
         try{
+            temp = inFile.read();
+            if(temp != -1){
+                nextChar = String.valueOf((char)temp);
+                //Mark our spot to return too
+                inFile.mark(1);
+            }
+            else{
+                nextChar = null;
+            }
+            /*
             //if the position is greater than the length
-            if(linepos > lineLength){
+            if(!(linepos < lineLength)){
                 //get new line
                 if((line = inFile.readLine()) != null){
-                    linepos = 0;
+                    /*linepos = 0;
                     lineLength = line.length()-1;
                     nextChar = String.valueOf(line.charAt(linepos++));
+                    System.out.println(nextChar);
+                    
                 }
                 else{
                     //EOF!
@@ -83,17 +96,26 @@ public class CminusScanner implements Scanner{
             //Get new line
             else{
                 nextChar = String.valueOf(line.charAt(linepos++));
-            }
+                System.out.println(nextChar);
+            }*/
         }
         //Do specific exceptions later
         catch(IOException e){
             e.printStackTrace();
         }
+        System.out.println(nextChar);
         return nextChar;  
     }
     
     private void ungetNextChar(){
-        linepos--;
+        try{
+            inFile.reset();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
+        //linepos--;
     }
     
     private Token scanToken() {
@@ -302,7 +324,7 @@ public class CminusScanner implements Scanner{
                 currToken.setTokenData(tokenString);
             }
             /*if(TraceParse){*/
-                System.out.println("LISTING:");
+                //System.out.println("LISTING:");
                 printToken(currToken);
             /*}*/
         }
