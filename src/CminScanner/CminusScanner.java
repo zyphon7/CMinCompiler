@@ -328,12 +328,8 @@ public class CminusScanner implements Scanner{
                 printToken(currToken);
             }
             /*if(TraceParse){*/
-<<<<<<< HEAD
-                
-=======
                 //System.out.println("LISTING:");
                 printToken(currToken);
->>>>>>> c3058cf7a34f019b95595f91fe995b9ad109a34e
             /*}*/
         }
         return currToken;
