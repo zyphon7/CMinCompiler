@@ -290,20 +290,22 @@ public class CminusScanner implements Scanner{
                 currToken.setTokenType(TokenType.EOF);
             }
             if(save){
-                tokenString.concat(s);
+                String temp = tokenString.concat(s);
+                tokenString = temp;
             }
             if(currState == State.DONE){
                 if(currToken.getTokenType() == Token.TokenType.ID){
                    Token.TokenType t = reservedKeywords.get(tokenString);
                    if(t != null){
                        currToken.setTokenType(t);
+                       tokenString = "";
                    }
                 }
                 currToken.setTokenData(tokenString);
+                printToken(currToken);
             }
             /*if(TraceParse){*/
-                System.out.println("LISTING:");
-                printToken(currToken);
+                
             /*}*/
         }
         return currToken;
