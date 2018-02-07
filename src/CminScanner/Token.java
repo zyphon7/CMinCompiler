@@ -7,7 +7,7 @@ package CminScanner;
 
 /**
  *
- * @author Spencer
+ * @author Spencer & Ann
  */
 public class Token {
  
@@ -18,7 +18,6 @@ public class Token {
         RETURN,
         VOID,
         WHILE,
-        //Maybe?
         ID,
         NUM,
         LETTER,

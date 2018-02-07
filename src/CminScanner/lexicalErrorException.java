@@ -7,7 +7,7 @@ package CminScanner;
 
 /**
  *
- * @author Annie
+ * @author Spencer & Ann
  */
 public class lexicalErrorException extends Exception {
 

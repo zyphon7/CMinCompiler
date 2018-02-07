@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  *
- * @author Annie
+ * @author Spencer & Ann
  */
 public class CminusScanner implements Scanner{
     
@@ -49,7 +49,7 @@ public class CminusScanner implements Scanner{
     //Just for testing scanner
     public static void main(String[] args) {
         try{
-            File cminFile = new File("CminPrograms/program3.txt");
+            File cminFile = new File("CminPrograms/program2.txt");
             CminusScanner cminscanner = new CminusScanner(new BufferedReader(new FileReader(cminFile)));
             
             while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
@@ -69,9 +69,11 @@ public class CminusScanner implements Scanner{
         inFile = file;
         lineLength = -1;
         nextToken = scanToken();
-        //newFile = true;
     }
     
+    /**
+     * @return grab the next token in the file
+     */
     public Token getNextToken(){
         Token returnToken = nextToken;
         if(nextToken.getTokenType()!= TokenType.EOF){
@@ -85,10 +87,16 @@ public class CminusScanner implements Scanner{
         return returnToken;
     }
     
+    /**
+     * @return view the next token in the file
+     */
     public Token viewNextToken(){
         return nextToken;
     }
 
+    /**
+     * @return the next character of the input file to determine next token
+     */
     private String getNextChar(){
         String nextChar = "";
         int temp;
@@ -118,6 +126,10 @@ public class CminusScanner implements Scanner{
         }
     }
     
+    /**
+     * @return scans for the next token
+     * @throws lexicalErrorException if a lex error occurs while scanning
+     */
     private Token scanToken() throws lexicalErrorException {
         String tokenString = "";
         State currState = State.START;
@@ -350,6 +362,9 @@ public class CminusScanner implements Scanner{
         return currToken;
     }
     
+    /**
+     * @param current token just found to be printed to the output file
+     */
     private void printToken(Token current){
         try{
             String name = "tokens.csv";
@@ -358,15 +373,12 @@ public class CminusScanner implements Scanner{
                        
             if(!output.exists()){
                 //print header columns first time
-                //output.createNewFile();
                 fw = new FileWriter(output);
                 fw.write("Token Type|Token Data|\n");
             }
             else{
                 fw = new FileWriter(output, true);
             }
-            
-            String test = current.getTokenType().toString();
             
             fw.write(current.getTokenType().toString());
             //Could do very long if statement testing to see if we have correct 

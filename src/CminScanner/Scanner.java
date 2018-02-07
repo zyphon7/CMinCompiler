@@ -7,7 +7,7 @@ package CminScanner;
 
 /**
  *
- * @author Spencer
+ * @author Spencer & Ann
  */
 public interface Scanner {
     public Token getNextToken();
