@@ -32,7 +32,6 @@ public class CminusScanner implements Scanner{
     private String line;
     private int linepos;
     private int lineLength;
-    private boolean newFile;
 
     private final Map<String, Token.TokenType> reservedKeywords = new HashMap<String, Token.TokenType>()
 {{
@@ -50,7 +49,7 @@ public class CminusScanner implements Scanner{
     //Just for testing scanner
     public static void main(String[] args) {
         try{
-            File cminFile = new File("CminPrograms/program1.txt");
+            File cminFile = new File("CminPrograms/program3.txt");
             CminusScanner cminscanner = new CminusScanner(new BufferedReader(new FileReader(cminFile)));
             
             while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
@@ -70,7 +69,7 @@ public class CminusScanner implements Scanner{
         inFile = file;
         lineLength = -1;
         nextToken = scanToken();
-        newFile = true;
+        //newFile = true;
     }
     
     public Token getNextToken(){
@@ -94,42 +93,15 @@ public class CminusScanner implements Scanner{
         String nextChar = "";
         int temp;
         try{
+            inFile.mark(1);
             temp = inFile.read();
-            //13 is a null character
-            while(temp == 13){
-                temp = inFile.read();
-            }
             if(temp != -1){
                 nextChar = String.valueOf((char)temp);
-                //Mark our spot to return too
-                inFile.mark(1);
             }
             else{
                 nextChar = null;
             }
-            /*
-            //if the position is greater than the length
-            if(!(linepos < lineLength)){
-                //get new line
-                if((line = inFile.readLine()) != null){
-                    /*linepos = 0;
-                    lineLength = line.length()-1;
-                    nextChar = String.valueOf(line.charAt(linepos++));
-                    System.out.println(nextChar);
-                    
-                }
-                else{
-                    //EOF!
-                    nextChar = null;
-                }
-            }
-            //Get new line
-            else{
-                nextChar = String.valueOf(line.charAt(linepos++));
-                System.out.println(nextChar);
-            }*/
         }
-        //Do specific exceptions later
         catch(IOException e){
             e.printStackTrace();
         }
@@ -144,8 +116,6 @@ public class CminusScanner implements Scanner{
         catch(IOException e){
             e.printStackTrace();
         }
-        
-        //linepos--;
     }
     
     private Token scanToken() throws lexicalErrorException {
@@ -261,6 +231,7 @@ public class CminusScanner implements Scanner{
                             currState = State.INCOMMENT;
                         }
                         else{
+                            ungetNextChar();
                             currState = State.DONE;
                             currToken.setTokenType(TokenType.DIVIDE);
                         }
@@ -385,7 +356,7 @@ public class CminusScanner implements Scanner{
             File output = new File(name);
             FileWriter fw;
                        
-            if(!output.exists() || newFile){
+            if(!output.exists()){
                 //print header columns first time
                 //output.createNewFile();
                 fw = new FileWriter(output);
@@ -406,7 +377,6 @@ public class CminusScanner implements Scanner{
             else{
                 fw.write("\n");
             }
-            newFile = false;
             fw.flush();
             fw.close();
         }
