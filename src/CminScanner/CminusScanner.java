@@ -68,6 +68,12 @@ public class CminusScanner implements Scanner{
     public CminusScanner(BufferedReader file) throws lexicalErrorException{
         inFile = file;
         lineLength = -1;
+        String name = "tokens.csv";
+        File output = new File(name);
+        //Delete the file everytime scanner is run
+        if(output.exists()){
+            output.delete();
+        }
         nextToken = scanToken();
     }
     
@@ -103,6 +109,10 @@ public class CminusScanner implements Scanner{
         try{
             inFile.mark(1);
             temp = inFile.read();
+            if(temp == 13){
+                inFile.mark(1);
+                temp = inFile.read();
+            }
             if(temp != -1){
                 nextChar = String.valueOf((char)temp);
             }
