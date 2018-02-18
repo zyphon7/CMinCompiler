@@ -151,7 +151,7 @@ public class CminusScannerB implements Scanner {
   private static final String ZZ_ACTION_PACKED_0 =
     "\2\0\1\1\2\2\1\3\1\4\1\5\2\6\5\5"+
     "\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16"+
-    "\1\17\1\20\1\21\1\1\1\22\1\23\1\1\1\24"+
+    "\1\17\1\20\1\21\1\1\1\22\1\23\1\2\1\24"+
     "\2\5\1\25\3\5\1\26\1\27\1\30\1\31\1\0"+
     "\1\32\1\5\1\33\3\5\1\0\1\34\1\5\1\35"+
     "\1\5\1\0\1\5\1\36\1\0\1\37\5\0\1\40";
@@ -219,7 +219,7 @@ public class CminusScannerB implements Scanner {
     "\1\13\2\10\1\14\3\10\1\15\1\10\1\16\2\10"+
     "\1\17\1\10\1\20\1\21\1\22\1\23\1\24\1\25"+
     "\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35"+
-    "\7\12\5\3\1\36\46\3\56\0\1\5\56\0\1\37"+
+    "\7\12\5\5\1\36\46\5\56\0\1\5\56\0\1\37"+
     "\54\0\1\10\2\0\16\10\34\0\2\12\34\0\7\12"+
     "\6\0\1\10\2\0\1\10\1\40\14\10\33\0\1\10"+
     "\2\0\4\10\1\41\1\10\1\42\7\10\33\0\1\10"+
@@ -385,9 +385,9 @@ public class CminusScannerB implements Scanner {
 
    public Token getNextToken(){
         Token returnToken = nextToken;
+        printToken(nextToken);
         if(nextToken.getTokenType()!= TokenType.EOF){
             try{
-                printToken(nextToken);
                 nextToken = yylex();
                
             }

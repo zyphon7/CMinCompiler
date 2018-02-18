@@ -67,9 +67,9 @@ import java.io.IOException;
 
    public Token getNextToken(){
         Token returnToken = nextToken;
+        printToken(nextToken);
         if(nextToken.getTokenType()!= TokenType.EOF){
             try{
-                printToken(nextToken);
                 nextToken = yylex();
                
             }
@@ -183,10 +183,6 @@ SingleCharacter = [^\r\n\'\\]
   "while"                        { return new Token(Token.TokenType.WHILE); }
   
   
-  /* null literal */
-  //"null"                         { return symbol(NULL_LITERAL); }
-  
-  
   /* separators */
   "("                            { return new Token(Token.TokenType.LP); }
   ")"                            { return new Token(Token.TokenType.RP); }
@@ -231,11 +227,9 @@ SingleCharacter = [^\r\n\'\\]
 }
 
 <COMMENT> {
-  "*/"                            { yybegin(YYINITIAL); }
-
+"*/"                         { yybegin(YYINITIAL); }
+[^]                          { /* ignore */ }
   <<EOF>>                         { throw new RuntimeException("File ended in the middle of a comment."); } 
-
-
 }
 
 /* error fallback */
