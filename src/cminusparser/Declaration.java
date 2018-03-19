@@ -11,6 +11,8 @@ package cminusparser;
  */
 public abstract class Declaration {
     
-    
+    static Declaration parseDeclaration(){
+        
+    }
     abstract void print();
 }

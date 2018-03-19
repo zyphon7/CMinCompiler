@@ -5,6 +5,7 @@
  */
 package cminusparser;
 
+import static cminusparser.Declaration.parseDeclaration;
 import java.util.ArrayList;
 
 /**
@@ -15,8 +16,12 @@ public class Program {
     
     private ArrayList<Declaration> decls = new ArrayList<Declaration>();
     
-    static void parseProgram(){
+    public Program(){
         
+    }
+    
+    void addDecl(Declaration d){
+        decls.add(d);
     }
     
     void print(){

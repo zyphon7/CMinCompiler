@@ -5,7 +5,6 @@
  */
 package cminusparser;
 
-import CminScanner.Token;
 import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
@@ -19,28 +18,18 @@ public class IterationStmt extends Statement{
     private Expression expr;
     private Statement stmt;
     
+    private static String caller = "ITER_STMT";
+    
     public IterationStmt(){
         
     }
     
-    static IterationStmt parseIterationStmt(){
+    static Statement parseIterationStmt(){
         IterationStmt i = new IterationStmt();
-        boolean matched = matchToken(TokenType.WHILE);
-        if(!matched){
-            System.out.println("No match for while.");
-            System.exit(1);
-        }
-        matched = matchToken(TokenType.LP);
-        if(!matched){
-           System.out.println("No match for LP.");
-           System.exit(1);
-        }
+        matchToken(TokenType.WHILE, caller);
+        matchToken(TokenType.LP, caller);
         i.expr = parseExpression();
-        matched = matchToken(TokenType.RP);
-        if(!matched){
-            System.out.println("No match for RP.");
-            System.exit(1);
-        }
+        matchToken(TokenType.RP, caller);
         i.stmt = parseStatement();
         return i;
     }
