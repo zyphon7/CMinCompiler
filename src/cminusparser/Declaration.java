@@ -50,6 +50,7 @@ public abstract class Declaration {
                 //Add function to log error and exit hah :P :P :P
              }
         }
+        return null;
         
     }
     abstract void print();
