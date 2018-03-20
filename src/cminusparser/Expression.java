@@ -33,11 +33,14 @@ public abstract class Expression {
                 oldTok = matchToken(TokenType.NUM, caller);
                 return parseSimpleExpr(oldTok);    
             }
-        else{
-            //error and exit
+            else{
+                //error and exit
+                return null;
+            }
         }
-        return null;
-    }
+        else{
+            
+        }
 }
     
     static Expression parseExpressionPrime(Token t){
