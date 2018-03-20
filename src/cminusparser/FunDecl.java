@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package cminusparser;
+import CminScanner.Token;
 import java.util.ArrayList;
 
 /**
@@ -12,19 +13,20 @@ import java.util.ArrayList;
  */
 public class FunDecl extends Declaration{
     
-    private funtype type;
+    private FunType type;
     private String name;
     private ArrayList<Parameter> params = new ArrayList<Parameter>();
     private CompoundStmt cmpdstmt;
     
-    public FunDecl(funtype t, String n, CompoundStmt c){
+    public FunDecl(FunType t, String n, CompoundStmt c){
         type = t;
         name = n;
         cmpdstmt = c;
     }
     
     //TODO
-    static Declaration parseFunDecl(){
+    static Declaration parseFunDecl(FunType t, Token id){
+        
         return null;
     }
     
@@ -33,5 +35,5 @@ public class FunDecl extends Declaration{
         
     }
     
-    public enum funtype { INT, VOID }
+    public enum FunType { INT, VOID }
 }

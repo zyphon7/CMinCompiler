@@ -6,6 +6,7 @@
 package cminusparser;
 
 import CminScanner.CminusScanner;
+import CminScanner.Token;
 import CminScanner.Token.TokenType;
 import CminScanner.lexicalErrorException;
 import static cminusparser.Declaration.parseDeclaration;
@@ -35,7 +36,7 @@ public class CminParser {
                 System.exit(1);
             }
             while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
-                Declaration d = parseDeclaration();
+                Declaration d = parseDeclaration("changeMe");
                 program.addDecl(d);
             }
                    
@@ -48,13 +49,14 @@ public class CminParser {
     }
     
     //Matches a token and advances the token ptr
-    public static void matchToken(TokenType t, String caller){
+    public static Token matchToken(TokenType t, String caller){
         if(cminscanner.viewNextToken().getTokenType() == t){
-            cminscanner.getNextToken();
+            return cminscanner.getNextToken();
         }
         else{
            System.out.println("No match for" + t.toString() + " in " + caller);
            System.exit(1);
+           return null;
         }
     }
 }
