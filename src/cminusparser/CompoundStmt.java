@@ -11,6 +11,17 @@ package cminusparser;
  */
 public class CompoundStmt extends Statement{
     
+    
+    private static String caller = "CompoundStmt";
+    
+    public CompoundStmt(){
+        
+    }
+    
+    private static Statement parseCompoundStmt(){
+        
+    }
+    
     void print(){
         
     }

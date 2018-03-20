@@ -5,11 +5,34 @@
  */
 package cminusparser;
 
+import CminScanner.Token.TokenType;
+import static cminusparser.CminParser.cminscanner;
+import static cminusparser.CminParser.matchToken;
+import static cminusparser.Expression.parseExpression;
+
 /**
  *
  * @author Annie
  */
 public class ExpressionStmt extends Statement{
+    
+    private Expression expr;
+    private static final String caller = "EXPR_STMT";
+    
+    public ExpressionStmt(){
+        
+    }
+    
+    private static Statement parseExpressionStmt(){
+        ExpressionStmt e = new ExpressionStmt();
+        if(cminscanner.viewNextToken().getTokenType() == TokenType.ID ||
+           cminscanner.viewNextToken().getTokenType() == TokenType.LP ||
+           cminscanner.viewNextToken().getTokenType() == TokenType.NUM){
+           e.expr = parseExpression();
+        }
+        matchToken(TokenType.SEMICOLON, caller);
+        return e;
+    }
     
     void print(){
         

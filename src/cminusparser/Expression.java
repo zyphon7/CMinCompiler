@@ -12,7 +12,7 @@ package cminusparser;
 public abstract class Expression {
     
     static Expression parseExpression(){
-        
+        return null;
     }
     
     static Expression parseExpressionPrime(){

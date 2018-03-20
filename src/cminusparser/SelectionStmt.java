@@ -36,7 +36,7 @@ public class SelectionStmt extends Statement {
         s.stmt1 = parseStatement();
         
         if(cminscanner.viewNextToken().getTokenType() == TokenType.ELSE){
-            cminscanner.getNextToken();
+            matchToken(TokenType.ELSE, caller);
             s.stmt2 = parseStatement();
         }      
         return s;
