@@ -28,6 +28,12 @@ public class CminParser {
             cminscanner = new CminusScanner(new BufferedReader(new FileReader(cminFile)));
             program = new Program();
             
+            //must have at least one decl or invalid program
+            if(cminscanner.viewNextToken().getTokenType() != TokenType.INT ||
+               cminscanner.viewNextToken().getTokenType() != TokenType.VOID){
+                System.out.println("A program must have at least one declaration.");
+                System.exit(1);
+            }
             while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
                 Declaration d = parseDeclaration();
                 program.addDecl(d);
