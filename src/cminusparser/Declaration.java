@@ -44,7 +44,7 @@ public abstract class Declaration {
         else{
              if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.SEMICOLON
                      || cminscanner.viewNextToken().getTokenType() == Token.TokenType.LBRACKET){
-                return parseVarDecl(ID, false);
+                return parseVarDecl(ID);
              }
              else if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.LP){
                 return parseFunDecl(FunType.INT, ID);

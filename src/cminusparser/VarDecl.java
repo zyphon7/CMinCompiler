@@ -27,28 +27,31 @@ public class VarDecl extends Declaration {
     }
     
     //TODO
-    static Declaration parseVarDecl(Token id, boolean fullDecl){
-        VarDecl var = new VarDecl();
-        if(fullDecl){
-            
-        }
-        else{
-            var.name = id.getTokenData().toString();
+    static Declaration parseVarDecl(Token id){
+            VarDecl var = new VarDecl();
+            if(id == null){
+                matchToken(Token.TokenType.INT, caller);
+                var.name = matchToken(Token.TokenType.ID, caller).getTokenData().toString();
+            }
+            return parseBracketNum(id, var);
+     }
+    
+    static Declaration parseBracketNum(Token id, VarDecl v){
+        v.name = id.getTokenData().toString();
             if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.LBRACKET){
                 matchToken(Token.TokenType.LBRACKET, caller);
-                var.num = (int)matchToken(Token.TokenType.NUM, caller).getTokenData();
+                v.num = (int)matchToken(Token.TokenType.NUM, caller).getTokenData();
                 matchToken(Token.TokenType.RBRACKET, caller);
                 matchToken(Token.TokenType.SEMICOLON, caller);
             }
             else if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.SEMICOLON){
-                var.num = -1;
+                v.num = -1;
                 matchToken(Token.TokenType.SEMICOLON, caller);
             }
             else {
                 //log error and die
             }
-        }
-        return var;
+        return v;
     }
     
     void print(){
