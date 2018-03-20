@@ -5,19 +5,24 @@
  */
 package cminusparser;
 import CminScanner.Token;
+import static cminusparser.CminParser.matchToken;
 import java.util.ArrayList;
 
 /**
  *
- * @author Annie
+ * @author Annie and Spencer
  */
 public class FunDecl extends Declaration{
     
+    private static String caller = "FUNDECL";
     private FunType type;
     private String name;
     private ArrayList<Parameter> params = new ArrayList<Parameter>();
     private CompoundStmt cmpdstmt;
     
+    public FunDecl(){
+        
+    }
     public FunDecl(FunType t, String n, CompoundStmt c){
         type = t;
         name = n;
@@ -26,8 +31,14 @@ public class FunDecl extends Declaration{
     
     //TODO
     static Declaration parseFunDecl(FunType t, Token id){
-        
-        return null;
+        FunDecl f = new FunDecl();
+        f.name = id.getTokenData().toString();
+        f.type = t;
+        matchToken(Token.TokenType.LP, caller);
+        f.params = parseParams();
+        matchToken(Token.TokenType.RP, caller);
+        f.cmpdstmt = parseCompoundStmt();
+        return f;
     }
     
     //TODO

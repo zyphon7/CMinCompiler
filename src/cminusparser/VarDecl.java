@@ -11,7 +11,7 @@ import static cminusparser.CminParser.matchToken;
 
 /**
  *
- * @author Annie
+ * @author Annie and Spencer
  */
 public class VarDecl extends Declaration {
     

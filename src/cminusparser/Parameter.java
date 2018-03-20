@@ -5,11 +5,23 @@
  */
 package cminusparser;
 
+import cminusparser.FunDecl.FunType;
+import java.util.ArrayList;
+
 /**
  *
  * @author Annie
  */
 public class Parameter {
+    //private ArrayList<Parameter> params = new ArrayList<Parameter>();
+    private String name;
+    private FunType type;
+    
+    
+    static ArrayList<Parameter> parseParams(){
+        
+    }
+    
     
     void print(){
         

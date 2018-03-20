@@ -14,12 +14,9 @@ import static cminusparser.VarDecl.parseVarDecl;
 
 /**
  *
- * @author Annie
+ * @author Annie and Spencer
  */
 public abstract class Declaration {
-    //Probably don't need type
-    //String type;
-    //private Token ID;
     private static String caller = "DECLARATION";
     
     static Declaration parseDeclaration(String test){
