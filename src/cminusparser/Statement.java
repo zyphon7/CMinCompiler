@@ -5,6 +5,9 @@
  */
 package cminusparser;
 
+import CminScanner.Token.TokenType;
+import static cminusparser.CminParser.cminscanner;
+
 /**
  *
  * @author Annie
@@ -12,7 +15,13 @@ package cminusparser;
 public abstract class Statement {
     
     static Statement parseStatement(){
-        
+        Statement s = null;
+        TokenType t = cminscanner.viewNextToken().getTokenType();
+        //expression-stmt
+        if(t == TokenType.ID || t == TokenType.LP || t == TokenType.NUM ||
+                t == TokenType.SEMICOLON){
+            //s = parseExpression();
+        }
     }
     abstract void print();
     
