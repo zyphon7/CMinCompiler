@@ -5,21 +5,58 @@
  */
 package cminusparser;
 
+import CminScanner.Token;
+import static cminusparser.CminParser.cminscanner;
+import static cminusparser.CminParser.matchToken;
 import cminusparser.FunDecl.FunType;
 import java.util.ArrayList;
 
 /**
  *
- * @author Annie
+ * @author Annie and Spencer
  */
 public class Parameter {
     //private ArrayList<Parameter> params = new ArrayList<Parameter>();
     private String name;
     private FunType type;
+    private static String caller = "PARAMETER";
     
+    Parameter(){ }
+    
+    Parameter(FunType t){
+        type = t;
+    }
     
     static ArrayList<Parameter> parseParams(){
-        
+        ArrayList<Parameter> params = new ArrayList<Parameter>();
+        if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.VOID){
+            Parameter p = new Parameter(FunType.VOID);
+            params.add(p);
+        }
+        else if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.INT){
+            //Some sort of while loop
+            while(cminscanner.viewNextToken().getTokenType() == Token.TokenType.INT){
+                Parameter p = new Parameter(FunType.INT);
+                matchToken(Token.TokenType.INT, caller);
+                p.name = matchToken(Token.TokenType.ID, caller).getTokenData().toString();
+                //see if we have brackets
+                if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.LBRACKET){
+                    p.name += matchToken(Token.TokenType.LBRACKET, caller).getTokenData().toString();
+                    //Don't need extra check because it should be this and if it is not
+                    //matchToken will error out for us
+                    p.name += matchToken(Token.TokenType.RBRACKET, caller).getTokenData().toString();
+                }
+                //Can't use else if or it will skip over if we have [],
+                if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.COMMA){
+                    matchToken(Token.TokenType.COMMA, caller);
+                }
+                params.add(p);
+            }
+        }
+        else{
+            //error
+        }
+        return params;
     }
     
     
