@@ -8,6 +8,7 @@ package cminusparser;
 import CminScanner.Token;
 import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.cminscanner;
+import static cminusparser.CminParser.matchToken;
 import static cminusparser.VarDecl.parseVarDecl;
 import java.util.ArrayList;
 
@@ -21,10 +22,6 @@ public class CompoundStmt extends Statement{
     private ArrayList<Statement> stmtList = new ArrayList<Statement>();
     
     private static final String caller = "CompoundStmt";
-
-    private static void matchToken(TokenType tokenType) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public CompoundStmt(){
         
@@ -32,7 +29,7 @@ public class CompoundStmt extends Statement{
     
     static Statement parseCompoundStmt(){
         CompoundStmt c = new CompoundStmt();
-        matchToken(TokenType.LCURLY);
+        matchToken(TokenType.LCURLY, caller);
         while(cminscanner.viewNextToken().getTokenType() == TokenType.INT){
             c.varDecls.add(parseVarDecl(null));
         }
@@ -47,7 +44,7 @@ public class CompoundStmt extends Statement{
               cminscanner.viewNextToken().getTokenType() == TokenType.LCURLY){
             c.stmtList.add(parseStatement());
         }
-        matchToken(TokenType.RCURLY);
+        matchToken(TokenType.RCURLY, caller);
         return c;
     }
     
