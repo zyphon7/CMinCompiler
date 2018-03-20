@@ -30,7 +30,7 @@ public class CompoundStmt extends Statement{
         
     }
     
-    private static Statement parseCompoundStmt(){
+    static Statement parseCompoundStmt(){
         CompoundStmt c = new CompoundStmt();
         matchToken(TokenType.LCURLY);
         while(cminscanner.viewNextToken().getTokenType() == TokenType.INT){
