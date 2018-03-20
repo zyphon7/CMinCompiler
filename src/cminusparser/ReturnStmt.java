@@ -5,6 +5,12 @@
  */
 package cminusparser;
 
+import CminScanner.Token;
+import CminScanner.Token.TokenType;
+import static cminusparser.CminParser.cminscanner;
+import static cminusparser.CminParser.matchToken;
+import static cminusparser.Expression.parseExpression;
+
 /**
  *
  * @author Annie
@@ -17,7 +23,20 @@ public class ReturnStmt extends Statement{
     public ReturnStmt(){
         
     }
-    private 
+    static Statement parseReturnStmt(){
+        ReturnStmt r = new ReturnStmt();
+        matchToken(TokenType.RETURN, caller);
+        
+        if(cminscanner.viewNextToken().getTokenType() == TokenType.ID ||
+           cminscanner.viewNextToken().getTokenType() == TokenType.LP ||
+           cminscanner.viewNextToken().getTokenType() == TokenType.NUM ){
+           cminscanner.getNextToken();
+           r.expr = parseExpression();
+        }
+        matchToken(TokenType.SEMICOLON, caller);
+        return r;
+    } 
+    
     void print(){
         
     }
