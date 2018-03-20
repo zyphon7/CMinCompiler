@@ -6,6 +6,7 @@
 package cminusparser;
 import CminScanner.Token;
 import static cminusparser.CminParser.matchToken;
+import static cminusparser.CompoundStmt.parseCompoundStmt;
 import static cminusparser.Parameter.parseParams;
 import java.util.ArrayList;
 
@@ -19,12 +20,12 @@ public class FunDecl extends Declaration{
     private FunType type;
     private String name;
     private ArrayList<Parameter> params = new ArrayList<Parameter>();
-    private CompoundStmt cmpdstmt;
+    private Statement cmpdstmt;
     
     public FunDecl(){
         
     }
-    public FunDecl(FunType t, String n, CompoundStmt c){
+    public FunDecl(FunType t, String n, Statement c){
         type = t;
         name = n;
         cmpdstmt = c;
