@@ -366,7 +366,7 @@ public class CminusScannerB implements Scanner {
     
      public static void main(String[] args) {
         try{
-            File cminFile = new File("CminPrograms/program2.txt");
+            File cminFile = new File("CminPrograms/program3.txt");
             CminusScannerB cminscanner = new CminusScannerB(new BufferedReader(new FileReader(cminFile)));
             
             while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
@@ -385,16 +385,15 @@ public class CminusScannerB implements Scanner {
 
    public Token getNextToken(){
         Token returnToken = nextToken;
-        printToken(nextToken);
         if(nextToken.getTokenType()!= TokenType.EOF){
             try{
                 nextToken = yylex();
-               
             }
             catch(IOException i){
                 i.printStackTrace();
             }
         }
+        printToken(nextToken);
         return returnToken;
     }
 
@@ -465,6 +464,7 @@ public class CminusScannerB implements Scanner {
         }
         try{
             nextToken = yylex();
+            printToken(nextToken);
         }
         catch(IOException i){
             i.printStackTrace();

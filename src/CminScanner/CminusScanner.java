@@ -49,7 +49,7 @@ public class CminusScanner implements Scanner{
     //Just for testing scanner
     public static void main(String[] args) {
         try{
-            File cminFile = new File("CminPrograms/program2.txt");
+            File cminFile = new File("CminPrograms/program1.txt");
             CminusScanner cminscanner = new CminusScanner(new BufferedReader(new FileReader(cminFile)));
             
             while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){

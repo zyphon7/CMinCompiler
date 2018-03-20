@@ -67,16 +67,15 @@ import java.io.IOException;
 
    public Token getNextToken(){
         Token returnToken = nextToken;
-        printToken(nextToken);
         if(nextToken.getTokenType()!= TokenType.EOF){
             try{
                 nextToken = yylex();
-               
             }
             catch(IOException i){
                 i.printStackTrace();
             }
         }
+        printToken(nextToken);
         return returnToken;
     }
 
@@ -141,6 +140,7 @@ import java.io.IOException;
         }
         try{
             nextToken = yylex();
+            printToken(nextToken);
         }
         catch(IOException i){
             i.printStackTrace();
