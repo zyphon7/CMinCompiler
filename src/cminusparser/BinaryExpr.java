@@ -5,11 +5,24 @@
  */
 package cminusparser;
 
+import CminScanner.Token.TokenType;
+
 /**
  *
  * @author Annie
  */
 public class BinaryExpr extends Expression {
+    
+    private TokenType token;
+    private Expression expr1;
+    private Expression expr2;
+    private static final String caller = "BinaryExpr";
+    
+    public BinaryExpr(TokenType t, Expression e1, Expression e2){
+        token = t;
+        expr1 = e1;
+        expr2 = e2;
+    }
     
     void print(){
         

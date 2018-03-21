@@ -83,6 +83,56 @@ public abstract class Expression {
         return null;
     }
     
+    static Expression parseAdditiveExpression(){
+        Expression lhs = parseTerm();
+        
+        while(cminscanner.viewNextToken().getTokenType() == TokenType.PLUS ||
+              cminscanner.viewNextToken().getTokenType() == TokenType.MINUS){
+            Token oldTok = cminscanner.getNextToken();
+            Expression rhs = parseTerm();
+            lhs = new BinaryExpr(oldTok.getTokenType(), lhs, rhs);
+        }
+        
+        return lhs;
+    }
+    
+    static Expression parseTerm(){
+        return null;
+    }
+    
+    static Expression parseTermPrime(){
+        return null;
+    }
+    
+    static Expression parseFactor(){
+        Token currToken = cminscanner.viewNextToken();
+        switch(currToken.getTokenType()){
+            case LP:
+                matchToken(TokenType.LP, caller);
+                Expression expr = parseExpression();
+                matchToken(TokenType.RP, caller);
+                return expr;
+            case ID:
+                matchToken(TokenType.ID, caller);
+                return parseVarCall(currToken); //labeled as create IdentExpr
+                break;
+            case NUM:
+                break;
+            default:
+                //error
+                return null;
+        }
+        return null;
+    }
+    
+    static Expression parseFactorPrime(){
+        return null;
+    }
+    
+    static Expression parseVarCall(Token t){
+        return null;
+    }
+    
     abstract void print();
     
 }
