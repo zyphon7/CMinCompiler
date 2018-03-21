@@ -61,6 +61,7 @@ public abstract class Expression {
             parseSimpleExpr();
         }
         else{
+            //error
             return null;
         }
     }
@@ -83,26 +84,27 @@ public abstract class Expression {
         return null;
     }
     
-    static Expression parseAdditiveExpression(){
-        Expression lhs = parseTerm();
+    //parseAEprime through a non null e
+    static Expression parseAdditiveExpression(Expression e){
+        Expression lhs = parseTerm(e);
         
         while(cminscanner.viewNextToken().getTokenType() == TokenType.PLUS ||
               cminscanner.viewNextToken().getTokenType() == TokenType.MINUS){
             Token oldTok = cminscanner.getNextToken();
-            Expression rhs = parseTerm();
+            Expression rhs = parseTerm(null);
             lhs = new BinaryExpr(oldTok.getTokenType(), lhs, rhs);
         }
-        
         return lhs;
     }
     
-    static Expression parseAdditiveExpressionPrime(){
-        return null;
-    }
-    
-    static Expression parseTerm(){
-        Expression lhs = parseFactor();
+    //parseTermPrime when e isn't null
+    static Expression parseTerm(Expression e){
+        Expression lhs = e;
         
+        if(e == null){
+            lhs = parseFactor();
+        }
+
         while(cminscanner.viewNextToken().getTokenType() == TokenType.MULTI ||
               cminscanner.viewNextToken().getTokenType() == TokenType.DIVIDE){
             Token oldTok = cminscanner.getNextToken();
@@ -110,10 +112,6 @@ public abstract class Expression {
             lhs = new BinaryExpr(oldTok.getTokenType(), lhs, rhs);
         }
         return lhs;
-    }
-    
-    static Expression parseTermPrime(){
-        return null;
     }
     
     static Expression parseFactor(){
