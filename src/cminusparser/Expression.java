@@ -134,10 +134,6 @@ public abstract class Expression {
         }
     }
     
-    static Expression parseFactorPrime(){
-        return null;
-    }
-    
     static Expression parseVarCall(Token t){
         return null;
     }
