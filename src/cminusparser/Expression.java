@@ -19,7 +19,7 @@ public abstract class Expression {
     private static String caller = "EXPRESSION";
     
     static Expression parseExpression(){
-        Token oldTok = null;
+            Token oldTok;
             if(cminscanner.viewNextToken().getTokenType() == TokenType.ID){
                 oldTok = matchToken(TokenType.ID, caller);
                 return parseExpressionPrime(oldTok);
@@ -41,11 +41,42 @@ public abstract class Expression {
     }
     
     static Expression parseExpressionPrime(Token t){
-        return null;
+        if(cminscanner.viewNextToken().getTokenType() == TokenType.EQUAL){
+            matchToken(TokenType.EQUAL, caller);
+            return parseExpression();
+        }
+        else if(cminscanner.viewNextToken().getTokenType() == TokenType.LBRACKET){
+            matchToken(TokenType.LBRACKET, caller);
+            parseExpression();
+            matchToken(TokenType.RBRACKET, caller);
+            parseExpressionDoublePrime();
+        }
+        else if(cminscanner.viewNextToken().getTokenType() == TokenType.LP){
+            matchToken(TokenType.LP, caller);
+            parseArgs();
+            matchToken(TokenType.RP, caller);
+        }
+        else if(cminscanner.viewNextToken().getTokenType() == TokenType.MULTI ||
+                cminscanner.viewNextToken().getTokenType() == TokenType.DIVIDE){
+            parseSimpleExpr();
+        }
+        else{
+            return null;
+        }
     }
     
     static Expression parseExpressionDoublePrime(){
-        return null;
+        if(cminscanner.viewNextToken().getTokenType() == TokenType.EQUAL){
+            matchToken(TokenType.EQUAL, caller);
+            parseExpression();
+        }
+        else if(cminscanner.viewNextToken().getTokenType() == TokenType.MULTI ||
+                cminscanner.viewNextToken().getTokenType() == TokenType.DIVIDE){
+            parseSimpleExpr();
+        }
+        else{
+            return null;
+        }
     }
     
     static Expression parseSimpleExpr(Expression e){
