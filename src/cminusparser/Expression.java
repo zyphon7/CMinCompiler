@@ -115,14 +115,13 @@ public abstract class Expression {
             case ID:
                 matchToken(TokenType.ID, caller);
                 return parseVarCall(currToken); //labeled as create IdentExpr
-                break;
             case NUM:
-                break;
+                matchToken(TokenType.NUM, caller);
+                return new NumExpr((int)currToken.getTokenData());
             default:
                 //error
                 return null;
         }
-        return null;
     }
     
     static Expression parseFactorPrime(){

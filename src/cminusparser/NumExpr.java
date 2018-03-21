@@ -5,11 +5,19 @@
  */
 package cminusparser;
 
+import CminScanner.Token;
+
 /**
  *
  * @author Annie
  */
 public class NumExpr extends Expression{
+    
+    private int num;
+    
+    public NumExpr(int n){
+        num = n;
+    }
     
     void print(){
         
