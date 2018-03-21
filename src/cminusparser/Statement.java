@@ -7,6 +7,7 @@ package cminusparser;
 
 import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.cminscanner;
+import static cminusparser.ExpressionStmt.parseExpressionStmt;
 
 /**
  *
@@ -20,7 +21,7 @@ public abstract class Statement {
         //expression-stmt
         if(t == TokenType.ID || t == TokenType.LP || t == TokenType.NUM ||
                 t == TokenType.SEMICOLON){
-            //s = parseExpression();
+            s = parseExpressionStmt();
         }
     }
     abstract void print();

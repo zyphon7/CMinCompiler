@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/zypho/Documents/NetBeansProjects/CminCompiler/src/cmincompiler/CminCompiler.java</file>
-            <file>file:/C:/Users/zypho/Documents/NetBeansProjects/CminCompiler/src/CminScanner/Scanner.java</file>
+            <file>file:/C:/Users/zypho/Google%20Drive/Spring%202018/Compiler/Project2/CMinCompiler/src/cminusparser/VarExpr.java</file>
+            <file>file:/C:/Users/zypho/Google%20Drive/Spring%202018/Compiler/Project2/CMinCompiler/src/cminusparser/CminParser.java</file>
+            <file>file:/C:/Users/zypho/Google%20Drive/Spring%202018/Compiler/Project2/CMinCompiler/src/cminusparser/Declaration.java</file>
+            <file>file:/C:/Users/zypho/Google%20Drive/Spring%202018/Compiler/Project2/CMinCompiler/src/cminusparser/VarDecl.java</file>
+            <file>file:/C:/Users/zypho/Google%20Drive/Spring%202018/Compiler/Project2/CMinCompiler/src/CminScanner/Token.java</file>
+            <file>file:/C:/Users/zypho/Google%20Drive/Spring%202018/Compiler/Project2/CMinCompiler/src/cminusparser/FunDecl.java</file>
+            <file>file:/C:/Users/zypho/Google%20Drive/Spring%202018/Compiler/Project2/CMinCompiler/src/cminusparser/SelectionStmt.java</file>
         </group>
     </open-files>
 </project-private>
