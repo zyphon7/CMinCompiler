@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b2922c1-3eab-4d56-bde5-bebf502efcfc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" />
-      <change beforePath="$PROJECT_DIR$/src/cminusparser/ExpressionStmt.java" afterPath="$PROJECT_DIR$/src/cminusparser/ExpressionStmt.java" />
       <change beforePath="$PROJECT_DIR$/src/cminusparser/Statement.java" afterPath="$PROJECT_DIR$/src/cminusparser/Statement.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -61,9 +59,11 @@
       <file leaf-file-name="Statement.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cminusparser/Statement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-              <folding />
+            <state relative-caret-position="595">
+              <caret line="42" column="24" lean-forward="false" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,8 +104,8 @@
         <option value="$PROJECT_DIR$/src/cminusparser/VarExpr.java" />
         <option value="$PROJECT_DIR$/src/cminusparser/Declaration.java" />
         <option value="$PROJECT_DIR$/src/cminusparser/VarDecl.java" />
-        <option value="$PROJECT_DIR$/src/cminusparser/Statement.java" />
         <option value="$PROJECT_DIR$/src/cminusparser/ExpressionStmt.java" />
+        <option value="$PROJECT_DIR$/src/cminusparser/Statement.java" />
       </list>
     </option>
   </component>
@@ -366,9 +366,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cminusparser/Statement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="595">
+          <caret line="42" column="24" lean-forward="false" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
