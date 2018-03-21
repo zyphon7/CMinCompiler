@@ -18,16 +18,17 @@ public abstract class Expression {
     
     private static String caller = "EXPRESSION";
     
-    static Expression parseExpression(Token t){
+    static Expression parseExpression(){
         Token oldTok = null;
-        if(t == null){
             if(cminscanner.viewNextToken().getTokenType() == TokenType.ID){
                 oldTok = matchToken(TokenType.ID, caller);
                 return parseExpressionPrime(oldTok);
             }
             else if(cminscanner.viewNextToken().getTokenType() == TokenType.LP){
-                oldTok = matchToken(TokenType.LP, caller);
-                return parseExpression(oldTok);
+                matchToken(TokenType.LP, caller);
+                Expression e = parseExpression();
+                matchToken(TokenType.RP, caller);
+                return parseSimpleExpr(e);
             }
             else if(cminscanner.viewNextToken().getTokenType() == TokenType.NUM){
                 oldTok = matchToken(TokenType.NUM, caller);
@@ -37,11 +38,7 @@ public abstract class Expression {
                 //error and exit
                 return null;
             }
-        }
-        else{
-            
-        }
-}
+    }
     
     static Expression parseExpressionPrime(Token t){
         return null;
@@ -51,7 +48,7 @@ public abstract class Expression {
         return null;
     }
     
-    static Expression parseSimpleExpr(Token t){
+    static Expression parseSimpleExpr(Expression e){
         return null;
     }
     
