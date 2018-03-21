@@ -23,7 +23,7 @@ public class ExpressionStmt extends Statement{
         
     }
     
-    private static Statement parseExpressionStmt(){
+    static Statement parseExpressionStmt(){
         ExpressionStmt e = new ExpressionStmt();
         if(cminscanner.viewNextToken().getTokenType() == TokenType.ID ||
            cminscanner.viewNextToken().getTokenType() == TokenType.LP ||
