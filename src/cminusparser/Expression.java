@@ -96,8 +96,20 @@ public abstract class Expression {
         return lhs;
     }
     
-    static Expression parseTerm(){
+    static Expression parseAdditiveExpressionPrime(){
         return null;
+    }
+    
+    static Expression parseTerm(){
+        Expression lhs = parseFactor();
+        
+        while(cminscanner.viewNextToken().getTokenType() == TokenType.MULTI ||
+              cminscanner.viewNextToken().getTokenType() == TokenType.DIVIDE){
+            Token oldTok = cminscanner.getNextToken();
+            Expression rhs = parseFactor();
+            lhs = new BinaryExpr(oldTok.getTokenType(), lhs, rhs);
+        }
+        return lhs;
     }
     
     static Expression parseTermPrime(){
