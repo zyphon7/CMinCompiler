@@ -30,7 +30,7 @@ public class ReturnStmt extends Statement{
         if(cminscanner.viewNextToken().getTokenType() == TokenType.ID ||
            cminscanner.viewNextToken().getTokenType() == TokenType.LP ||
            cminscanner.viewNextToken().getTokenType() == TokenType.NUM ){
-           cminscanner.getNextToken();
+           //cminscanner.getNextToken();
            r.expr = parseExpression();
         }
         matchToken(TokenType.SEMICOLON, caller);

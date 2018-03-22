@@ -25,7 +25,7 @@ public class CminParser {
     
     public static void main(String[] args) {
         try{
-            File cminFile = new File("CminPrograms/program4.txt");
+            File cminFile = new File("CminPrograms/program1.txt");
             cminscanner = new CminusScanner(new BufferedReader(new FileReader(cminFile)));
             program = new Program();
             

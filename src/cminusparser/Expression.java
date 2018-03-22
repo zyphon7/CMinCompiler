@@ -114,8 +114,8 @@ public abstract class Expression {
     }
     
     static Expression parseSimpleExpr(Expression e){
-        TokenType t = cminscanner.viewNextToken().getTokenType();
         Expression lhs = parseAdditiveExpression(e);
+        TokenType t = cminscanner.viewNextToken().getTokenType();
         
         while(t == TokenType.LESSEQ || t == TokenType.LESS ||
            t == TokenType.GREATER || t == TokenType.GREATEREQ ||

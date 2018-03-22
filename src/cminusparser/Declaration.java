@@ -27,8 +27,7 @@ public abstract class Declaration {
                  matchToken(Token.TokenType.INT, caller);
                  ID = matchToken(Token.TokenType.ID, caller);
                  //VarExpr id = new VarExpr(ID.getTokenData().toString(), null);
-                 parseDeclaration(ID); //decl'
-                 break;
+                 return parseDeclaration(ID); //decl'
              case VOID:
                  matchToken(Token.TokenType.VOID, caller);
                  ID = matchToken(Token.TokenType.ID, caller);
