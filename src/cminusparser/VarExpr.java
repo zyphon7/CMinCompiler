@@ -5,12 +5,28 @@
  */
 package cminusparser;
 
+import cminusparser.FunDecl.FunType;
+
 /**
  *
  * @author Annie
  */
 public class VarExpr extends Expression{
-  
+    private String name;
+    private Expression index;
+    
+    public VarExpr(){ }
+    
+    //will pass null if no array
+    public VarExpr(String n, Expression i){
+        name = n;
+        index = i;
+    }
+    
+    public void setIndex(Expression e) {
+        index = e;
+    }
+    
     void print(){
         
     }

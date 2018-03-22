@@ -11,6 +11,16 @@ package cminusparser;
  */
 public class AssignExpr extends Expression {
     
+    Expression lhs;
+    Expression rhs;
+    
+    public AssignExpr(){ }
+    
+    public AssignExpr(Expression l, Expression r){
+        lhs = l;
+        rhs = r;
+    }
+    
     void print(){
         
     }

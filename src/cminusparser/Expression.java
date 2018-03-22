@@ -22,7 +22,9 @@ public abstract class Expression {
             Token oldTok;
             if(cminscanner.viewNextToken().getTokenType() == TokenType.ID){
                 oldTok = matchToken(TokenType.ID, caller);
-                return parseExpressionPrime(oldTok);
+                //Turn ID into a varexpr
+                Expression id = new VarExpr(oldTok.getTokenData().toString(), null);
+                return parseExpressionPrime(id);
             }
             else if(cminscanner.viewNextToken().getTokenType() == TokenType.LP){
                 matchToken(TokenType.LP, caller);
@@ -31,8 +33,9 @@ public abstract class Expression {
                 return parseSimpleExpr(e);
             }
             else if(cminscanner.viewNextToken().getTokenType() == TokenType.NUM){
-                oldTok = matchToken(TokenType.NUM, caller);
-                return parseSimpleExpr(oldTok);    
+                Expression num = new NumExpr((int)cminscanner.viewNextToken().getTokenData());
+                matchToken(TokenType.NUM, caller);
+                return parseSimpleExpr(num);    
             }
             else{
                 //error and exit
@@ -40,25 +43,34 @@ public abstract class Expression {
             }
     }
     
-    static Expression parseExpressionPrime(Token t){
-        if(cminscanner.viewNextToken().getTokenType() == TokenType.EQUAL){
+    static Expression parseExpressionPrime(Expression lhs){
+        TokenType t = cminscanner.viewNextToken().getTokenType();
+        if(t == TokenType.EQUAL){
             matchToken(TokenType.EQUAL, caller);
-            return parseExpression();
+            Expression e = parseExpression();
+            return new AssignExpr(lhs, e);
         }
-        else if(cminscanner.viewNextToken().getTokenType() == TokenType.LBRACKET){
+        else if(t == TokenType.LBRACKET){
             matchToken(TokenType.LBRACKET, caller);
-            parseExpression();
+            Expression index = parseExpression();
             matchToken(TokenType.RBRACKET, caller);
-            parseExpressionDoublePrime();
+            ((VarExpr)lhs).setIndex(index);
+            //AssignExpr a = new AssignExpr(t.getTokenData().toString(), e);
+            return parseExpressionDoublePrime(lhs);
+        }
+        else if(t == TokenType.MULTI || t == TokenType.DIVIDE ||
+                t == TokenType.PLUS || t == TokenType.MINUS ||
+                t == TokenType.GREATEREQ || t == TokenType.GREATER ||
+                t == TokenType.LESS || t == TokenType.LESSEQ ||
+                t == TokenType.DOUBLEEQUAL || t == TokenType.NOTEQUAL){
+            return parseSimpleExpr(lhs);
+            
         }
         else if(cminscanner.viewNextToken().getTokenType() == TokenType.LP){
             matchToken(TokenType.LP, caller);
-            parseArgs();
+            Expression e = parseArgs(); //Correct?
             matchToken(TokenType.RP, caller);
-        }
-        else if(cminscanner.viewNextToken().getTokenType() == TokenType.MULTI ||
-                cminscanner.viewNextToken().getTokenType() == TokenType.DIVIDE){
-            parseSimpleExpr();
+            return e;
         }
         else{
             //error
@@ -66,14 +78,15 @@ public abstract class Expression {
         }
     }
     
-    static Expression parseExpressionDoublePrime(){
+    static Expression parseExpressionDoublePrime(Expression lhs){
         if(cminscanner.viewNextToken().getTokenType() == TokenType.EQUAL){
             matchToken(TokenType.EQUAL, caller);
-            parseExpression();
+            AssignExpr a = new AssignExpr(lhs, parseExpression());
+            return a;
         }
         else if(cminscanner.viewNextToken().getTokenType() == TokenType.MULTI ||
                 cminscanner.viewNextToken().getTokenType() == TokenType.DIVIDE){
-            parseSimpleExpr();
+            return parseSimpleExpr(index, t);
         }
         else{
             return null;
@@ -81,6 +94,15 @@ public abstract class Expression {
     }
     
     static Expression parseSimpleExpr(Expression e){
+        Expression add = parseAdditiveExpression(e);
+
+        //Case ID expr'
+        if(t == null){
+            
+        }
+        if(e == null){
+            
+        }
         return null;
     }
     
@@ -136,6 +158,10 @@ public abstract class Expression {
     
     static Expression parseVarCall(Token t){
         return null;
+    }
+    
+    static Expression parseArgs(){
+        //create callexpr here?
     }
     
     abstract void print();
