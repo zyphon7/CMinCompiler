@@ -27,6 +27,10 @@ public class VarExpr extends Expression{
         index = e;
     }
     
+    public String getName(){
+        return name;
+    }
+    
     void print(){
         
     }

@@ -5,12 +5,25 @@
  */
 package cminusparser;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Annie
  */
 public class CallExpr extends Expression{
     
+    private Expression ID;
+    private ArrayList<Expression> args = new ArrayList<Expression>();
+    
+     public CallExpr(Expression id){
+         ID = id;
+     }
+     
+     public void addArgument(Expression e){
+         args.add(e);
+     }
+     
     void print(){
         
     }

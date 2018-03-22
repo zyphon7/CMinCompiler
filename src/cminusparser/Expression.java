@@ -167,8 +167,9 @@ public abstract class Expression {
                 matchToken(TokenType.RP, caller);
                 return expr;
             case ID:
-                matchToken(TokenType.ID, caller);
-                return parseVarCall(currToken); //labeled as create IdentExpr
+                Token oldTok = matchToken(TokenType.ID, caller);
+                Expression id = new VarExpr(oldTok.getTokenData().toString(), null);
+                return parseVarCall(id); //labeled as create IdentExpr
             case NUM:
                 matchToken(TokenType.NUM, caller);
                 return new NumExpr((int)currToken.getTokenData());
@@ -178,12 +179,37 @@ public abstract class Expression {
         }
     }
     
-    static Expression parseVarCall(Token t){
-        return null;
+    static Expression parseVarCall(Expression lhs){
+        Token currToken = cminscanner.viewNextToken();
+        Expression rhs;
+        switch(currToken.getTokenType()){
+            case LBRACKET:
+                matchToken(TokenType.LBRACKET, caller);
+                rhs = parseExpression();
+                matchToken(TokenType.RBRACKET, caller);
+                return new VarExpr(((VarExpr)lhs).getName(), rhs);
+            case LP:
+                matchToken(TokenType.LP, caller);
+                rhs = parseArgs(lhs);
+                matchToken(TokenType.RP, caller);
+                return rhs;
+            default:
+               return new VarExpr(((VarExpr)lhs).getName(), null);    
+        }
     }
     
     static Expression parseArgs(Expression lhs){
         //create callexpr here?
+        CallExpr c = new CallExpr(lhs);
+        while(cminscanner.viewNextToken().getTokenType() == TokenType.ID
+                || cminscanner.viewNextToken().getTokenType() == TokenType.LP
+                || cminscanner.viewNextToken().getTokenType() == TokenType.NUM){
+                c.addArgument(parseExpression());
+                if(cminscanner.viewNextToken().getTokenType() == TokenType.COMMA){
+                    matchToken(TokenType.COMMA, caller);
+                }
+        }
+        return c;
     }
     
     abstract void print();

@@ -123,7 +123,6 @@ public class CminusScanner implements Scanner{
         catch(IOException e){
             e.printStackTrace();
         }
-        System.out.println(nextChar);
         return nextChar;  
     }
     
