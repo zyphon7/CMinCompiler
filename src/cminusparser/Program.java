@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class Program {
     
     private ArrayList<Declaration> decls = new ArrayList<Declaration>();
+    public static final String INDENT = "    ";
     
     public Program(){
         
@@ -25,18 +26,14 @@ public class Program {
         decls.add(d);
     }
     
-    public int declCount(){
-        return decls.size();
-    }
-    
     public Declaration getDecl(int index){
         return decls.get(index);
     }
     
     protected void printProgram(){
         System.out.println("PROGRAM {");
-        for(int i = 0; i < program.declCount(); i++){
-            program.getDecl(i).print("    ");
+        for(int i = 0; i < decls.size(); i++){
+            program.getDecl(i).print(INDENT);
         }
         System.out.println("}");
     }

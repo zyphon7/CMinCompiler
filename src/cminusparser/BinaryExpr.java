@@ -6,6 +6,7 @@
 package cminusparser;
 
 import CminScanner.Token.TokenType;
+import static cminusparser.Program.INDENT;
 
 /**
  *
@@ -25,7 +26,9 @@ public class BinaryExpr extends Expression {
     }
     
     void print(String s){
-        
+        System.out.println(s + token.toString());
+        expr1.print(s+INDENT);
+        expr2.print(s+INDENT);
     }
     
 }

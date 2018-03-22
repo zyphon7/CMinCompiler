@@ -25,7 +25,12 @@ public class CallExpr extends Expression{
      }
      
     void print(String s){
-        
+        ID.print(s);
+        System.out.println("(");
+        for(int i = 0; i < args.size(); i++){
+            args.get(i).print("");
+        }
+        System.out.println(")");
     }
     
 }

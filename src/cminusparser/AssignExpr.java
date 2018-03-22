@@ -5,6 +5,8 @@
  */
 package cminusparser;
 
+import static cminusparser.Program.INDENT;
+
 /**
  *
  * @author Annie
@@ -22,7 +24,9 @@ public class AssignExpr extends Expression {
     }
     
     void print(String s){
-        
+        System.out.println(s + "=");
+        lhs.print(s + INDENT);
+        rhs.print(s + INDENT);
     }
     
 }
