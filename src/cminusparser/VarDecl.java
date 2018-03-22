@@ -33,11 +33,14 @@ public class VarDecl extends Declaration {
                 matchToken(Token.TokenType.INT, caller);
                 var.name = matchToken(Token.TokenType.ID, caller).getTokenData().toString();
             }
-            return parseBracketNum(id, var);
+            else{
+                var.name = id.getTokenData().toString();
+            }
+            return parseBracketNum(/*id,*/ var);
      }
     
-    static Declaration parseBracketNum(Token id, VarDecl v){
-        v.name = id.getTokenData().toString();
+    static Declaration parseBracketNum(/*Token id,*/ VarDecl v){
+        //v.name = id.getTokenData().toString();
             if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.LBRACKET){
                 matchToken(Token.TokenType.LBRACKET, caller);
                 v.num = Integer.parseInt((String)matchToken(Token.TokenType.NUM, caller).getTokenData());
