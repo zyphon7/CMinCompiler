@@ -34,11 +34,11 @@ public class CminParser {
             if(cminscanner.viewNextToken().getTokenType() == TokenType.INT ||
                cminscanner.viewNextToken().getTokenType() == TokenType.VOID){
                 while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
-                    TokenType test = cminscanner.viewNextToken().getTokenType();
                     Declaration d = parseDeclaration(null);
                     program.addDecl(d);
                 }
                 //print
+                
                 program.printProgram();
                 
             }
