@@ -39,7 +39,7 @@ public class VarExpr extends Expression{
         else{
             System.out.println(s + name + "[");
             index.print(s+INDENT);
-            System.out.println("]");
+            System.out.println(s + "]");
         }
     }
 }

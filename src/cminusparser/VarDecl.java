@@ -57,7 +57,7 @@ public class VarDecl extends Declaration {
     
     void print(String s){
         if(num != null){
-            System.out.println(s + "int " + name + Integer.toString(num) + ";");
+            System.out.println(s + "int " + name + "[" + Integer.toString(num) + "];");
         }
         else{
          System.out.println(s + "int " + name + ";");   
