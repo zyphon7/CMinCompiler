@@ -11,6 +11,7 @@ import static cminusparser.CminParser.matchToken;
 import cminusparser.FunDecl.FunType;
 import static cminusparser.FunDecl.parseFunDecl;
 import static cminusparser.VarDecl.parseVarDecl;
+import java.io.PrintWriter;
 
 /**
  *
@@ -53,5 +54,5 @@ public abstract class Declaration {
         return null;
         
     }
-    abstract void print(String s);
+    abstract void print(String s, PrintWriter w);
 }

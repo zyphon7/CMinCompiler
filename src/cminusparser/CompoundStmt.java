@@ -5,12 +5,12 @@
  */
 package cminusparser;
 
-import CminScanner.Token;
 import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import static cminusparser.Program.INDENT;
 import static cminusparser.VarDecl.parseVarDecl;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -50,14 +50,16 @@ public class CompoundStmt extends Statement{
         return c;
     }
     
-    void print(String s){
+    void print(String s, PrintWriter w){
+        w.println(s + "{");
         System.out.println(s + "{");
         for(int i = 0; i < varDecls.size(); i++){
-            varDecls.get(i).print(s+INDENT);
+            varDecls.get(i).print(s+INDENT, w);
         }
         for(int i = 0; i < stmtList.size(); i++){
-            stmtList.get(i).print(s+INDENT);
+            stmtList.get(i).print(s+INDENT, w);
         }
+        w.println(s + "}");
         System.out.println(s + "}");
     }
     

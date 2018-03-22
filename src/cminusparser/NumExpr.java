@@ -5,7 +5,7 @@
  */
 package cminusparser;
 
-import CminScanner.Token;
+import java.io.PrintWriter;
 
 /**
  *
@@ -19,7 +19,8 @@ public class NumExpr extends Expression{
         num = n;
     }
     
-    void print(String s){
+    void print(String s, PrintWriter w){
+        w.println(s + Integer.toString(num));
         System.out.println(s + Integer.toString(num));
     }
 }

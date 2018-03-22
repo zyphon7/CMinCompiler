@@ -9,6 +9,7 @@ import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
+import java.io.PrintWriter;
 
 /**
  *
@@ -34,12 +35,13 @@ public class ExpressionStmt extends Statement{
         return e;
     }
     
-    void print(String s){
+    void print(String s, PrintWriter w){
         if(expr == null){
+            w.println(";");
             System.out.println(";");
         }
         else{
-            expr.print(s);
+            expr.print(s, w);
         }
     }   
 }

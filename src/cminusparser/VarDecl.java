@@ -8,6 +8,7 @@ package cminusparser;
 import CminScanner.Token;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
+import java.io.PrintWriter;
 
 /**
  *
@@ -55,11 +56,13 @@ public class VarDecl extends Declaration {
         return v;
     }
     
-    void print(String s){
+    void print(String s, PrintWriter w){
         if(num != null){
+            w.println(s + "int " + name + "[" + Integer.toString(num) + "];");
             System.out.println(s + "int " + name + "[" + Integer.toString(num) + "];");
         }
         else{
+         w.println(s + "int " + name + ";");
          System.out.println(s + "int " + name + ";");   
         }
     }

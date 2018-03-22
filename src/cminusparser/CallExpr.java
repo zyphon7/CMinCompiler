@@ -6,6 +6,7 @@
 package cminusparser;
 
 import static cminusparser.Program.INDENT;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -25,12 +26,14 @@ public class CallExpr extends Expression{
          args.add(e);
      }
      
-    void print(String s){
-        ID.print(s);
+    void print(String s, PrintWriter w){
+        ID.print(s, w);
+        w.println(s + "(");
         System.out.println(s + "(");
         for(int i = 0; i < args.size(); i++){
-            args.get(i).print(s+INDENT);
+            args.get(i).print(s+INDENT, w);
         }
+        w.println(s + ")");
         System.out.println(s + ")");
     }
     

@@ -6,7 +6,7 @@
 package cminusparser;
 
 import static cminusparser.CminParser.program;
-import static cminusparser.Declaration.parseDeclaration;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -30,11 +30,13 @@ public class Program {
         return decls.get(index);
     }
     
-    protected void printProgram(){
+    protected void printProgram(PrintWriter w){
+        w.println("PROGRAM {");
         System.out.println("PROGRAM {");
         for(int i = 0; i < decls.size(); i++){
-            program.getDecl(i).print(INDENT);
+            program.getDecl(i).print(INDENT, w);
         }
+        w.println("}");
         System.out.println("}");
     }
 }

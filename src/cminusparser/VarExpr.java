@@ -5,8 +5,8 @@
  */
 package cminusparser;
 
-import cminusparser.FunDecl.FunType;
 import static cminusparser.Program.INDENT;
+import java.io.PrintWriter;
 
 /**
  *
@@ -32,14 +32,17 @@ public class VarExpr extends Expression{
         return name;
     }
     
-    void print(String s){
+    void print(String s, PrintWriter w){
         if(index == null){
+            w.println(s + name);
             System.out.println(s + name);
         }
         else{
+            w.println(s + name + "[");
             System.out.println(s + name + "[");
-            index.print(s+INDENT);
+            index.print(s+INDENT, w);
             System.out.println(s + "]");
+            w.println(s + "]");
         }
     }
 }

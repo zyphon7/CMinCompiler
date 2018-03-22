@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
@@ -38,9 +39,9 @@ public class CminParser {
                     program.addDecl(d);
                 }
                 //print
-                
-                program.printProgram();
-                
+                PrintWriter writer = new PrintWriter("parsed.ast");
+                program.printProgram(writer);
+                writer.close();
             }
             else{
                 System.out.println("A program must have at least one declaration.");

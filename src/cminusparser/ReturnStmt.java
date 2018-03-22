@@ -5,12 +5,12 @@
  */
 package cminusparser;
 
-import CminScanner.Token;
 import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
 import static cminusparser.Program.INDENT;
+import java.io.PrintWriter;
 
 /**
  *
@@ -38,12 +38,14 @@ public class ReturnStmt extends Statement{
         return r;
     } 
     
-    void print(String s){
+    void print(String s, PrintWriter w){
+        w.println(s + "return");
         System.out.println(s + "return");
         if(expr != null){
-            expr.print(s+INDENT);
+            expr.print(s+INDENT, w);
         }
         else{
+            w.println(";");
             System.out.print(";");
         }
     }

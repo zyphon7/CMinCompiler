@@ -9,6 +9,7 @@ import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
 import static cminusparser.Program.INDENT;
+import java.io.PrintWriter;
 
 /**
  *
@@ -35,12 +36,15 @@ public class IterationStmt extends Statement{
         return i;
     }
     
-    void print(String s){
+    void print(String s, PrintWriter w){
+        w.println(s + "while");
+        w.println(s + "(");
         System.out.println(s + "while");
         System.out.println(s + "(");
-        expr.print(s+INDENT);
+        expr.print(s+INDENT, w);
+        w.println(s + ")");
         System.out.println(s + ")");
-        stmt.print(s+INDENT);   
+        stmt.print(s+INDENT, w);   
     }
     
 }

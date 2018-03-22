@@ -9,7 +9,7 @@ import static cminusparser.CminParser.matchToken;
 import static cminusparser.CompoundStmt.parseCompoundStmt;
 import static cminusparser.Parameter.parseParams;
 import static cminusparser.Parameter.stringParams;
-import static cminusparser.Program.INDENT;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -46,14 +46,16 @@ public class FunDecl extends Declaration{
     }
     
     //TODO
-    void print(String s){
+    void print(String s, PrintWriter w){
         String paramString = stringParams(params);
         if(cmpdstmt == null){
+            w.println(s + type.toString().toLowerCase() + " " + name + " " + paramString + ";");
             System.out.println(s + type.toString().toLowerCase() + " " + name + " " + paramString + ";");
         }
         else{
+            w.println(s + type.toString().toLowerCase() + " " + name + " " + paramString);
             System.out.println(s + type.toString().toLowerCase() + " " + name + " " + paramString);
-            cmpdstmt.print(s);
+            cmpdstmt.print(s, w);
         }
     }
     

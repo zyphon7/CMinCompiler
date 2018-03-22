@@ -5,9 +5,9 @@
  */
 package cminusparser;
 
-import CminScanner.Token;
 import CminScanner.Token.TokenType;
 import static cminusparser.Program.INDENT;
+import java.io.PrintWriter;
 
 /**
  *
@@ -26,7 +26,7 @@ public class BinaryExpr extends Expression {
         expr2 = e2;
     }
     
-    void print(String s){
+    void print(String s, PrintWriter w){
         String oper;
         switch(token){
             case GREATER:
@@ -64,8 +64,9 @@ public class BinaryExpr extends Expression {
                 break;
         }
         System.out.println(s + oper);
-        expr1.print(s+INDENT);
-        expr2.print(s+INDENT);
+        w.println(s + oper);
+        expr1.print(s+INDENT, w);
+        expr2.print(s+INDENT, w);
     }
     
 }

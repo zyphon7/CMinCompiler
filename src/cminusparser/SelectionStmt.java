@@ -5,12 +5,12 @@
  */
 package cminusparser;
 
-import CminScanner.Token;
 import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
 import static cminusparser.Program.INDENT;
+import java.io.PrintWriter;
 
 /**
  *
@@ -43,15 +43,19 @@ public class SelectionStmt extends Statement {
         return s;
     }
     
-    void print(String s){
+    void print(String s, PrintWriter w){
+        w.println(s + "if");
+        w.println(s + "(");
         System.out.println(s + "if");
         System.out.println(s + "(");
-        expr.print(s+INDENT);
+        expr.print(s+INDENT, w);
+        w.println(s + ")");
         System.out.println(s+ ")");
-        stmt1.print(s+INDENT);
+        stmt1.print(s+INDENT, w);
         if(stmt2 != null){
+            w.println(s + "else");
             System.out.println(s + "else");
-            stmt2.print(s+INDENT);
+            stmt2.print(s+INDENT, w);
         }
     }
     

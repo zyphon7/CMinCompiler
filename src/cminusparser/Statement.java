@@ -12,6 +12,7 @@ import static cminusparser.ExpressionStmt.parseExpressionStmt;
 import static cminusparser.IterationStmt.parseIterationStmt;
 import static cminusparser.ReturnStmt.parseReturnStmt;
 import static cminusparser.SelectionStmt.parseSelectionStmt;
+import java.io.PrintWriter;
 
 /**
  *
@@ -43,6 +44,6 @@ public abstract class Statement {
             return null;
         }
     }
-    abstract void print(String s);
+    abstract void print(String s, PrintWriter w);
     
 }
