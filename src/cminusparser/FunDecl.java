@@ -49,10 +49,10 @@ public class FunDecl extends Declaration{
     void print(String s){
         String paramString = stringParams(params);
         if(cmpdstmt == null){
-            System.out.println(s + type.toString() + " " + name + " " + paramString + ";");
+            System.out.println(s + type.toString().toLowerCase() + " " + name + " " + paramString + ";");
         }
         else{
-            System.out.println(s + type.toString() + " " + name + " " + paramString);
+            System.out.println(s + type.toString().toLowerCase() + " " + name + " " + paramString);
             cmpdstmt.print(s);
         }
     }

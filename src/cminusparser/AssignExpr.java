@@ -24,9 +24,9 @@ public class AssignExpr extends Expression {
     }
     
     void print(String s){
-        System.out.println(s + "=");
-        lhs.print(s + INDENT);
-        rhs.print(s + INDENT);
+        System.out.println(s + INDENT + "=");
+        lhs.print(s + INDENT + INDENT);
+        rhs.print(s + INDENT + INDENT);
     }
     
 }

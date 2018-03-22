@@ -5,6 +5,7 @@
  */
 package cminusparser;
 
+import CminScanner.Token;
 import CminScanner.Token.TokenType;
 import static cminusparser.Program.INDENT;
 
@@ -26,7 +27,43 @@ public class BinaryExpr extends Expression {
     }
     
     void print(String s){
-        System.out.println(s + token.toString());
+        String oper;
+        switch(token){
+            case GREATER:
+                oper = ">";
+                break;
+            case GREATEREQ:
+                oper = ">=";
+                break;
+            case LESS:
+                oper = "<";
+                break;
+            case LESSEQ:
+                oper = "<=";
+                break;
+            case DOUBLEEQUAL:
+                oper = "==";
+                break;
+            case NOTEQUAL:
+                oper = "!=";
+                break;
+            case PLUS:
+                oper = "+";
+                break;
+            case MINUS:
+                oper = "-";
+                break;
+            case MULTI:
+                oper = "*";
+                break;
+            case DIVIDE:
+                oper = "/";
+                break;
+            default:
+                oper = "oper";
+                break;
+        }
+        System.out.println(s + oper);
         expr1.print(s+INDENT);
         expr2.print(s+INDENT);
     }

@@ -65,11 +65,11 @@ public class Parameter {
         String params = "( ";
         for(int i = 0; i < p.size(); i++){
             Parameter param = p.get(i);
-            params += param.type.toString() + " ";
+            params += param.type.toString().toLowerCase() + " ";
             if(param.name != null){
                 params += param.name;
             }
-            if(i-1 != p.size()){
+            if(i+1 != p.size()){
                 params += ", ";
             }
         }
