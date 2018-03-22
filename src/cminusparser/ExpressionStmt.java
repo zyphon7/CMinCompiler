@@ -35,7 +35,11 @@ public class ExpressionStmt extends Statement{
     }
     
     void print(String s){
-        
-    }
-    
+        if(expr == null){
+            System.out.println(";");
+        }
+        else{
+            expr.print(s);
+        }
+    }   
 }

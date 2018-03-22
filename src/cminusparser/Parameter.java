@@ -61,6 +61,22 @@ public class Parameter {
     }
     
     
+    protected static String stringParams(ArrayList<Parameter> p){
+        String params = "( ";
+        for(int i = 0; i < p.size(); i++){
+            Parameter param = p.get(i);
+            params += param.type.toString() + " ";
+            if(param.name != null){
+                params += param.name;
+            }
+            if(i-1 != p.size()){
+                params += ", ";
+            }
+        }
+        params += " )";
+        return params;
+    }
+    
     void print(String s){
         
     }

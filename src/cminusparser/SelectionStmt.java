@@ -10,6 +10,7 @@ import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
+import static cminusparser.Program.INDENT;
 
 /**
  *
@@ -43,7 +44,15 @@ public class SelectionStmt extends Statement {
     }
     
     void print(String s){
-        
+        System.out.println(s + "if");
+        System.out.println(s + "(");
+        expr.print(s+INDENT);
+        System.out.println(s+ ")");
+        stmt1.print(s+INDENT);
+        if(stmt2 != null){
+            System.out.println(s + "else");
+            stmt2.print(s+INDENT);
+        }
     }
     
 }

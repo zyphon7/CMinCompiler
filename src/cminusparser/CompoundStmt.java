@@ -9,6 +9,7 @@ import CminScanner.Token;
 import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
+import static cminusparser.Program.INDENT;
 import static cminusparser.VarDecl.parseVarDecl;
 import java.util.ArrayList;
 
@@ -50,7 +51,14 @@ public class CompoundStmt extends Statement{
     }
     
     void print(String s){
-        
+        System.out.println(s + "{");
+        for(int i = 0; i < varDecls.size(); i++){
+            varDecls.get(i).print(s+INDENT);
+        }
+        for(int i = 0; i < stmtList.size(); i++){
+            stmtList.get(i).print(s+INDENT);
+        }
+        System.out.println(s + "}");
     }
     
 }

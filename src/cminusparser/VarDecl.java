@@ -57,7 +57,7 @@ public class VarDecl extends Declaration {
     }
     
     void print(String s){
-        
+        System.out.println(s + "int " + name + Integer.toString(num) + ";");
     }
     
 }

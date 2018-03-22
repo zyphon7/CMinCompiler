@@ -20,7 +20,6 @@ public class NumExpr extends Expression{
     }
     
     void print(String s){
-        
+        System.out.println(s + Integer.toString(num));
     }
-    
 }

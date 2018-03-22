@@ -10,6 +10,7 @@ import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
+import static cminusparser.Program.INDENT;
 
 /**
  *
@@ -38,7 +39,12 @@ public class ReturnStmt extends Statement{
     } 
     
     void print(String s){
-        
+        System.out.println(s + "return");
+        if(expr != null){
+            expr.print(s+INDENT);
+        }
+        else{
+            System.out.print(";");
+        }
     }
-    
 }

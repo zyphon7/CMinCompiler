@@ -8,6 +8,8 @@ import CminScanner.Token;
 import static cminusparser.CminParser.matchToken;
 import static cminusparser.CompoundStmt.parseCompoundStmt;
 import static cminusparser.Parameter.parseParams;
+import static cminusparser.Parameter.stringParams;
+import static cminusparser.Program.INDENT;
 import java.util.ArrayList;
 
 /**
@@ -45,7 +47,14 @@ public class FunDecl extends Declaration{
     
     //TODO
     void print(String s){
-        
+        String paramString = stringParams(params);
+        if(cmpdstmt == null){
+            System.out.println(s + type.toString() + " " + name + " " + paramString + ";");
+        }
+        else{
+            System.out.println(s + type.toString() + " " + name + " " + paramString);
+            cmpdstmt.print(s);
+        }
     }
     
     public enum FunType { INT, VOID }

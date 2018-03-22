@@ -6,6 +6,7 @@
 package cminusparser;
 
 import cminusparser.FunDecl.FunType;
+import static cminusparser.Program.INDENT;
 
 /**
  *
@@ -32,6 +33,13 @@ public class VarExpr extends Expression{
     }
     
     void print(String s){
-        
+        if(index == null){
+            System.out.println(s + name);
+        }
+        else{
+            System.out.println(s + name + "[");
+            index.print(s+INDENT);
+            System.out.println("]");
+        }
     }
 }
