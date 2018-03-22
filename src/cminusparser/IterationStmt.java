@@ -34,7 +34,7 @@ public class IterationStmt extends Statement{
         return i;
     }
     
-    void print(){
+    void print(String s){
         
     }
     

@@ -31,7 +31,7 @@ public class VarExpr extends Expression{
         return name;
     }
     
-    void print(){
+    void print(String s){
         
     }
 }

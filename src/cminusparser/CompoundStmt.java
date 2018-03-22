@@ -49,7 +49,7 @@ public class CompoundStmt extends Statement{
         return c;
     }
     
-    void print(){
+    void print(String s){
         
     }
     

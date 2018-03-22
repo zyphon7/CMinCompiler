@@ -34,7 +34,7 @@ public class ExpressionStmt extends Statement{
         return e;
     }
     
-    void print(){
+    void print(String s){
         
     }
     

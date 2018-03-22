@@ -61,7 +61,7 @@ public class Parameter {
     }
     
     
-    void print(){
+    void print(String s){
         
     }
 }

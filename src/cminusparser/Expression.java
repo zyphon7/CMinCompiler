@@ -212,6 +212,6 @@ public abstract class Expression {
         return c;
     }
     
-    abstract void print();
+    abstract void print(String s);
     
 }

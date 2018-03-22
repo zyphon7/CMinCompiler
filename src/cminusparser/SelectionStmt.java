@@ -42,7 +42,7 @@ public class SelectionStmt extends Statement {
         return s;
     }
     
-    void print(){
+    void print(String s){
         
     }
     

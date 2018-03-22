@@ -43,6 +43,6 @@ public abstract class Statement {
             return null;
         }
     }
-    abstract void print();
+    abstract void print(String s);
     
 }

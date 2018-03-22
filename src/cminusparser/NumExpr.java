@@ -19,7 +19,7 @@ public class NumExpr extends Expression{
         num = n;
     }
     
-    void print(){
+    void print(String s){
         
     }
     

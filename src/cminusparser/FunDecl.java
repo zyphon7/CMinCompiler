@@ -44,7 +44,7 @@ public class FunDecl extends Declaration{
     }
     
     //TODO
-    void print(){
+    void print(String s){
         
     }
     

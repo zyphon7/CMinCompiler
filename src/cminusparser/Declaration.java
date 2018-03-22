@@ -53,5 +53,5 @@ public abstract class Declaration {
         return null;
         
     }
-    abstract void print();
+    abstract void print(String s);
 }

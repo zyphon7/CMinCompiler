@@ -56,7 +56,7 @@ public class VarDecl extends Declaration {
         return v;
     }
     
-    void print(){
+    void print(String s){
         
     }
     

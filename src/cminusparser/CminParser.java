@@ -38,6 +38,8 @@ public class CminParser {
                     Declaration d = parseDeclaration(null);
                     program.addDecl(d);
                 }
+                //print
+                program.printProgram();
             }
             else{
                 System.out.println("A program must have at least one declaration.");

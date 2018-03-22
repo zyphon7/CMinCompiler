@@ -37,7 +37,7 @@ public class ReturnStmt extends Statement{
         return r;
     } 
     
-    void print(){
+    void print(String s){
         
     }
     

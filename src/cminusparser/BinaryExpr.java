@@ -24,7 +24,7 @@ public class BinaryExpr extends Expression {
         expr2 = e2;
     }
     
-    void print(){
+    void print(String s){
         
     }
     
