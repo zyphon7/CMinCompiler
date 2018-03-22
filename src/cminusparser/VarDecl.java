@@ -16,17 +16,16 @@ import static cminusparser.CminParser.matchToken;
 public class VarDecl extends Declaration {
     
     private String name;
-    private int num;
+    private Integer num;
     private static String caller = "VARDECL";
     
     public VarDecl(){}
     
-    public VarDecl(String n, int i){
+    public VarDecl(String n, Integer i){
         name = n;
         num = i;
     }
     
-    //TODO
     static Declaration parseVarDecl(Token id){
             VarDecl var = new VarDecl();
             if(id == null){
@@ -47,7 +46,7 @@ public class VarDecl extends Declaration {
                 matchToken(Token.TokenType.SEMICOLON, caller);
             }
             else if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.SEMICOLON){
-                v.num = -1;
+                v.num = null;
                 matchToken(Token.TokenType.SEMICOLON, caller);
             }
             else {
@@ -57,7 +56,12 @@ public class VarDecl extends Declaration {
     }
     
     void print(String s){
-        System.out.println(s + "int " + name + Integer.toString(num) + ";");
+        if(num != null){
+            System.out.println(s + "int " + name + Integer.toString(num) + ";");
+        }
+        else{
+         System.out.println(s + "int " + name + ";");   
+        }
     }
     
 }
