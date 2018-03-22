@@ -33,7 +33,7 @@ public abstract class Expression {
                 return parseSimpleExpr(e);
             }
             else if(cminscanner.viewNextToken().getTokenType() == TokenType.NUM){
-                Expression num = new NumExpr((int)cminscanner.viewNextToken().getTokenData());
+                Expression num = new NumExpr(Integer.parseInt((String)cminscanner.viewNextToken().getTokenData()));
                 matchToken(TokenType.NUM, caller);
                 return parseSimpleExpr(num);    
             }
@@ -172,7 +172,7 @@ public abstract class Expression {
                 return parseVarCall(id); //labeled as create IdentExpr
             case NUM:
                 matchToken(TokenType.NUM, caller);
-                return new NumExpr((int)currToken.getTokenData());
+                return new NumExpr(Integer.parseInt((String)currToken.getTokenData()));
             default:
                 //error
                 return null;

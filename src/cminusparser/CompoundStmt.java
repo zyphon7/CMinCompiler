@@ -42,6 +42,7 @@ public class CompoundStmt extends Statement{
               cminscanner.viewNextToken().getTokenType() == TokenType.WHILE ||
               cminscanner.viewNextToken().getTokenType() == TokenType.RETURN ||
               cminscanner.viewNextToken().getTokenType() == TokenType.LCURLY){
+            
             c.stmtList.add(parseStatement());
         }
         matchToken(TokenType.RCURLY, caller);

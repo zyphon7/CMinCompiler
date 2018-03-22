@@ -19,14 +19,15 @@ import static cminusparser.VarDecl.parseVarDecl;
 public abstract class Declaration {
     private static String caller = "DECLARATION";
     
-    static Declaration parseDeclaration(String test){
+    static Declaration parseDeclaration(Token e){
         Token ID = new Token();
-        if(test != null){
+        if(e == null){
             switch(cminscanner.viewNextToken().getTokenType()){
              case INT:
                  matchToken(Token.TokenType.INT, caller);
                  ID = matchToken(Token.TokenType.ID, caller);
-                 parseDeclaration(null); //decl'
+                 //VarExpr id = new VarExpr(ID.getTokenData().toString(), null);
+                 parseDeclaration(ID); //decl'
                  break;
              case VOID:
                  matchToken(Token.TokenType.VOID, caller);
@@ -41,10 +42,10 @@ public abstract class Declaration {
         else{
              if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.SEMICOLON
                      || cminscanner.viewNextToken().getTokenType() == Token.TokenType.LBRACKET){
-                return parseVarDecl(ID);
+                return parseVarDecl(e);
              }
              else if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.LP){
-                return parseFunDecl(FunType.INT, ID);
+                return parseFunDecl(FunType.INT, e);
              }
              else{
                 //Add function to log error and exit hah :P :P :P

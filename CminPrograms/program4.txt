@@ -1,0 +1,5 @@
+int a[5];
+
+int fun(void){
+a[4] = 2;
+}

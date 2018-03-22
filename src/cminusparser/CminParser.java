@@ -25,16 +25,17 @@ public class CminParser {
     
     public static void main(String[] args) {
         try{
-            File cminFile = new File("CminPrograms/program2.txt");
+            File cminFile = new File("CminPrograms/program4.txt");
             cminscanner = new CminusScanner(new BufferedReader(new FileReader(cminFile)));
             program = new Program();
             
-            TokenType test = cminscanner.viewNextToken().getTokenType();
+            
             //must have at least one decl or invalid program
             if(cminscanner.viewNextToken().getTokenType() == TokenType.INT ||
                cminscanner.viewNextToken().getTokenType() == TokenType.VOID){
                 while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
-                    Declaration d = parseDeclaration("changeMe");
+                    TokenType test = cminscanner.viewNextToken().getTokenType();
+                    Declaration d = parseDeclaration(null);
                     program.addDecl(d);
                 }
             }

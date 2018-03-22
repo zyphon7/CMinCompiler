@@ -40,7 +40,7 @@ public class VarDecl extends Declaration {
         v.name = id.getTokenData().toString();
             if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.LBRACKET){
                 matchToken(Token.TokenType.LBRACKET, caller);
-                v.num = (int)matchToken(Token.TokenType.NUM, caller).getTokenData();
+                v.num = Integer.parseInt((String)matchToken(Token.TokenType.NUM, caller).getTokenData());
                 matchToken(Token.TokenType.RBRACKET, caller);
                 matchToken(Token.TokenType.SEMICOLON, caller);
             }

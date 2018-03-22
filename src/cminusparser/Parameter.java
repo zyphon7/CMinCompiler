@@ -31,6 +31,7 @@ public class Parameter {
         ArrayList<Parameter> params = new ArrayList<Parameter>();
         if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.VOID){
             Parameter p = new Parameter(FunType.VOID);
+            matchToken(Token.TokenType.VOID, caller);
             params.add(p);
         }
         else if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.INT){
