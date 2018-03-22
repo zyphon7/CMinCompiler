@@ -62,15 +62,29 @@ public abstract class Expression {
                 t == TokenType.PLUS || t == TokenType.MINUS ||
                 t == TokenType.GREATEREQ || t == TokenType.GREATER ||
                 t == TokenType.LESS || t == TokenType.LESSEQ ||
-                t == TokenType.DOUBLEEQUAL || t == TokenType.NOTEQUAL){
-            return parseSimpleExpr(lhs);
-            
+                t == TokenType.DOUBLEEQUAL || t == TokenType.NOTEQUAL ||
+                t == TokenType.RP || t == TokenType.RBRACKET ||
+                t == TokenType.COMMA || t == TokenType.SEMICOLON){
+            return parseSimpleExpr(lhs); 
         }
-        else if(cminscanner.viewNextToken().getTokenType() == TokenType.LP){
+        else if(t == TokenType.LP){
             matchToken(TokenType.LP, caller);
-            Expression e = parseArgs(); //Correct?
+            Expression args = parseArgs(lhs); //Correct?
             matchToken(TokenType.RP, caller);
-            return e;
+            if(t == TokenType.MULTI || t == TokenType.DIVIDE ||
+                t == TokenType.PLUS || t == TokenType.MINUS ||
+                t == TokenType.GREATEREQ || t == TokenType.GREATER ||
+                t == TokenType.LESS || t == TokenType.LESSEQ ||
+                t == TokenType.DOUBLEEQUAL || t == TokenType.NOTEQUAL ||
+                t == TokenType.RP || t == TokenType.RBRACKET ||
+                t == TokenType.COMMA || t == TokenType.SEMICOLON){
+                Expression e = parseSimpleExpr(args);
+                return e;
+            }
+            else{
+                return args;
+            }
+            
         }
         else{
             //error
@@ -79,14 +93,20 @@ public abstract class Expression {
     }
     
     static Expression parseExpressionDoublePrime(Expression lhs){
-        if(cminscanner.viewNextToken().getTokenType() == TokenType.EQUAL){
+        TokenType t = cminscanner.viewNextToken().getTokenType();
+        if(t == TokenType.EQUAL){
             matchToken(TokenType.EQUAL, caller);
             AssignExpr a = new AssignExpr(lhs, parseExpression());
             return a;
         }
-        else if(cminscanner.viewNextToken().getTokenType() == TokenType.MULTI ||
-                cminscanner.viewNextToken().getTokenType() == TokenType.DIVIDE){
-            return parseSimpleExpr(index, t);
+        else if(t == TokenType.MULTI || t == TokenType.DIVIDE ||
+                t == TokenType.PLUS || t == TokenType.MINUS ||
+                t == TokenType.GREATEREQ || t == TokenType.GREATER ||
+                t == TokenType.LESS || t == TokenType.LESSEQ ||
+                t == TokenType.DOUBLEEQUAL || t == TokenType.NOTEQUAL ||
+                t == TokenType.RP || t == TokenType.RBRACKET ||
+                t == TokenType.COMMA || t == TokenType.SEMICOLON){
+            return parseSimpleExpr(lhs);
         }
         else{
             return null;
@@ -94,16 +114,18 @@ public abstract class Expression {
     }
     
     static Expression parseSimpleExpr(Expression e){
-        Expression add = parseAdditiveExpression(e);
-
-        //Case ID expr'
-        if(t == null){
-            
+        TokenType t = cminscanner.viewNextToken().getTokenType();
+        Expression lhs = parseAdditiveExpression(e);
+        
+        while(t == TokenType.LESSEQ || t == TokenType.LESS ||
+           t == TokenType.GREATER || t == TokenType.GREATEREQ ||
+           t == TokenType.DOUBLEEQUAL || t == TokenType.NOTEQUAL){
+            matchToken(t, caller);
+            Expression rhs = parseAdditiveExpression(null);
+            lhs = new BinaryExpr(t, lhs, rhs);
+            t = cminscanner.viewNextToken().getTokenType();
         }
-        if(e == null){
-            
-        }
-        return null;
+        return lhs;
     }
     
     //parseAEprime through a non null e
@@ -160,7 +182,7 @@ public abstract class Expression {
         return null;
     }
     
-    static Expression parseArgs(){
+    static Expression parseArgs(Expression lhs){
         //create callexpr here?
     }
     
