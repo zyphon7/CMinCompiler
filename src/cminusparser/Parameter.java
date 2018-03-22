@@ -8,6 +8,8 @@ package cminusparser;
 import CminScanner.Token;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
+import static cminusparser.Expression.parseExpression;
+
 import cminusparser.FunDecl.FunType;
 import java.util.ArrayList;
 
@@ -19,12 +21,14 @@ public class Parameter {
     //private ArrayList<Parameter> params = new ArrayList<Parameter>();
     private String name;
     private FunType type;
+    private boolean array;
     private static String caller = "PARAMETER";
     
     Parameter(){ }
     
     Parameter(FunType t){
         type = t;
+        array = false;
     }
     
     static ArrayList<Parameter> parseParams(){
@@ -46,6 +50,7 @@ public class Parameter {
                     //Don't need extra check because it should be this and if it is not
                     //matchToken will error out for us
                     p.name += matchToken(Token.TokenType.RBRACKET, caller).getTokenData().toString();
+                    p.array = true;
                 }
                 //Can't use else if or it will skip over if we have [],
                 if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.COMMA){
@@ -68,6 +73,9 @@ public class Parameter {
             params += param.type.toString().toLowerCase() + " ";
             if(param.name != null){
                 params += param.name;
+            }
+            if(param.array == true){
+                params += "[]";
             }
             if(i+1 != p.size()){
                 params += ", ";
