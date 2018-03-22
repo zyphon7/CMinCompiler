@@ -40,6 +40,7 @@ public class CminParser {
                 }
                 //print
                 program.printProgram();
+                
             }
             else{
                 System.out.println("A program must have at least one declaration.");
@@ -60,7 +61,7 @@ public class CminParser {
             return cminscanner.getNextToken();
         }
         else{
-           System.out.println("No match for" + t.toString() + " in " + caller);
+           System.out.println("No match for " + t.toString() + " in " + caller);
            System.exit(1);
            return null;
         }
