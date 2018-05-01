@@ -42,6 +42,23 @@ public class Program {
     }
     
     public CodeItem genLLCode(){
-        return null;
+        //for each decl call genCode
+        if(decls.size() < 1){
+            System.out.println("Error: No decls");
+        }
+        CodeItem firstItem = getDecl(0).genCode();
+        CodeItem nextItem = null;
+        for(int i = 1; i < decls.size(); i++){
+            if(i == 1){
+                nextItem = getDecl(1).genCode();
+                firstItem.setNextItem(nextItem); 
+            }
+            else{
+                CodeItem temp = getDecl(i).genCode();
+                nextItem.setNextItem(temp);
+                nextItem = temp;
+            }
+        }
+        return firstItem;
     }
 }
