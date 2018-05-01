@@ -11,6 +11,7 @@ import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -57,6 +58,10 @@ public class SelectionStmt extends Statement {
             System.out.println(s + "else");
             stmt2.print(s+INDENT, w);
         }
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
     
 }

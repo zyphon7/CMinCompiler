@@ -7,6 +7,7 @@ package cminusparser;
 
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -29,6 +30,10 @@ public class AssignExpr extends Expression {
         w.println(s + INDENT + "=");
         lhs.print(s + INDENT + INDENT, w);
         rhs.print(s + INDENT + INDENT, w);
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
     
 }

@@ -9,6 +9,7 @@ import CminScanner.Token;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import java.io.PrintWriter;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -65,6 +66,10 @@ public class VarDecl extends Declaration {
          w.println(s + "int " + name + ";");
          System.out.println(s + "int " + name + ";");   
         }
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
     
 }

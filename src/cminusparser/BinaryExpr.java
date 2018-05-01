@@ -8,6 +8,7 @@ package cminusparser;
 import CminScanner.Token.TokenType;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -67,6 +68,10 @@ public class BinaryExpr extends Expression {
         w.println(s + oper);
         expr1.print(s+INDENT, w);
         expr2.print(s+INDENT, w);
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
     
 }

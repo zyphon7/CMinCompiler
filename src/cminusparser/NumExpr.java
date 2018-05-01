@@ -6,6 +6,7 @@
 package cminusparser;
 
 import java.io.PrintWriter;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -22,5 +23,9 @@ public class NumExpr extends Expression{
     void print(String s, PrintWriter w){
         w.println(s + Integer.toString(num));
         System.out.println(s + Integer.toString(num));
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
 }

@@ -7,6 +7,7 @@ package cminusparser;
 
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -44,5 +45,9 @@ public class VarExpr extends Expression{
             System.out.println(s + "]");
             w.println(s + "]");
         }
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
 }

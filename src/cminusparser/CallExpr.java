@@ -8,6 +8,7 @@ package cminusparser;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -35,6 +36,10 @@ public class CallExpr extends Expression{
         }
         w.println(s + ")");
         System.out.println(s + ")");
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
     
 }

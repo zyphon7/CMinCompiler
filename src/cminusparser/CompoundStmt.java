@@ -12,6 +12,7 @@ import static cminusparser.Program.INDENT;
 import static cminusparser.VarDecl.parseVarDecl;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -61,6 +62,10 @@ public class CompoundStmt extends Statement{
         }
         w.println(s + "}");
         System.out.println(s + "}");
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
     
 }

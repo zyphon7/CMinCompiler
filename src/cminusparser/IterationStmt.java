@@ -10,6 +10,7 @@ import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -45,6 +46,10 @@ public class IterationStmt extends Statement{
         w.println(s + ")");
         System.out.println(s + ")");
         stmt.print(s+INDENT, w);   
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
     
 }

@@ -12,6 +12,7 @@ import static cminusparser.Expression.parseExpression;
 
 import cminusparser.FunDecl.FunType;
 import java.util.ArrayList;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -87,5 +88,9 @@ public class Parameter {
     
     void print(String s){
         
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
 }

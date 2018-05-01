@@ -13,6 +13,7 @@ import static cminusparser.IterationStmt.parseIterationStmt;
 import static cminusparser.ReturnStmt.parseReturnStmt;
 import static cminusparser.SelectionStmt.parseSelectionStmt;
 import java.io.PrintWriter;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -45,5 +46,6 @@ public abstract class Statement {
         }
     }
     abstract void print(String s, PrintWriter w);
+    abstract CodeItem genCode();
     
 }

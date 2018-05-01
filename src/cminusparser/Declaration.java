@@ -12,6 +12,7 @@ import cminusparser.FunDecl.FunType;
 import static cminusparser.FunDecl.parseFunDecl;
 import static cminusparser.VarDecl.parseVarDecl;
 import java.io.PrintWriter;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -55,4 +56,5 @@ public abstract class Declaration {
         
     }
     abstract void print(String s, PrintWriter w);
+    abstract CodeItem genCode();
 }

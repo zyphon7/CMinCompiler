@@ -11,6 +11,7 @@ import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -48,5 +49,9 @@ public class ReturnStmt extends Statement{
             w.println(";");
             System.out.print(";");
         }
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
 }

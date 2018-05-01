@@ -11,6 +11,7 @@ import static cminusparser.Parameter.parseParams;
 import static cminusparser.Parameter.stringParams;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -57,6 +58,10 @@ public class FunDecl extends Declaration{
             System.out.println(s + type.toString().toLowerCase() + " " + name + " " + paramString);
             cmpdstmt.print(s, w);
         }
+    }
+    
+    public CodeItem genCode(){
+        return null;
     }
     
     public enum FunType { INT, VOID }
