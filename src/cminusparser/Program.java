@@ -46,6 +46,8 @@ public class Program {
         if(decls.size() < 1){
             System.out.println("Error: No decls");
         }
+        
+        //keep track of the stupid linked list...
         CodeItem firstItem = getDecl(0).genCode();
         CodeItem nextItem = null;
         for(int i = 1; i < decls.size(); i++){
