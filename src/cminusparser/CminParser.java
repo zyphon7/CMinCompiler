@@ -23,6 +23,21 @@ import java.io.PrintWriter;
 public class CminParser {
     public static CminusScanner cminscanner;
     public static Program program;
+    public static File programName;
+    
+    public CminParser(String f){
+        try{
+        programName = new File(f);
+        cminscanner = new CminusScanner(new BufferedReader(new FileReader(programName)));
+        program = new Program();
+        }
+        catch(IOException i){
+            i.printStackTrace();
+        }
+        catch(lexicalErrorException l){
+            System.out.println("Problem Lexing input file.");
+        }
+    }
     
     public static void main(String[] args) {
         try{
@@ -54,6 +69,30 @@ public class CminParser {
             System.out.println(ex.toString());
             System.exit(1);
         }       
+    }
+    
+    public static Program parseAndPrint(){
+        if(cminscanner.viewNextToken().getTokenType() == TokenType.INT ||
+               cminscanner.viewNextToken().getTokenType() == TokenType.VOID){
+                while(cminscanner.viewNextToken().getTokenType() != TokenType.EOF){
+                    Declaration d = parseDeclaration(null);
+                    program.addDecl(d);
+                }
+                //print tree when done
+                try{
+                    PrintWriter writer = new PrintWriter("parsed.ast");
+                    program.printProgram(writer);
+                    writer.close();
+                }
+                catch(IOException i){
+                    i.printStackTrace();
+                }
+            }
+            else{
+                System.out.println("A program must have at least one declaration.");
+                System.exit(1);
+            }
+        return program;
     }
     
     //Matches a token and advances the token ptr

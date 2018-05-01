@@ -8,6 +8,7 @@ package cminusparser;
 import static cminusparser.CminParser.program;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import lowlevel.CodeItem;
 
 /**
  *
@@ -38,5 +39,9 @@ public class Program {
         }
         w.println("}");
         System.out.println("}");
+    }
+    
+    public CodeItem genLLCode(){
+        return null;
     }
 }
