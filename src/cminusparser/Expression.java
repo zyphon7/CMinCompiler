@@ -19,6 +19,15 @@ import lowlevel.CodeItem;
 public abstract class Expression {
     
     private static String caller = "EXPRESSION";
+    private int regNum = -1;
+    
+    protected void setRegNum(int i){
+        regNum = i;
+    }
+    
+    protected int getRegNum(){
+        return regNum;
+    }
     
     static Expression parseExpression(){
             Token oldTok;
