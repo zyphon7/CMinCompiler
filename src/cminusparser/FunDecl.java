@@ -103,7 +103,7 @@ public class FunDecl extends Declaration{
         //call gen code on cmpdstmt (pass the func down)
         cmpdstmt.genCode(func);
         
-        //append return block?
+        //append return block
         func.appendBlock(func.getReturnBlock());
         
         //return it back up
