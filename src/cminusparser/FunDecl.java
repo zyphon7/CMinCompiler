@@ -12,6 +12,7 @@ import static cminusparser.Parameter.stringParams;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import lowlevel.CodeItem;
+import lowlevel.Function;
 
 /**
  *
@@ -62,12 +63,19 @@ public class FunDecl extends Declaration{
     
     public CodeItem genCode(){
         //create a new function
-        //get return type and name 
+        int type;
+        if(this.type == FunType.INT){
+            type = 0;
+        }
+        else{
+            type = 1;
+        }
+        Function func = new Function(type, this.name); 
         //make func params
         //create new block
         //make new block current block
         //call gen code on cmpdstmt (pass the func down)
-        cmpdstmt.genCode();
+        cmpdstmt.genCode(func);
         return null;
     }
     

@@ -48,7 +48,7 @@ public class IterationStmt extends Statement{
         stmt.print(s+INDENT, w);   
     }
     
-    public void genCode(){
+    public void genCode(CodeItem i){
     
     }
     

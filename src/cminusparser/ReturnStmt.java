@@ -51,7 +51,7 @@ public class ReturnStmt extends Statement{
         }
     }
     
-    public void genCode(){
+    public void genCode(CodeItem i){
 
     }
 }

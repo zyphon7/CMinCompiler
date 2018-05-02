@@ -65,7 +65,6 @@ public class CompoundStmt extends Statement{
     }
     
     public void genCode(CodeItem i){
-        return null;
     }
     
 }

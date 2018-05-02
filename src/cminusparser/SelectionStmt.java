@@ -60,7 +60,7 @@ public class SelectionStmt extends Statement {
         }
     }
     
-    public void genCode(){
+    public void genCode(CodeItem i){
         
     }
     
