@@ -27,7 +27,7 @@ public class NumExpr extends Expression{
         System.out.println(s + Integer.toString(num));
     }
     
-    public void genCode(){
+    public void genCode(CodeItem i){
         this.setRegNum(this.getNextRegNum());
         //put this in calling fn
         //Operand number = new Operand(REGISTER, this.getRegNum());

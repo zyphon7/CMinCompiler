@@ -38,7 +38,7 @@ public class CallExpr extends Expression{
         System.out.println(s + ")");
     }
     
-    public void genCode(){
+    public void genCode(CodeItem i){
         
     }
     

@@ -30,7 +30,7 @@ public abstract class Expression {
         return regNum;
     }
     
-    protected int getNextRegNum(){
+    protected static int getNextRegNum(){
         return ++lastRegNum;
     }
     
@@ -229,6 +229,6 @@ public abstract class Expression {
     }
     
     abstract void print(String s, PrintWriter w);
-    abstract void genCode();
+    abstract void genCode(CodeItem i);
     
 }

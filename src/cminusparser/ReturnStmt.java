@@ -12,6 +12,11 @@ import static cminusparser.Expression.parseExpression;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
 import lowlevel.CodeItem;
+import lowlevel.Function;
+import lowlevel.Operand;
+import lowlevel.Operand.OperandType;
+import lowlevel.Operation;
+import lowlevel.Operation.OperationType;
 
 /**
  *
@@ -52,6 +57,18 @@ public class ReturnStmt extends Statement{
     }
     
     public void genCode(CodeItem i){
-
+        Function f = (Function)i;
+            if(expr != null){
+                expr.genCode(i);
+            }
+            //Adding operation to move expr result into RETREG & add whole
+            //operation to the block
+            Operation retOper = new Operation(OperationType.RETURN, f.getCurrBlock());
+            Operand retReg = new Operand(OperandType.MACRO);
+            retOper.setSrcOperand(0,retReg);
+            f.getCurrBlock().appendOper(retOper);
+            
+            //Create Exit block?
+                //Add jump operation to exit block
     }
 }

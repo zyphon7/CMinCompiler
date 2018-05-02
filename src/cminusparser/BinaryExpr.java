@@ -9,6 +9,11 @@ import CminScanner.Token.TokenType;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
 import lowlevel.CodeItem;
+import lowlevel.Function;
+import lowlevel.Operand;
+import lowlevel.Operand.OperandType;
+import lowlevel.Operation;
+import lowlevel.Operation.OperationType;
 
 /**
  *
@@ -70,7 +75,46 @@ public class BinaryExpr extends Expression {
         expr2.print(s+INDENT, w);
     }
     
-    public void genCode(){
+    public void genCode(CodeItem i){
+        Function f = (Function)i;
+        expr1.genCode(i);
+        expr2.genCode(i);
+        OperationType operType;
+        switch(token){
+            case GREATER:
+                operType = OperationType.GT;
+                break;
+            case LESS:
+                operType = OperationType.LT;
+                break;
+            case GREATEREQ:
+                operType = OperationType.GTE;
+                break;
+            case LESSEQ:
+                operType = OperationType.LTE;
+                break;
+            case DOUBLEEQUAL:
+                operType = OperationType.EQUAL;
+                break;
+            case NOTEQUAL:
+                operType = OperationType.NOT_EQUAL;
+                break;
+            default:
+                System.out.println(caller + " WOOPS in OperationType!");
+                operType = null;
+                break;
+        }
+
+        Operation binOper = new Operation(operType, f.getCurrBlock());
+        
+        //make operands & append operation to basic block
+        Operand srcOper1 = new Operand(OperandType.REGISTER, expr1.getRegNum());
+        binOper.setSrcOperand(0,srcOper1);
+        Operand srcOper2 = new Operand(OperandType.REGISTER, expr2.getRegNum());
+        binOper.setSrcOperand(1, srcOper2);
+        Operand destOper = new Operand(OperandType.REGISTER, Expression.getNextRegNum());
+        binOper.setDestOperand(2, destOper);
+        f.getCurrBlock().appendOper(binOper);
         
     }
     
