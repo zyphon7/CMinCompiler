@@ -32,6 +32,19 @@ public class Parameter {
         array = false;
     }
     
+    protected String getName(){
+        return name;
+    }
+    
+    protected int getType(){
+        if(this.type == FunType.INT){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    
     static ArrayList<Parameter> parseParams(){
         ArrayList<Parameter> params = new ArrayList<Parameter>();
         if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.VOID){

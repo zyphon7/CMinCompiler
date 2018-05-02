@@ -11,7 +11,9 @@ import static cminusparser.Parameter.parseParams;
 import static cminusparser.Parameter.stringParams;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import lowlevel.BasicBlock;
 import lowlevel.CodeItem;
+import lowlevel.FuncParam;
 import lowlevel.Function;
 
 /**
@@ -62,21 +64,50 @@ public class FunDecl extends Declaration{
     }
     
     public CodeItem genCode(){
+        
         //create a new function
         int type;
         if(this.type == FunType.INT){
-            type = 0;
-        }
-        else{
             type = 1;
         }
+        else{
+            type = 0;
+        }
         Function func = new Function(type, this.name); 
-        //make func params
-        //create new block
-        //make new block current block
+        
+        //make LL of funcparams
+        FuncParam firstParam = null;
+        for(int i = 0; i < params.size(); i++){
+            Parameter p = params.get(i);
+            FuncParam nextParam = new FuncParam(p.getType(), p.getName());
+            FuncParam insertHere = null;
+            while(firstParam.getNextParam() != null){
+                insertHere = firstParam.getNextParam();
+            }
+            if(insertHere == null){
+                firstParam = new FuncParam(p.getType(), p.getName());
+            }
+            else{    
+                insertHere.setNextParam(nextParam);
+            }
+        }
+        
+        //assign the list of funcparams to the current function
+        func.setFirstParam(firstParam);
+        
+        //create new block & make block currBlock
+        BasicBlock b = new BasicBlock(func);
+        func.appendBlock(b);
+        func.setCurrBlock(b);
+        
         //call gen code on cmpdstmt (pass the func down)
         cmpdstmt.genCode(func);
-        return null;
+        
+        //append return block?
+        func.appendBlock(func.getReturnBlock());
+        
+        //return it back up
+        return func;
     }
     
     public enum FunType { INT, VOID }
