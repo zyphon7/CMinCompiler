@@ -19,7 +19,8 @@ import lowlevel.CodeItem;
 public abstract class Expression {
     
     private static String caller = "EXPRESSION";
-    private int regNum = -1;
+    private int regNum = 0;
+    private static int lastRegNum = 0;
     
     protected void setRegNum(int i){
         regNum = i;
@@ -27,6 +28,10 @@ public abstract class Expression {
     
     protected int getRegNum(){
         return regNum;
+    }
+    
+    protected int getNextRegNum(){
+        return ++lastRegNum;
     }
     
     static Expression parseExpression(){

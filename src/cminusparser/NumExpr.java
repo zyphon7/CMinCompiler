@@ -7,6 +7,8 @@ package cminusparser;
 
 import java.io.PrintWriter;
 import lowlevel.CodeItem;
+import lowlevel.Operand;
+import static lowlevel.Operand.OperandType.REGISTER;
 
 /**
  *
@@ -26,6 +28,8 @@ public class NumExpr extends Expression{
     }
     
     public CodeItem genCode(){
+        this.setRegNum(this.getNextRegNum());
+        Operand number = new Operand(REGISTER, this.getRegNum());
         return null;
     }
 }
