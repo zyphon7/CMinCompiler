@@ -65,6 +65,12 @@ public class CompoundStmt extends Statement{
     }
     
     public void genCode(CodeItem i){
+        //loop thru vardecls
+        //assign register
+        //put in local symbol table
+        
+        //loop thru stmts
+        //stmtList.nextStatment.genCode(i)   
     }
     
 }

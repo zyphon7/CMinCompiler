@@ -102,8 +102,4 @@ public class Parameter {
     void print(String s){
         
     }
-    
-    public CodeItem genCode(){
-        return null;
-    }
 }
