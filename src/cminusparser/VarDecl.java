@@ -10,6 +10,7 @@ import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import java.io.PrintWriter;
 import lowlevel.CodeItem;
+import lowlevel.Data;
 
 /**
  *
@@ -70,8 +71,7 @@ public class VarDecl extends Declaration {
     
     public CodeItem genCode(){
         //add a new data object, put in global symbol table
-        //link it to other CodeItems in the list
-        return null;
+        return new Data(Data.TYPE_INT, this.name);
     }
     
 }

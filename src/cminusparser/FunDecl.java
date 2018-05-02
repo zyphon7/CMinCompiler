@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import lowlevel.BasicBlock;
 import lowlevel.CodeItem;
+import lowlevel.Data;
 import lowlevel.FuncParam;
 import lowlevel.Function;
 
@@ -68,10 +69,10 @@ public class FunDecl extends Declaration{
         //create a new function
         int type;
         if(this.type == FunType.INT){
-            type = 1;
+            type = Data.TYPE_INT;
         }
         else{
-            type = 0;
+            type = Data.TYPE_VOID;
         }
         Function func = new Function(type, this.name); 
         
@@ -106,7 +107,7 @@ public class FunDecl extends Declaration{
         //append return block
         func.appendBlock(func.getReturnBlock());
         
-        //return it back up
+        //return it back up (with the block inside)
         return func;
     }
     
