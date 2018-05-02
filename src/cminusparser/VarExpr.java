@@ -5,9 +5,15 @@
  */
 package cminusparser;
 
+import static cmincompiler.CMinusCompiler.globalHash;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import lowlevel.CodeItem;
+import lowlevel.Function;
+import lowlevel.Operand;
+import lowlevel.Operand.OperandType;
+import lowlevel.Operation;
 
 /**
  *
@@ -16,6 +22,7 @@ import lowlevel.CodeItem;
 public class VarExpr extends Expression{
     private String name;
     private Expression index;
+    private static String caller = "VAR_EXPR";
     
     public VarExpr(){ }
     
@@ -48,9 +55,30 @@ public class VarExpr extends Expression{
     }
     
     public void genCode(CodeItem i){
-        //look up location in symbol table
-        //if in global create a load oper
-            //append new oper to f.getCurrBlock()
         
+        Function f = (Function)i;
+        HashMap localTable = f.getTable();
+        Operation op;
+        
+        //if in local, load reg num
+        if(localTable.containsKey(name)){
+            Integer reg = (Integer)localTable.get(name);
+            if(reg != null){
+                this.setRegNum(reg);
+            }
+            else{
+                System.out.println(caller + "Value wasn't in local symbol table.");
+            }
+        }
+        //else in global create a load oper
+        else{
+            String value = (String)globalHash.get(name);
+            op = new Operation(Operation.OperationType.LOAD_I, f.getCurrBlock());
+            Operand src = new Operand(OperandType.STRING, name);
+            Operand dest = new Operand(OperandType.REGISTER, Expression.getNextRegNum());
+            op.setSrcOperand(0, src);
+            op.setDestOperand(0, dest);
+            f.getCurrBlock().appendOper(op);
+        }
     }
 }

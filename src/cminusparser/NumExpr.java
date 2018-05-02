@@ -7,8 +7,6 @@ package cminusparser;
 
 import java.io.PrintWriter;
 import lowlevel.CodeItem;
-import lowlevel.Operand;
-import static lowlevel.Operand.OperandType.REGISTER;
 
 /**
  *

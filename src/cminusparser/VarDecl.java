@@ -6,6 +6,7 @@
 package cminusparser;
 
 import CminScanner.Token;
+import static cmincompiler.CMinusCompiler.globalHash;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import java.io.PrintWriter;
@@ -71,6 +72,7 @@ public class VarDecl extends Declaration {
     
     public CodeItem genCode(){
         //add a new data object, put in global symbol table
+        globalHash.put(name, name);
         return new Data(Data.TYPE_INT, this.name);
     }
     
