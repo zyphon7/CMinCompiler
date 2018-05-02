@@ -8,6 +8,11 @@ package cminusparser;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
 import lowlevel.CodeItem;
+import lowlevel.Function;
+import lowlevel.Operand;
+import lowlevel.Operand.OperandType;
+import lowlevel.Operation;
+import lowlevel.Operation.OperationType;
 
 /**
  *
@@ -33,10 +38,20 @@ public class AssignExpr extends Expression {
     }
     
     public void genCode(CodeItem i){
+        Function f = (Function)i;
+        
         //Call genCode on rhs
+        rhs.genCode(i);
         //Make this the source operand
+        Operand src = new Operand(OperandType.REGISTER, rhs.getRegNum());
         //Call genCode on the lhs
+        lhs.genCode(i);
         //Make this the destination operand
+        Operand dest = new Operand(OperandType.REGISTER, lhs.getRegNum());
+        
+        //make op and assign to function
+        Operation op = new Operation(OperationType.ASSIGN, f.getCurrBlock());
+        f.getCurrBlock().appendOper(op);
     }
     
 }
