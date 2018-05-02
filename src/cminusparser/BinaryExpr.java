@@ -99,6 +99,18 @@ public class BinaryExpr extends Expression {
             case NOTEQUAL:
                 operType = OperationType.NOT_EQUAL;
                 break;
+            case PLUS:
+                operType = OperationType.ADD_I;
+                break;
+            case MINUS:
+                operType = OperationType.SUB_I;
+                break;
+            case MULTI:
+                operType = OperationType.MUL_I;
+                break;
+            case DIVIDE:
+                operType = OperationType.DIV_I;
+                break;
             default:
                 System.out.println(caller + " WOOPS in OperationType!");
                 operType = null;

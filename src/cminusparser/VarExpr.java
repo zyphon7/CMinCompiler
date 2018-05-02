@@ -48,6 +48,9 @@ public class VarExpr extends Expression{
     }
     
     public void genCode(CodeItem i){
+        //look up location in symbol table
+        //if in global create a load oper
+            //append new oper to f.getCurrBlock()
         
     }
 }
