@@ -69,6 +69,8 @@ public class VarDecl extends Declaration {
     }
     
     public CodeItem genCode(){
+        //add a new data object, put in global symbol table
+        //link it to other CodeItems in the list
         return null;
     }
     

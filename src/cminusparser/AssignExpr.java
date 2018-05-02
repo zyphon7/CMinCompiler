@@ -32,8 +32,11 @@ public class AssignExpr extends Expression {
         rhs.print(s + INDENT + INDENT, w);
     }
     
-    public CodeItem genCode(){
-        return null;
+    public void genCode(){
+        //Call genCode on rhs
+        //Make this the source operand
+        //Call genCode on the lhs
+        //Make this the destination operand
     }
     
 }

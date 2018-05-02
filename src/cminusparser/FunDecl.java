@@ -61,6 +61,13 @@ public class FunDecl extends Declaration{
     }
     
     public CodeItem genCode(){
+        //create a new function
+        //get return type and name 
+        //make func params
+        //create new block
+        //make new block current block
+        //call gen code on cmpdstmt (pass the func down)
+        cmpdstmt.genCode();
         return null;
     }
     

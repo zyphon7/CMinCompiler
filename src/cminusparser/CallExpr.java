@@ -38,8 +38,8 @@ public class CallExpr extends Expression{
         System.out.println(s + ")");
     }
     
-    public CodeItem genCode(){
-        return null;
+    public void genCode(){
+        
     }
     
 }

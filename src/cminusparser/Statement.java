@@ -46,6 +46,6 @@ public abstract class Statement {
         }
     }
     abstract void print(String s, PrintWriter w);
-    abstract CodeItem genCode();
+    abstract void genCode();
     
 }

@@ -47,7 +47,7 @@ public class VarExpr extends Expression{
         }
     }
     
-    public CodeItem genCode(){
-        return null;
+    public void genCode(){
+        
     }
 }

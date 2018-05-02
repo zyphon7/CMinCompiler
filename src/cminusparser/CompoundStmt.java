@@ -64,7 +64,7 @@ public class CompoundStmt extends Statement{
         System.out.println(s + "}");
     }
     
-    public CodeItem genCode(){
+    public void genCode(CodeItem i){
         return null;
     }
     

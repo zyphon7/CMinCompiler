@@ -70,8 +70,8 @@ public class BinaryExpr extends Expression {
         expr2.print(s+INDENT, w);
     }
     
-    public CodeItem genCode(){
-        return null;
+    public void genCode(){
+        
     }
     
 }

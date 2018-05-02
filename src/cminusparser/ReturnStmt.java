@@ -51,7 +51,7 @@ public class ReturnStmt extends Statement{
         }
     }
     
-    public CodeItem genCode(){
-        return null;
+    public void genCode(){
+
     }
 }

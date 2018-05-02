@@ -60,8 +60,8 @@ public class SelectionStmt extends Statement {
         }
     }
     
-    public CodeItem genCode(){
-        return null;
+    public void genCode(){
+        
     }
     
 }

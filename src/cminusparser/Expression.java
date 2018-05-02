@@ -229,6 +229,6 @@ public abstract class Expression {
     }
     
     abstract void print(String s, PrintWriter w);
-    abstract CodeItem genCode();
+    abstract void genCode();
     
 }

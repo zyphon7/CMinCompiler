@@ -46,7 +46,7 @@ public class ExpressionStmt extends Statement{
         }
     }
     
-    public CodeItem genCode(){
-        return expr.genCode();
+    public void genCode(){
+        expr.genCode();
     }
 }

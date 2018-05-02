@@ -48,8 +48,8 @@ public class IterationStmt extends Statement{
         stmt.print(s+INDENT, w);   
     }
     
-    public CodeItem genCode(){
-        return null;
+    public void genCode(){
+    
     }
     
 }
