@@ -34,6 +34,10 @@ public abstract class Expression {
         return ++lastRegNum;
     }
     
+    protected static int getCurrRegNum(){
+        return lastRegNum;
+    }
+    
     static Expression parseExpression(){
             Token oldTok;
             if(cminscanner.viewNextToken().getTokenType() == TokenType.ID){

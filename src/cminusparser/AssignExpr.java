@@ -41,15 +41,25 @@ public class AssignExpr extends Expression {
         
         //Call genCode on rhs
         rhs.genCode(f);
+        if(rhs.getRegNum() == 0){
+            rhs.setRegNum(getCurrRegNum());
+        }
+        
         //Make this the source operand
         Operand src = new Operand(OperandType.REGISTER, rhs.getRegNum());
+        
         //Call genCode on the lhs
         lhs.genCode(f);
+        if(lhs.getRegNum() == 0){
+            lhs.setRegNum(getCurrRegNum());
+        }
         //Make this the destination operand
         Operand dest = new Operand(OperandType.REGISTER, lhs.getRegNum());
         
         //make op and assign to function
         Operation op = new Operation(OperationType.ASSIGN, f.getCurrBlock());
+        op.setSrcOperand(0, src);
+        op.setDestOperand(0, dest);
         f.getCurrBlock().appendOper(op);
     }
     

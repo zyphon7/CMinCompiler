@@ -65,8 +65,8 @@ public class VarExpr extends Expression{
                 this.setRegNum(reg);
             }
         }
-        //else in global create a load oper
-        else{
+        //if in global create load oper
+        else if(globalHash.containsKey(name)){
             String value = (String)globalHash.get(name);
             op = new Operation(Operation.OperationType.LOAD_I, f.getCurrBlock());
             Operand src = new Operand(OperandType.STRING, name);
@@ -74,6 +74,11 @@ public class VarExpr extends Expression{
             op.setSrcOperand(0, src);
             op.setDestOperand(0, dest);
             f.getCurrBlock().appendOper(op);
+        }
+        //else add to local table & annotate self
+        else{
+          this.setRegNum(getNextRegNum());
+          localTable.put(name, this.getRegNum());
         }
     }
 }
