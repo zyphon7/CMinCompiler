@@ -124,7 +124,7 @@ public class BinaryExpr extends Expression {
         Operand srcOper2 = new Operand(OperandType.REGISTER, expr2.getRegNum());
         binOper.setSrcOperand(1, srcOper2);
         Operand destOper = new Operand(OperandType.REGISTER, Expression.getNextRegNum());
-        binOper.setDestOperand(2, destOper);
+        binOper.setDestOperand(0, destOper);
         f.getCurrBlock().appendOper(binOper); 
     }
     

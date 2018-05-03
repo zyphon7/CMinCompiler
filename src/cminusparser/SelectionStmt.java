@@ -117,6 +117,7 @@ public class SelectionStmt extends Statement {
             Operation jmpPostOp = new Operation(OperationType.JMP, post1);
             Operand postOp = new Operand(OperandType.BLOCK, post1.getBlockNum());
             jmpPostOp.setSrcOperand(0, postOp);
+            f.getCurrBlock().appendOper(jmpPostOp);
             f.appendUnconnectedBlock(else1);
         }
        

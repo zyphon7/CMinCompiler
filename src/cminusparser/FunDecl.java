@@ -16,6 +16,8 @@ import lowlevel.CodeItem;
 import lowlevel.Data;
 import lowlevel.FuncParam;
 import lowlevel.Function;
+import lowlevel.Operation;
+import lowlevel.Operation.OperationType;
 
 /**
  *
@@ -78,9 +80,10 @@ public class FunDecl extends Declaration{
         
         //make LL of funcparams
         //POTENTIAL PROBLEM
+        //options:
         //func(void)
         //func (int i)
-        //func(int a, int b)
+        //func(int a, int b...)
         FuncParam firstParam;
         Parameter p = params.get(0);
         if(p.getFunType() == FunType.VOID){
@@ -101,9 +104,8 @@ public class FunDecl extends Declaration{
         func.setFirstParam(firstParam);
         
         //create new block & make block currBlock
-        BasicBlock b = new BasicBlock(func);
-        func.appendToCurrentBlock(b);
-        func.setCurrBlock(b);
+        //FUNC_ENTRY
+        func.createBlock0();
         
         //call gen code on cmpdstmt (pass the func down)
         cmpdstmt.genCode(func);
