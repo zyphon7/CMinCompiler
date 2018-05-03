@@ -67,7 +67,7 @@ public class VarExpr extends Expression{
                 this.setRegNum(reg);
             }
             else{
-                System.out.println(caller + "Value wasn't in local symbol table.");
+                System.out.println(caller + "REGValue wasn't in local symbol table.");
             }
         }
         //else in global create a load oper

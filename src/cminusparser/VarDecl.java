@@ -19,8 +19,8 @@ import lowlevel.Data;
  */
 public class VarDecl extends Declaration {
     
-    private String name;
-    private Integer num;
+    protected String name;
+    protected Integer num;
     private static String caller = "VARDECL";
     
     public VarDecl(){}

@@ -13,6 +13,7 @@ import static cminusparser.VarDecl.parseVarDecl;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import lowlevel.CodeItem;
+import lowlevel.Function;
 
 /**
  *
@@ -65,12 +66,20 @@ public class CompoundStmt extends Statement{
     }
     
     public void genCode(CodeItem i){
-        //loop thru vardecls
-        //assign register
-        //put in local symbol table
+        Function f = (Function)i;
         
+        //loop thru vardecls
+        for(int j = 0; j < varDecls.size(); j++){
+            VarDecl d = (VarDecl)varDecls.get(j);
+            d.setRegNum(Expression.getNextRegNum());
+            //assign register
+            f.getTable().put(d.name, d.getRegNum());
+        }
+      
         //loop thru stmts
-        //stmtList.nextStatment.genCode(i)   
+        for(int j = 0; j < stmtList.size(); j++){
+            stmtList.get(j).genCode(i);
+        }  
     }
     
 }
