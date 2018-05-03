@@ -10,8 +10,10 @@ import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
-import lowlevel.CodeItem;
+import lowlevel.BasicBlock;
 import lowlevel.Function;
+import lowlevel.Operand;
+import lowlevel.Operation;
 
 /**
  *
@@ -50,8 +52,43 @@ public class IterationStmt extends Statement{
     }
     
     public void genCode(Function f){
+        BasicBlock whileBlock = new BasicBlock(f);
+        BasicBlock bodyBlock = new BasicBlock(f);
+        BasicBlock postBlock = new BasicBlock(f);
         
+        //gencode whileblock
+        expr.genCode(f);
         
+        //gen branch
+        Operation branchOp = new Operation(Operation.OperationType.BEQ, f.getCurrBlock());
+        Operand src0 = new Operand(Operand.OperandType.REGISTER, expr.getRegNum());
+        Operand src1 = new Operand(Operand.OperandType.INTEGER, 0);
+        Operand src2 = new Operand(Operand.OperandType.BLOCK, postBlock);
+       
+        f.getCurrBlock().appendOper(branchOp);
+        
+        //append whileblock to currBlock
+        f.appendToCurrentBlock(whileBlock);
+        
+        //curr block = body
+        f.setCurrBlock(bodyBlock);
+        
+        //gencode body
+        stmt.genCode(f);
+        
+        //gen whileblock expr again to see if we need to Branch
+        expr.genCode(f);
+        branchOp = new Operation(Operation.OperationType.BNE, f.getCurrBlock());
+        src0 = new Operand(Operand.OperandType.REGISTER, expr.getRegNum());
+        src1 = new Operand(Operand.OperandType.INTEGER, 0);
+        src2 = new Operand(Operand.OperandType.BLOCK, bodyBlock);
+        f.getCurrBlock().appendOper(branchOp);
+        
+        //append post
+        f.appendToCurrentBlock(postBlock);
+        
+        //currBlock = post
+        f.setCurrBlock(postBlock);
     }
     
 }
