@@ -5,6 +5,7 @@
  */
 package cminusparser;
 
+import static cmincompiler.CMinusCompiler.globalHash;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
 import lowlevel.CodeItem;
@@ -46,7 +47,7 @@ public class AssignExpr extends Expression {
         }
         
         //Make this the source operand
-        Operand src = new Operand(OperandType.REGISTER, rhs.getRegNum());
+        Operand src0 = new Operand(OperandType.REGISTER, rhs.getRegNum());
         
         //if in  local, get register and do assign op
         VarExpr var = (VarExpr)lhs;
@@ -55,14 +56,21 @@ public class AssignExpr extends Expression {
         if(f.getTable().containsKey(var)){
             Integer regNum = (Integer)f.getTable().get(var);
             op = new Operation(OperationType.ASSIGN, f.getCurrBlock());
-            op.setSrcOperand(0, src);
+            op.setSrcOperand(0, src0);
             dest = new Operand(OperandType.REGISTER, regNum);
             op.setDestOperand(0, dest);
             f.getCurrBlock().appendOper(op);
         }
         //o/w we are working with global var
         else{
-           //do store op 
+           //do store op
+           op = new Operation(OperationType.STORE_I,f.getCurrBlock());
+           Operand src1 = new Operand(OperandType.REGISTER, globalHash.get(var.getName()));
+           Operand src2 = new Operand(OperandType.INTEGER, 0);
+           op.setSrcOperand(0, src0);
+           op.setSrcOperand(1, src1);
+           op.setSrcOperand(2, src2);
+           f.getCurrBlock().appendOper(op);
         }
     }
     
