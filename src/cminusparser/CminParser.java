@@ -38,7 +38,7 @@ public class CminParser {
             System.out.println("Problem Lexing input file.");
         }
     }
-    
+    //not used for proj3
     public static void main(String[] args) {
         try{
             File cminFile = new File("CminPrograms/program4.txt");
@@ -70,6 +70,7 @@ public class CminParser {
             System.exit(1);
         }       
     }
+    //end of not used for proj3
     
     public static Program parseAndPrint(){
         if(cminscanner.viewNextToken().getTokenType() == TokenType.INT ||

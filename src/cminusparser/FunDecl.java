@@ -94,16 +94,7 @@ public class FunDecl extends Declaration{
         for(int i = 1; i < params.size(); i++){
             p = params.get(i);
             FuncParam nextParam = new FuncParam(p.getType(), p.getName());
-            FuncParam insertHere = null;
-            while(firstParam.getNextParam() != null){
-                insertHere = firstParam.getNextParam();
-            }
-            if(insertHere == null){
-                firstParam = new FuncParam(p.getType(), p.getName());
-            }
-            else{    
-                insertHere.setNextParam(nextParam);
-            }
+            firstParam.setNextParam(nextParam);
         }
         
         //assign the list of funcparams to the current function
@@ -111,14 +102,14 @@ public class FunDecl extends Declaration{
         
         //create new block & make block currBlock
         BasicBlock b = new BasicBlock(func);
-        func.appendBlock(b);
+        func.appendToCurrentBlock(b);
         func.setCurrBlock(b);
         
         //call gen code on cmpdstmt (pass the func down)
         cmpdstmt.genCode(func);
         
         //append return block
-        func.appendBlock(func.getReturnBlock());
+        func.appendToCurrentBlock(func.getReturnBlock());
         
         //return it back up (with the block inside)
         return func;
