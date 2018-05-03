@@ -45,6 +45,10 @@ public class Parameter {
         }
     }
     
+    protected FunType getFunType(){
+        return type;
+    }
+    
     static ArrayList<Parameter> parseParams(){
         ArrayList<Parameter> params = new ArrayList<Parameter>();
         if(cminscanner.viewNextToken().getTokenType() == Token.TokenType.VOID){

@@ -77,9 +77,22 @@ public class FunDecl extends Declaration{
         Function func = new Function(type, this.name); 
         
         //make LL of funcparams
-        FuncParam firstParam = null;
-        for(int i = 0; i < params.size(); i++){
-            Parameter p = params.get(i);
+        //POTENTIAL PROBLEM
+        //func(void)
+        //func (int i)
+        //func(int a, int b)
+        FuncParam firstParam;
+        Parameter p = params.get(0);
+        if(p.getFunType() == FunType.VOID){
+            firstParam = null;
+        }
+        
+        else{
+            firstParam = new FuncParam(p.getType(), p.getName());
+        }
+        
+        for(int i = 1; i < params.size(); i++){
+            p = params.get(i);
             FuncParam nextParam = new FuncParam(p.getType(), p.getName());
             FuncParam insertHere = null;
             while(firstParam.getNextParam() != null){
