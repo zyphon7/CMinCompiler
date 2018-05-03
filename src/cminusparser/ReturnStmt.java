@@ -60,16 +60,24 @@ public class ReturnStmt extends Statement{
             if(expr != null){
                 expr.genCode(f);
             }
+           
             //Adding operation to move expr result into RETREG & add whole
             //operation to the block
-           /* Operation retOper = new Operation(OperationType.RETURN, f.getCurrBlock());
-            Operand retReg = new Operand(OperandType.MACRO, "RetReg");
-            retOper.setSrcOperand(0,retReg);
-            f.getCurrBlock().appendOper(retOper); */
-           
-           f.setCurrBlock(f.getReturnBlock());
+            Operation movRet = new Operation(OperationType.ASSIGN, f.getCurrBlock());
+            Operand srcOp = new Operand(OperandType.REGISTER, expr.getRegNum());
+            Operand destRetReg = new Operand(OperandType.REGISTER, "RetReg");
+            movRet.setSrcOperand(0, srcOp);
+            movRet.setDestOperand(0, destRetReg);
+            f.getCurrBlock().appendOper(movRet);
             
-            //Create Exit block?
-                //Add jump operation to exit block
+           //Add jump operation to exit block
+           Operation jmpOp = new Operation(OperationType.JMP, f.getCurrBlock());
+           srcOp = new Operand(OperandType.BLOCK, f.getReturnBlock().getBlockNum());
+           jmpOp.setSrcOperand(0, srcOp);
+           f.getCurrBlock().appendOper(jmpOp);
+           
+           //append return block
+           //f.setCurrBlock(f.getReturnBlock());
+           
     }
 }

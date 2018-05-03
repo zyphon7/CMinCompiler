@@ -26,6 +26,6 @@ public class NumExpr extends Expression{
     }
     
     public void genCode(Function f){
-        this.setRegNum(this.getNextRegNum());
+        this.setRegNum(Expression.getNextRegNum());
     }
 }

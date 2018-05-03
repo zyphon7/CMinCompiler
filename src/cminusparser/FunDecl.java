@@ -78,6 +78,14 @@ public class FunDecl extends Declaration{
         }
         Function func = new Function(type, this.name); 
         
+        //create new block & make block currBlock
+        //FUNC_ENTRY
+        func.createBlock0();
+        func.setCurrBlock(func.getFirstBlock());
+        BasicBlock body = new BasicBlock(func);
+        func.appendToCurrentBlock(body);
+        func.setCurrBlock(body);
+        
         //make LL of funcparams
         //POTENTIAL PROBLEM
         //options:
@@ -102,10 +110,6 @@ public class FunDecl extends Declaration{
         
         //assign the list of funcparams to the current function
         func.setFirstParam(firstParam);
-        
-        //create new block & make block currBlock
-        //FUNC_ENTRY
-        func.createBlock0();
         
         //call gen code on cmpdstmt (pass the func down)
         cmpdstmt.genCode(func);
