@@ -7,6 +7,10 @@ package cminusparser;
 
 import java.io.PrintWriter;
 import lowlevel.Function;
+import lowlevel.Operand;
+import lowlevel.Operand.OperandType;
+import lowlevel.Operation;
+import lowlevel.Operation.OperationType;
 
 /**
  *
@@ -27,5 +31,11 @@ public class NumExpr extends Expression{
     
     public void genCode(Function f){
         this.setRegNum(Expression.getNextRegNum());
+        Operation op = new Operation(OperationType.ASSIGN, f.getCurrBlock());
+        Operand src = new Operand(OperandType.INTEGER, num);
+        Operand dest = new Operand(OperandType.REGISTER, this.getRegNum());
+        op.setSrcOperand(0, src);
+        op.setDestOperand(0, dest);
+        f.getCurrBlock().appendOper(op);
     }
 }
