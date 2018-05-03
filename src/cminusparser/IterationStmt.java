@@ -11,6 +11,7 @@ import static cminusparser.Expression.parseExpression;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
 import lowlevel.CodeItem;
+import lowlevel.Function;
 
 /**
  *
@@ -48,8 +49,9 @@ public class IterationStmt extends Statement{
         stmt.print(s+INDENT, w);   
     }
     
-    public void genCode(CodeItem i){
-    
+    public void genCode(Function f){
+        
+        
     }
     
 }

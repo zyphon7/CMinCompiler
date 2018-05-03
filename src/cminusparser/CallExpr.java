@@ -44,8 +44,7 @@ public class CallExpr extends Expression{
         System.out.println(s + ")");
     }
     
-    public void genCode(CodeItem i){
-        Function f = (Function)i;
+    public void genCode(Function f){
         
         //iterate over args
         for(int j = 0; j < args.size(); j++){

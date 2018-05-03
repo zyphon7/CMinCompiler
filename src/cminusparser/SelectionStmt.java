@@ -11,7 +11,13 @@ import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
+import lowlevel.BasicBlock;
 import lowlevel.CodeItem;
+import lowlevel.Function;
+import lowlevel.Operand;
+import lowlevel.Operand.OperandType;
+import lowlevel.Operation;
+import lowlevel.Operation.OperationType;
 
 /**
  *
@@ -60,8 +66,52 @@ public class SelectionStmt extends Statement {
         }
     }
     
-    public void genCode(CodeItem i){
+    public void genCode(Function f){
         
+        //create 2 or 3 blocks
+        BasicBlock then1 = new BasicBlock(f);
+        BasicBlock else1;
+        if(stmt2 != null){
+            else1 = new BasicBlock(f);
+        }
+        else{
+            else1 = null;
+        }
+        BasicBlock post1 = new BasicBlock(f);
+        
+        //genCode expr
+        expr.genCode(f);
+        
+        //generate branch
+        
+        
+        //append then block to the currBlock
+        f.appendToCurrentBlock(then1);
+        
+        //currBlock = THEN
+        f.setCurrBlock(then1);
+        
+        //genCode stmt1
+        stmt1.genCode(f);
+        
+        //append POST
+        f.appendToCurrentBlock(post1);
+        
+        //IF ELSE BLOCK: currBlock = ELSE
+        //gencode stmt2 if there
+        //JMP to post block
+        //append else to unconnected chain
+        if(else1 != null){
+            f.setCurrBlock(else1);
+            stmt2.genCode(f);
+            Operation jmpPostOp = new Operation(OperationType.JMP, post1);
+            Operand postOp = new Operand(OperandType.BLOCK, post1.getBlockNum());
+            jmpPostOp.setSrcOperand(0, postOp);
+            f.appendUnconnectedBlock(else1);
+        }
+       
+        //currBlock = POST
+        f.setCurrBlock(post1);
     }
     
 }

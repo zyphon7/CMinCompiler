@@ -56,10 +56,9 @@ public class ReturnStmt extends Statement{
         }
     }
     
-    public void genCode(CodeItem i){
-        Function f = (Function)i;
+    public void genCode(Function f){
             if(expr != null){
-                expr.genCode(i);
+                expr.genCode(f);
             }
             //Adding operation to move expr result into RETREG & add whole
             //operation to the block

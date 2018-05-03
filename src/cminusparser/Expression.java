@@ -10,7 +10,7 @@ import CminScanner.Token.TokenType;
 import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import java.io.PrintWriter;
-import lowlevel.CodeItem;
+import lowlevel.Function;
 
 /**
  *
@@ -229,6 +229,6 @@ public abstract class Expression {
     }
     
     abstract void print(String s, PrintWriter w);
-    abstract void genCode(CodeItem i);
+    abstract void genCode(Function f);
     
 }

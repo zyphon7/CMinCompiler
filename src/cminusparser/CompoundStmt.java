@@ -65,8 +65,7 @@ public class CompoundStmt extends Statement{
         System.out.println(s + "}");
     }
     
-    public void genCode(CodeItem i){
-        Function f = (Function)i;
+    public void genCode(Function f){
         
         //loop thru vardecls
         for(int j = 0; j < varDecls.size(); j++){
@@ -78,7 +77,7 @@ public class CompoundStmt extends Statement{
       
         //loop thru stmts
         for(int j = 0; j < stmtList.size(); j++){
-            stmtList.get(j).genCode(i);
+            stmtList.get(j).genCode(f);
         }  
     }
     

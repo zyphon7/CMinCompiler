@@ -75,10 +75,10 @@ public class BinaryExpr extends Expression {
         expr2.print(s+INDENT, w);
     }
     
-    public void genCode(CodeItem i){
-        Function f = (Function)i;
-        expr1.genCode(i);
-        expr2.genCode(i);
+    public void genCode(Function f){
+        
+        expr1.genCode(f);
+        expr2.genCode(f);
         OperationType operType;
         switch(token){
             case GREATER:

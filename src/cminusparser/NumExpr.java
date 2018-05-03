@@ -6,7 +6,7 @@
 package cminusparser;
 
 import java.io.PrintWriter;
-import lowlevel.CodeItem;
+import lowlevel.Function;
 
 /**
  *
@@ -25,7 +25,7 @@ public class NumExpr extends Expression{
         System.out.println(s + Integer.toString(num));
     }
     
-    public void genCode(CodeItem i){
+    public void genCode(Function f){
         this.setRegNum(this.getNextRegNum());
     }
 }

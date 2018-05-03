@@ -9,7 +9,6 @@ import static cmincompiler.CMinusCompiler.globalHash;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import lowlevel.CodeItem;
 import lowlevel.Function;
 import lowlevel.Operand;
 import lowlevel.Operand.OperandType;
@@ -54,9 +53,8 @@ public class VarExpr extends Expression{
         }
     }
     
-    public void genCode(CodeItem i){
+    public void genCode(Function f){
         
-        Function f = (Function)i;
         HashMap localTable = f.getTable();
         Operation op;
         

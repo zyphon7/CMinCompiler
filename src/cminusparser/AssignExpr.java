@@ -37,15 +37,14 @@ public class AssignExpr extends Expression {
         rhs.print(s + INDENT + INDENT, w);
     }
     
-    public void genCode(CodeItem i){
-        Function f = (Function)i;
+    public void genCode(Function f){
         
         //Call genCode on rhs
-        rhs.genCode(i);
+        rhs.genCode(f);
         //Make this the source operand
         Operand src = new Operand(OperandType.REGISTER, rhs.getRegNum());
         //Call genCode on the lhs
-        lhs.genCode(i);
+        lhs.genCode(f);
         //Make this the destination operand
         Operand dest = new Operand(OperandType.REGISTER, lhs.getRegNum());
         

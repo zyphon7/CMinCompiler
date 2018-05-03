@@ -10,7 +10,7 @@ import static cminusparser.CminParser.cminscanner;
 import static cminusparser.CminParser.matchToken;
 import static cminusparser.Expression.parseExpression;
 import java.io.PrintWriter;
-import lowlevel.CodeItem;
+import lowlevel.Function;
 
 /**
  *
@@ -46,7 +46,7 @@ public class ExpressionStmt extends Statement{
         }
     }
     
-    public void genCode(CodeItem i){
-        expr.genCode(i);
+    public void genCode(Function f){
+        expr.genCode(f);
     }
 }
