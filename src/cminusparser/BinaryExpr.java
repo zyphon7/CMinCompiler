@@ -8,7 +8,6 @@ package cminusparser;
 import CminScanner.Token.TokenType;
 import static cminusparser.Program.INDENT;
 import java.io.PrintWriter;
-import lowlevel.CodeItem;
 import lowlevel.Function;
 import lowlevel.Operand;
 import lowlevel.Operand.OperandType;
@@ -22,6 +21,7 @@ import lowlevel.Operation.OperationType;
 public class BinaryExpr extends Expression {
     
     private TokenType token;
+    private OperationType operType;
     private Expression expr1;
     private Expression expr2;
     private static final String caller = "BinaryExpr";
@@ -79,7 +79,6 @@ public class BinaryExpr extends Expression {
         
         expr1.genCode(f);
         expr2.genCode(f);
-        OperationType operType;
         switch(token){
             case GREATER:
                 operType = OperationType.GT;

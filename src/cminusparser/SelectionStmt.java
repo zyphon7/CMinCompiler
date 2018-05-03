@@ -83,7 +83,17 @@ public class SelectionStmt extends Statement {
         expr.genCode(f);
         
         //generate branch
-        
+        Operation branchOp = new Operation(OperationType.BEQ, f.getCurrBlock());
+        Operand src0 = new Operand(OperandType.REGISTER, expr.getRegNum());
+        Operand src1 = new Operand(OperandType.INTEGER, 0);
+        Operand src2;
+        if(else1 != null){
+            src2 = new Operand(OperandType.BLOCK, else1);
+        }
+        else{
+            src2 = new Operand(OperandType.BLOCK, post1);
+        }
+        f.getCurrBlock().appendOper(branchOp);
         
         //append then block to the currBlock
         f.appendToCurrentBlock(then1);
