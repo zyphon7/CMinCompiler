@@ -64,9 +64,6 @@ public class VarExpr extends Expression{
             if(reg != null){
                 this.setRegNum(reg);
             }
-            else{
-                System.out.println(caller + "REGValue wasn't in local symbol table.");
-            }
         }
         //else in global create a load oper
         else{

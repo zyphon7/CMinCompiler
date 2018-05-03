@@ -52,6 +52,7 @@ public class CallExpr extends Expression{
             Expression e = args.get(j);
             //create operand add to operation and append to block
             Operation passOp = new Operation(OperationType.PASS,f.getCurrBlock());
+            passOp.attr = new Attribute("PARAM_NUM", new String(Integer.toString(j)));
             Operand srcOper0 = new Operand(OperandType.REGISTER, e.getRegNum());
             passOp.setSrcOperand(0,srcOper0);
             f.getCurrBlock().appendOper(passOp);
