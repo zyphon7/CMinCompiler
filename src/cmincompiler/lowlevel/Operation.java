@@ -62,7 +62,7 @@ public class Operation {
   private BitArraySet liveRange;
 
     // future use
-  private Attribute attr;
+  public Attribute attr;
 /***************************************************************************/
   // constructors
     /**
