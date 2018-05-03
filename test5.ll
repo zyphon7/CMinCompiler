@@ -8,7 +8,7 @@
     (OPER 5 Load [(r 3)]  [(s e)])
     (OPER 6 Add_I [(r 4)]  [(r 0)(r 0)])
     (OPER 7 Mov []  [])
-    (OPER 8 Mov [(r RetReg)]  [(r 1)])
+    (OPER 8 Mov [(m RetReg)]  [(r 1)])
     (OPER 9 Jmp []  [(bb 1)])
   )
   (BB 1

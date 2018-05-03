@@ -65,7 +65,7 @@ public class ReturnStmt extends Statement{
             //operation to the block
             Operation movRet = new Operation(OperationType.ASSIGN, f.getCurrBlock());
             Operand srcOp = new Operand(OperandType.REGISTER, expr.getRegNum());
-            Operand destRetReg = new Operand(OperandType.REGISTER, "RetReg");
+            Operand destRetReg = new Operand(OperandType.MACRO, "RetReg");
             movRet.setSrcOperand(0, srcOp);
             movRet.setDestOperand(0, destRetReg);
             f.getCurrBlock().appendOper(movRet);
