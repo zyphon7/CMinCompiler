@@ -48,19 +48,22 @@ public class AssignExpr extends Expression {
         //Make this the source operand
         Operand src = new Operand(OperandType.REGISTER, rhs.getRegNum());
         
-        //Call genCode on the lhs
-        lhs.genCode(f);
-        if(lhs.getRegNum() == 0){
-            lhs.setRegNum(getCurrRegNum());
+        //if in  local, get register and do assign op
+        VarExpr var = (VarExpr)lhs;
+        Operation op;
+        Operand dest;
+        if(f.getTable().containsKey(var)){
+            Integer regNum = (Integer)f.getTable().get(var);
+            op = new Operation(OperationType.ASSIGN, f.getCurrBlock());
+            op.setSrcOperand(0, src);
+            dest = new Operand(OperandType.REGISTER, regNum);
+            op.setDestOperand(0, dest);
+            f.getCurrBlock().appendOper(op);
         }
-        //Make this the destination operand
-        Operand dest = new Operand(OperandType.REGISTER, lhs.getRegNum());
-        
-        //make op and assign to function
-        Operation op = new Operation(OperationType.ASSIGN, f.getCurrBlock());
-        op.setSrcOperand(0, src);
-        op.setDestOperand(0, dest);
-        f.getCurrBlock().appendOper(op);
+        //o/w we are working with global var
+        else{
+           //do store op 
+        }
     }
     
 }
