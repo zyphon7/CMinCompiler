@@ -64,7 +64,7 @@ public class ReturnStmt extends Statement{
             //Adding operation to move expr result into RETREG & add whole
             //operation to the block
             Operation retOper = new Operation(OperationType.RETURN, f.getCurrBlock());
-            Operand retReg = new Operand(OperandType.MACRO);
+            Operand retReg = new Operand(OperandType.MACRO, "RetReg");
             retOper.setSrcOperand(0,retReg);
             f.getCurrBlock().appendOper(retOper);
             
