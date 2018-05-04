@@ -77,10 +77,10 @@ public class ReturnStmt extends Statement{
            f.getCurrBlock().appendOper(jmpOp);
            
            //connect UC if there?
-           /*f.setCurrBlock(f.getReturnBlock());
+           //f.setCurrBlock(f.getReturnBlock());
             if(f.getFirstUnconnectedBlock() != null){
                 f.appendToCurrentBlock(f.getFirstUnconnectedBlock());
-            }*/
+            }
            
     }
 }
