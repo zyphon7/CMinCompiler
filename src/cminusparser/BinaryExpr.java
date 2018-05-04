@@ -123,7 +123,8 @@ public class BinaryExpr extends Expression {
         binOper.setSrcOperand(0,srcOper1);
         Operand srcOper2 = new Operand(OperandType.REGISTER, expr2.getRegNum());
         binOper.setSrcOperand(1, srcOper2);
-        Operand destOper = new Operand(OperandType.REGISTER, Expression.getNextRegNum());
+        this.setRegNum(getNextRegNum());
+        Operand destOper = new Operand(OperandType.REGISTER, this.getRegNum());
         binOper.setDestOperand(0, destOper);
         f.getCurrBlock().appendOper(binOper); 
     }

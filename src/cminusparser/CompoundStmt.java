@@ -78,6 +78,7 @@ public class CompoundStmt extends Statement{
         //loop thru stmts
         for(int j = 0; j < stmtList.size(); j++){
             stmtList.get(j).genCode(f);
+            
         }  
     }
     

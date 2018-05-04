@@ -53,8 +53,8 @@ public class AssignExpr extends Expression {
         VarExpr var = (VarExpr)lhs;
         Operation op;
         Operand dest;
-        if(f.getTable().containsKey(var)){
-            Integer regNum = (Integer)f.getTable().get(var);
+        if(f.getTable().containsKey(var.getName())){
+            Integer regNum = (Integer)f.getTable().get(var.getName());
             op = new Operation(OperationType.ASSIGN, f.getCurrBlock());
             op.setSrcOperand(0, src0);
             dest = new Operand(OperandType.REGISTER, regNum);
