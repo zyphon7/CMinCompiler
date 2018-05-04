@@ -120,7 +120,7 @@ public class SelectionStmt extends Statement {
             Operation jmpPostOp = new Operation(OperationType.JMP, else1);
             Operand postOp = new Operand(OperandType.BLOCK, post1.getBlockNum());
             jmpPostOp.setSrcOperand(0, postOp);
-            else1.appendOper(jmpPostOp);
+            f.getCurrBlock().appendOper(jmpPostOp);
             f.appendUnconnectedBlock(else1);  /*uc*/
         }
        

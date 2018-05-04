@@ -42,9 +42,9 @@ public class AssignExpr extends Expression {
         
         //Call genCode on rhs
         rhs.genCode(f);
-        if(rhs.getRegNum() == 0){
-            rhs.setRegNum(f.getNewRegNum());
-        }
+//        if(rhs.getRegNum() == 0){
+//            rhs.setRegNum(f.getNewRegNum());
+//        }
         
         //Make this the source operand
         Operand src0 = new Operand(OperandType.REGISTER, rhs.getRegNum());
@@ -60,6 +60,7 @@ public class AssignExpr extends Expression {
             dest = new Operand(OperandType.REGISTER, regNum);
             op.setDestOperand(0, dest);
             f.getCurrBlock().appendOper(op);
+            this.setRegNum(regNum);
         }
         //o/w we are working with global var
         else{
@@ -71,6 +72,7 @@ public class AssignExpr extends Expression {
            op.setSrcOperand(1, src1);
            op.setSrcOperand(2, src2);
            f.getCurrBlock().appendOper(op);
+           this.setRegNum(rhs.getRegNum());
         }
     }
     

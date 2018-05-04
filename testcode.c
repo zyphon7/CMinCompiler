@@ -105,7 +105,7 @@ int main (void) {
   i = 0;
 
   if (b == 0) {
-    if (c==0) {
+    if (c == 0) {
       i = 1;
     }
     else if (g == 0) {

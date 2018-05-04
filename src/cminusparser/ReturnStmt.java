@@ -59,7 +59,7 @@ public class ReturnStmt extends Statement{
     public void genCode(Function f){
             if(expr != null){
                 expr.genCode(f);
-            }
+            
            
             //Adding operation to move expr result into RETREG & add whole
             //operation to the block
@@ -69,10 +69,10 @@ public class ReturnStmt extends Statement{
             movRet.setSrcOperand(0, srcOp);
             movRet.setDestOperand(0, destRetReg);
             f.getCurrBlock().appendOper(movRet);
-            
+            } 
            //Add jump operation to exit block
            Operation jmpOp = new Operation(OperationType.JMP, f.getCurrBlock());
-           srcOp = new Operand(OperandType.BLOCK, f.getReturnBlock().getBlockNum());
+           Operand srcOp = new Operand(OperandType.BLOCK, f.getReturnBlock().getBlockNum());
            jmpOp.setSrcOperand(0, srcOp);
            f.getCurrBlock().appendOper(jmpOp);
            

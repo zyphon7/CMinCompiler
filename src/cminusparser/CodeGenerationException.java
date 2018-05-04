@@ -9,7 +9,7 @@ package cminusparser;
  *
  * @author annmcostantino
  */
-public class CodeGenerationException extends Exception{
+public class CodeGenerationException extends RuntimeException{
 
     public CodeGenerationException() {
     }

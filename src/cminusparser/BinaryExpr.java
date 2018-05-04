@@ -72,6 +72,9 @@ public class BinaryExpr extends Expression {
         System.out.println(s + oper);
         w.println(s + oper);
         expr1.print(s+INDENT, w);
+        if (expr2 == null) {
+            int z=0;
+        }
         expr2.print(s+INDENT, w);
     }
     

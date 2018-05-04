@@ -50,6 +50,7 @@ public class CallExpr extends Expression{
         for(int j = 0; j < args.size(); j++){
             
             Expression e = args.get(j);
+            e.genCode(f);
             //create operand add to operation and append to block
             Operation passOp = new Operation(OperationType.PASS,f.getCurrBlock());
             passOp.attr = new Attribute("PARAM_NUM", new String(Integer.toString(j)));
@@ -60,7 +61,8 @@ public class CallExpr extends Expression{
        
         //add call operation & annotate with args.size()
         Operation callOp = new Operation(OperationType.CALL, f.getCurrBlock());
-        Operand srcOper0 =  new Operand(OperandType.STRING, ID.toString());
+        String name = ((VarExpr)ID).getName();
+        Operand srcOper0 =  new Operand(OperandType.STRING, name);
         callOp.setSrcOperand(0, srcOper0);
         callOp.attr = new Attribute("numParams", new String(Integer.toString(args.size())));
         f.getCurrBlock().appendOper(callOp);

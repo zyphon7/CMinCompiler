@@ -81,9 +81,8 @@ public class FunDecl extends Declaration{
         //create new block & make block currBlock
         //FUNC_ENTRY
         func.createBlock0();
-        func.setCurrBlock(func.getFirstBlock());
         BasicBlock body = new BasicBlock(func);
-        func.appendToCurrentBlock(body);
+        func.appendBlock(body);
         func.setCurrBlock(body);
         
         //make LL of funcparams
@@ -100,11 +99,15 @@ public class FunDecl extends Declaration{
         
         else{
             firstParam = new FuncParam(p.getType(), p.getName());
+            int regNum = func.getNewRegNum();
+            func.getTable().put(p.getName(), regNum);
         }
         
         for(int i = 1; i < params.size(); i++){
             p = params.get(i);
             FuncParam nextParam = new FuncParam(p.getType(), p.getName());
+            int regNum = func.getNewRegNum();
+            func.getTable().put(p.getName(), regNum);
             firstParam.setNextParam(nextParam);
         }
         
@@ -115,10 +118,10 @@ public class FunDecl extends Declaration{
         cmpdstmt.genCode(func);
         
         //append return block
-        func.appendToCurrentBlock(func.getReturnBlock());
-        func.setCurrBlock(func.getReturnBlock());
+        func.appendBlock(func.getReturnBlock());
+        //func.setCurrBlock(func.getReturnBlock());
             if(func.getFirstUnconnectedBlock() != null){
-                func.appendToCurrentBlock(func.getFirstUnconnectedBlock());
+                func.appendBlock(func.getFirstUnconnectedBlock());
             }
         //return it back up (with the block inside)
         return func;

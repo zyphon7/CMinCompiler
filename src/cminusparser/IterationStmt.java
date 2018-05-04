@@ -70,7 +70,7 @@ public class IterationStmt extends Statement{
         f.getCurrBlock().appendOper(branchOp);
         
         //append whileblock to currBlock
-        f.appendToCurrentBlock(whileBlock);
+        f.appendToCurrentBlock(bodyBlock);
         
         //curr block = body
         f.setCurrBlock(bodyBlock);
