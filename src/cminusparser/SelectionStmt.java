@@ -121,18 +121,20 @@ public class SelectionStmt extends Statement {
             Operand postOp = new Operand(OperandType.BLOCK, post1.getBlockNum());
             jmpPostOp.setSrcOperand(0, postOp);
             f.getCurrBlock().appendOper(jmpPostOp);
-            f.appendUnconnectedBlock(else1);  
+            f.appendUnconnectedBlock(else1);  /*uc*/
         }
        
         //currBlock = POST
         f.setCurrBlock(post1);
         
         //ret block
-        f.appendToCurrentBlock(f.getReturnBlock());
+        //f.appendToCurrentBlock(f.getReturnBlock());
         
         //connect uc to ret block
-        f.setCurrBlock(f.getReturnBlock());
-        f.appendToCurrentBlock(f.getFirstUnconnectedBlock());
+        /*f.setCurrBlock(f.getReturnBlock());
+        if(f.getFirstUnconnectedBlock() != null){
+            f.appendToCurrentBlock(f.getFirstUnconnectedBlock());
+        }*/
     }
     
 }

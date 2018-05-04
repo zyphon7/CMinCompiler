@@ -63,7 +63,10 @@ public class IterationStmt extends Statement{
         Operation branchOp = new Operation(Operation.OperationType.BEQ, f.getCurrBlock());
         Operand src0 = new Operand(Operand.OperandType.REGISTER, expr.getRegNum());
         Operand src1 = new Operand(Operand.OperandType.INTEGER, 0);
-        Operand src2 = new Operand(Operand.OperandType.BLOCK, postBlock);
+        Operand src2 = new Operand(Operand.OperandType.BLOCK, postBlock.getBlockNum());
+        branchOp.setSrcOperand(0, src0);
+        branchOp.setSrcOperand(1, src1);
+        branchOp.setSrcOperand(2, src2);
        
         f.getCurrBlock().appendOper(branchOp);
         
@@ -81,8 +84,11 @@ public class IterationStmt extends Statement{
         branchOp = new Operation(Operation.OperationType.BNE, f.getCurrBlock());
         src0 = new Operand(Operand.OperandType.REGISTER, expr.getRegNum());
         src1 = new Operand(Operand.OperandType.INTEGER, 0);
-        src2 = new Operand(Operand.OperandType.BLOCK, bodyBlock);
+        src2 = new Operand(Operand.OperandType.BLOCK, bodyBlock.getBlockNum());
         f.getCurrBlock().appendOper(branchOp);
+        branchOp.setSrcOperand(0, src0);
+        branchOp.setSrcOperand(1, src1);
+        branchOp.setSrcOperand(2, src2);
         
         //append post
         f.appendToCurrentBlock(postBlock);
