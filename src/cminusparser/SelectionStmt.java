@@ -117,7 +117,7 @@ public class SelectionStmt extends Statement {
         if(else1 != null){
             f.setCurrBlock(else1);
             stmt2.genCode(f);
-            Operation jmpPostOp = new Operation(OperationType.JMP, f.getCurrBlock());
+            Operation jmpPostOp = new Operation(OperationType.JMP, else1);
             Operand postOp = new Operand(OperandType.BLOCK, post1.getBlockNum());
             jmpPostOp.setSrcOperand(0, postOp);
             f.getCurrBlock().appendOper(jmpPostOp);
@@ -126,15 +126,6 @@ public class SelectionStmt extends Statement {
        
         //currBlock = POST
         f.setCurrBlock(post1);
-        
-        //ret block
-        //f.appendToCurrentBlock(f.getReturnBlock());
-        
-        //connect uc to ret block
-        /*f.setCurrBlock(f.getReturnBlock());
-        if(f.getFirstUnconnectedBlock() != null){
-            f.appendToCurrentBlock(f.getFirstUnconnectedBlock());
-        }*/
     }
     
 }
