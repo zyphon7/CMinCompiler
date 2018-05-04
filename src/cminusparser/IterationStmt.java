@@ -67,7 +67,6 @@ public class IterationStmt extends Statement{
         branchOp.setSrcOperand(0, src0);
         branchOp.setSrcOperand(1, src1);
         branchOp.setSrcOperand(2, src2);
-       
         f.getCurrBlock().appendOper(branchOp);
         
         //append whileblock to currBlock
@@ -85,11 +84,11 @@ public class IterationStmt extends Statement{
         src0 = new Operand(Operand.OperandType.REGISTER, expr.getRegNum());
         src1 = new Operand(Operand.OperandType.INTEGER, 0);
         src2 = new Operand(Operand.OperandType.BLOCK, bodyBlock.getBlockNum());
-        f.getCurrBlock().appendOper(branchOp);
         branchOp.setSrcOperand(0, src0);
         branchOp.setSrcOperand(1, src1);
         branchOp.setSrcOperand(2, src2);
-        
+        f.getCurrBlock().appendOper(branchOp);
+     
         //append post
         f.appendToCurrentBlock(postBlock);
         
