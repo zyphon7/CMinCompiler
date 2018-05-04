@@ -30,7 +30,7 @@ public class NumExpr extends Expression{
     }
     
     public void genCode(Function f){
-        this.setRegNum(Expression.getNextRegNum());
+        this.setRegNum(f.getNewRegNum());
         Operation op = new Operation(OperationType.ASSIGN, f.getCurrBlock());
         Operand src = new Operand(OperandType.INTEGER, num);
         Operand dest = new Operand(OperandType.REGISTER, this.getRegNum());

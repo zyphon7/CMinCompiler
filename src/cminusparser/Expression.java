@@ -20,24 +20,12 @@ public abstract class Expression {
     
     private static String caller = "EXPRESSION";
     private int regNum = 0;
-    private static int lastRegNum = 0;
-    
-    protected void setRegNum(int i){
-        regNum = i;
-    }
-    
     protected int getRegNum(){
         return regNum;
     }
-    
-    protected static int getNextRegNum(){
-        return ++lastRegNum;
+    protected void setRegNum(int i){
+        regNum = i;
     }
-    
-    protected static int getCurrRegNum(){
-        return lastRegNum;
-    }
-    
     static Expression parseExpression(){
             Token oldTok;
             if(cminscanner.viewNextToken().getTokenType() == TokenType.ID){

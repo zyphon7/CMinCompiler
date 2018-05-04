@@ -43,7 +43,7 @@ public class AssignExpr extends Expression {
         //Call genCode on rhs
         rhs.genCode(f);
         if(rhs.getRegNum() == 0){
-            rhs.setRegNum(getCurrRegNum());
+            rhs.setRegNum(f.getNewRegNum());
         }
         
         //Make this the source operand

@@ -21,15 +21,12 @@ import lowlevel.CodeItem;
 public abstract class Declaration {
     private static String caller = "DECLARATION";
     private int regNum = 0;
-    
-    protected void setRegNum(int i){
-        regNum = i;
-    }
-    
     protected int getRegNum(){
         return regNum;
     }
-    
+    protected void setRegNum(int i){
+        regNum = i;
+    }
     static Declaration parseDeclaration(Token e){
         Token ID = new Token();
         if(e == null){

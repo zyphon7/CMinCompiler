@@ -70,7 +70,7 @@ public class CompoundStmt extends Statement{
         //loop thru vardecls
         for(int j = 0; j < varDecls.size(); j++){
             VarDecl d = (VarDecl)varDecls.get(j);
-            d.setRegNum(Expression.getNextRegNum());
+            d.setRegNum(f.getNewRegNum());
             //assign register
             f.getTable().put(d.name, d.getRegNum());
         }

@@ -70,14 +70,14 @@ public class VarExpr extends Expression{
             String value = (String)globalHash.get(name);
             op = new Operation(Operation.OperationType.LOAD_I, f.getCurrBlock());
             Operand src = new Operand(OperandType.STRING, name);
-            Operand dest = new Operand(OperandType.REGISTER, Expression.getNextRegNum());
+            Operand dest = new Operand(OperandType.REGISTER, f.getNewRegNum());
             op.setSrcOperand(0, src);
             op.setDestOperand(0, dest);
             f.getCurrBlock().appendOper(op);
         }
         //else add to local table & annotate self
         else{
-          this.setRegNum(getNextRegNum());
+          this.setRegNum(f.getNewRegNum());
           localTable.put(name, this.getRegNum());
         }
     }

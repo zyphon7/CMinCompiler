@@ -69,7 +69,8 @@ public class CallExpr extends Expression{
         Operation movOp = new Operation(OperationType.ASSIGN, f.getCurrBlock());
         Operand srcOp0 = new Operand(OperandType.MACRO, "RetReg");
         movOp.setSrcOperand(0, srcOp0);
-        Operand destOp0 = new Operand(OperandType.REGISTER, Expression.getNextRegNum());
+        this.setRegNum(f.getNewRegNum());
+        Operand destOp0 = new Operand(OperandType.REGISTER, this.getRegNum());
         movOp.setDestOperand(0, destOp0);
         f.getCurrBlock().appendOper(movOp);
     }
