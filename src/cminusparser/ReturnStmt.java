@@ -78,9 +78,9 @@ public class ReturnStmt extends Statement{
            
            //connect UC if there?
            //f.setCurrBlock(f.getReturnBlock());
-            if(f.getFirstUnconnectedBlock() != null){
+            /*if(f.getFirstUnconnectedBlock() != null){
                 f.appendToCurrentBlock(f.getFirstUnconnectedBlock());
-            }
+            }*/
            
     }
 }

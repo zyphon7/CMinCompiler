@@ -116,7 +116,10 @@ public class FunDecl extends Declaration{
         
         //append return block
         func.appendToCurrentBlock(func.getReturnBlock());
-        
+        func.setCurrBlock(func.getReturnBlock());
+            if(func.getFirstUnconnectedBlock() != null){
+                func.appendToCurrentBlock(func.getFirstUnconnectedBlock());
+            }
         //return it back up (with the block inside)
         return func;
     }
