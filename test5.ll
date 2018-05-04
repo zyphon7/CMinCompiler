@@ -27,7 +27,7 @@
   )
   (BB 4
     (OPER 9 Mov [(r 13)]  [(i 3)])
-    (OPER 10 Store []  [(r 13)(r a)(i 0)])
+    (OPER 10 Store []  [(r 13)(s a)(i 0)])
   )
   (BB 6
   )

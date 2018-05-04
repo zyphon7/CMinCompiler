@@ -65,7 +65,7 @@ public class AssignExpr extends Expression {
         else{
            //do store op
            op = new Operation(OperationType.STORE_I,f.getCurrBlock());
-           Operand src1 = new Operand(OperandType.REGISTER, globalHash.get(var.getName()));
+           Operand src1 = new Operand(OperandType.STRING, globalHash.get(var.getName()));
            Operand src2 = new Operand(OperandType.INTEGER, 0);
            op.setSrcOperand(0, src0);
            op.setSrcOperand(1, src1);
